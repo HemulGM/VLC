@@ -1,10 +1,11 @@
-(*
+﻿(*
  *******************************************************************************
  * PasLibVlcPlayerUnit.pas - VCL component for VideoLAN libvlc 3.0.5
  *
  * See copyright notice below.
  *
- * Last modified: 2019.01.10
+ * Last modified: 2019.02.22 [HemulGM]
+ * Last modified: Fix create player (del middle panel)
  *
  * author: Robert Jędrzejczyk
  * e-mail: robert@prog.olsztyn.pl
@@ -47,7 +48,7 @@
  *
  *)
 
-{$I ..\source\compiler.inc}
+{$I compiler.inc}
 
 unit PasLibVlcPlayerUnit;
 
@@ -256,7 +257,6 @@ type
 
     FUseEvents                     : boolean;
 
-    FPlayerWinCtrl                 : TWinControl;
     FMouseEventWinCtrl             : TPasLibVlcMouseEventWinCtrl;
 
     FMouseEventsHandler            : TPasLibVlcPlayerMouseEventsHandler;
@@ -302,6 +302,8 @@ type
     procedure InternalOnMouseEnter(Sender: TObject);
     procedure InternalOnMouseLeave(Sender: TObject);
     {$ENDIF}
+    procedure InternalOnMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+    procedure InternalOnMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 
     procedure WmMediaPlayerMediaChanged      (var m: TVlcMessage); message WM_MEDIA_PLAYER_MEDIA_CHANGED;
     procedure WmMediaPlayerNothingSpecial    (var m: TVlcMessage); message WM_MEDIA_PLAYER_NOTHING_SPECIAL;
@@ -348,6 +350,7 @@ type
 
     procedure DestroyPlayer();
 
+    procedure WMNCPaint(var Message: TMessage); message WM_NCPAINT;
     procedure PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayContinue(const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
   public
@@ -599,10 +602,14 @@ type
     {$ENDIF}
     property OnMouseMove;
     property OnMouseUp;
+    property OnMouseWheelUp;
+    property OnMouseWheelDown;
     property OnResize;
     property OnStartDock;
     property OnStartDrag;
     property OnUnDock;
+    property TabOrder;
+    property TabStop default True;
 
     property SpuShow : Boolean
       read    FSpuShow
@@ -662,9 +669,6 @@ type
       read    FDeinterlaceFilter
       write   SetDeinterlaceFilter
       default deOFF;
-
-    property DeinterlaceModeName:  WideString
-      read    GetDeinterlaceModeName;
 
     property DeinterlaceMode : TDeinterlaceMode
       read    FDeinterlaceMode
@@ -1505,6 +1509,8 @@ begin
   Width      := 320;
   Height     := 240;
 
+  TabStop:=True;
+
   FVideoOutput := voDefault;
   FAudioOutput := aoDefault;
 
@@ -1526,16 +1532,18 @@ begin
 
   FViewTeleText := FALSE;
 
-  {$IFDEF HAS_ParentBackground}
+  //{$IFDEF HAS_ParentBackground}
   ParentBackground := False;
-  {$ENDIF}
+  ParentColor := False;
+  //{$ENDIF}
+
+  DoubleBuffered     := True;
 
   Caption            := '';
   BevelOuter         := bvNone;
   p_mi               := NIL;
   p_mi_ev_mgr        := NIL;
   FMute              := FALSE;
-  FPlayerWinCtrl     := NIL;
   FMouseEventWinCtrl := NIL;
   FVLC               := NIL;
   p_mi               := NIL;
@@ -1547,10 +1555,6 @@ begin
   FStartOptions      := TStringList.Create;
 
   if (csDesigning in ComponentState) then exit;
-
-  FPlayerWinCtrl := TWinControl.Create(SELF);
-  SELF.InsertControl(FPlayerWinCtrl);
-  FPlayerWinCtrl.SetBounds(0, 0, SELF.Width, SELF.Height);
 
   FMouseEventWinCtrl := TPasLibVlcMouseEventWinCtrl.Create(SELF);
   SELF.InsertControl(FMouseEventWinCtrl);
@@ -1575,6 +1579,9 @@ begin
   FMouseEventWinCtrl.OnMouseEnter    := InternalOnMouseEnter;
   FMouseEventWinCtrl.OnMouseLeave    := InternalOnMouseLeave;
   {$ENDIF}
+
+  FMouseEventWinCtrl.OnMouseWheelDown:= InternalOnMouseWheelDown;
+  FMouseEventWinCtrl.OnMouseWheelUp  := InternalOnMouseWheelUp;
 end;
 
 procedure TPasLibVlcPlayer.SetBounds(ALeft, ATop, AWidth, AHeight: Integer);
@@ -1582,11 +1589,6 @@ begin
   inherited SetBounds(ALeft, ATop, AWidth, AHeight);
 
   if (csDesigning in ComponentState) then exit;
-
-  if (Assigned(FPlayerWinCtrl)) then
-  begin
-    FPlayerWinCtrl.SetBounds(0, 0, SELF.Width, SELF.Height);
-  end;
 
   if (Assigned(FMouseEventWinCtrl)) then
   begin
@@ -1904,7 +1906,7 @@ procedure TPasLibVlcPlayer.SetHwnd();
 begin
   if (p_mi <> NIL) then
   begin
-    libvlc_media_player_set_display_window(p_mi, FPlayerWinCtrl.Handle);
+    libvlc_media_player_set_display_window(p_mi, Handle);
   end;
 end;
 
@@ -4108,6 +4110,20 @@ begin
     OnMouseUp(SELF, Button, Shift, X, Y);
 end;
 
+procedure TPasLibVlcPlayer.InternalOnMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+  if Assigned(OnMouseWheelDown) then
+    OnMouseWheelDown(SELF, Shift, MousePos, Handled);
+end;
+
+procedure TPasLibVlcPlayer.InternalOnMouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+  if Assigned(OnMouseWheelUp) then
+    OnMouseWheelUp(SELF, Shift, MousePos, Handled);
+end;
+
 {$IFDEF DELPHI2005_UP}
 procedure TPasLibVlcPlayer.InternalOnMouseActivate(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer;
@@ -4356,6 +4372,11 @@ begin
     FOnMediaPlayerVideoOutChanged(SELF, m.WParam);
   end;
   m.Result := 0;
+end;
+
+procedure TPasLibVlcPlayer.WMNCPaint(var Message: TMessage);
+begin
+ //Invalidate;
 end;
 
 procedure TPasLibVlcPlayer.WmMediaPlayerScrambledChanged(var m: TVlcMessage);

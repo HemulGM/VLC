@@ -4,7 +4,8 @@
  *
  * See copyright notice below.
  *
- * Last modified: 2019.01.08
+ * Last modified: 2019.02.22 [HemulGM]
+ * Last modified: Search dlls local path
  *
  * author: Robert Jêdrzejczyk
  * e-mail: robert@prog.olsztyn.pl
@@ -63,13 +64,16 @@ uses
   {$IFDEF LCLQT5}Qt5, QtWidgets,{$ENDIF}
   {$IFDEF UNIX}Dialogs,{$ENDIF}
   {$IFDEF MACOS}FMX.Dialogs,Posix.Unistd,{$ENDIF}
-  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math;
+  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math, Forms;
 
 {$IFDEF HAS_EXCEPTION_MASK}
 const
   VLC_EXCEPTION_MASK_ALL = [exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision];
   VLC_EXCEPTION_MASK_MIN = [exPrecision, exInvalidOp];
 {$ENDIF}
+  LibVlc     = 'LibVlc.dll';
+  LibVlcCore = 'LibVlcCore.dll';
+
 
 (**
  * Real path to libvlc.dll
@@ -7499,6 +7503,11 @@ var
   vBuff : packed array[0..2047] of Char;
 begin
   Result := '';
+  // Search Local path
+  if FileExists(ExtractFilePath(Application.ExeName) + LibVlc) and
+     FileExists(ExtractFilePath(Application.ExeName) + LibVlcCore)
+  then Exit(ExtractFilePath(Application.ExeName));
+  // Search Inatall VideoLAN path
   FillChar(vBuff, sizeof(vBuff), 0);
   reKey := INVALID_HANDLE_VALUE;
   reRes := RegOpenKeyEx(HKEY_LOCAL_MACHINE, 'Software\VideoLAN\VLC', 0, KEY_READ, reKey);
