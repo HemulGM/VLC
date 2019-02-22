@@ -1,0 +1,515 @@
+﻿2018.09.18 Fix Play declaration for compatible with D4
+
+2018.07.13 Fix resize bug under FPC 1.8.x
+
+           reported by Mukataï Mukatai <mukatai@msn.com>
+
+           affected procedures:
+
+                procedure WMEraseBkgnd(var msg: ...); message ...;
+
+2018.07.01 Add support for media callbacks
+
+           inspired by Mark Adamson <markadamson83@gmail.com>
+
+           new procedure:
+            
+                procedure Play(stm : TStream, ...); overload;
+
+2018.06.29 Remove duplicated code
+
+           affected procedures:
+            
+                procedure Play       (...); overload;
+                procedure PlayNormal (...); overload;
+                procedure PlayYoutube(...); overload;
+
+2018.06.25 Fix copy paste bug
+
+           reported by bnop90 <bnop90@mail.ru>
+
+           affected procedures:
+
+                procedure Play(mrl: WideString; mediaOptions : array of WideString; ...); overload;
+
+2018.06.11 Extend parameters:
+
+           inspired by Wortmann Sándor <wortmann@visualsolutions.hu>
+
+           affected procedures:
+
+                procedure TPasLibVlcMediaList.Add(mrl : WideString; mediaOptions : array of WideString);
+
+2018.06.05 Correct PlayYoutube
+
+           reported by Ahmet Yeşilçimen <yesilcimenahmet@gmail.com>
+
+2018.04.26 Correct version comment
+
+2018.03.11 Update for better compatibility with libvlc 3.0.0
+
+           New events:
+
+               libvlc_MediaPlayerESAdded,
+               libvlc_MediaPlayerESDeleted,
+               libvlc_MediaPlayerESSelected,
+               libvlc_MediaPlayerAudioDevice,
+               libvlc_MediaPlayerChapterChanged,
+               libvlc_RendererDiscovererItemAdded,
+               libvlc_RendererDiscovererItemDeleted,
+
+2018.01.02 Extend parameters:
+
+           inspired by "Christian Koch" <ch.koch.ed@online.de>
+           required to add ":cdda-track=1" as option to the media
+
+           affected procedures:
+
+                procedure Play       (mrl: WideString; mediaOptions : array of WideString; ...); overload;
+                procedure PlayNormal (mrl: WideString; mediaOptions : array of WideString; ...); overload;
+                procedure PlayYoutube(mrl: WideString; mediaOptions : array of WideString; ...); overload;
+
+2017.12.05 New functions:
+
+           GetVideoSampleAspectRatio
+
+2017.04.11 Correct media list event handler WillAddItem
+
+           reported by "Adolfo Ramirez" <arogemail@gmail.com>
+
+               OnItemAdded => OnWillAddItem
+
+2016.11.28 Update Equalizer function declarations for compile with BC6.
+
+           reported by "Woldemar Unknown" <djvk@mail.ru>
+
+2016.10.18 Updated for compile under Lazarus 1.6.0 + FPC 3.0.0.
+
+2016.10.08 Cleanup and add support for adjust video:
+
+    procedure SetVideoAdjustEnable(value : Boolean);
+    procedure SetVideoAdjustContrast(value : Single);
+    procedure SetVideoAdjustBrightness(value : Single);
+    procedure SetVideoAdjustHue(value : Single);
+    procedure SetVideoAdjustSaturation(value : Single);
+    procedure SetVideoAdjustGamma(value : Single);
+
+    function  GetVideoAdjustEnable(): Boolean;
+    function  GetVideoAdjustContrast() : Single;
+    function  GetVideoAdjustBrightness() : Single;
+    function  GetVideoAdjustHue():Single;
+    function  GetVideoAdjustSaturation():Single;
+    function  GetVideoAdjustGamma():Single;
+
+2016.10.04 Update for better compatibility with libvlc 2.2.4
+
+           New functions:
+
+               GetAudioFilterList(): TStringList;
+               GetVideoFilterList(): TStringList;
+
+2016.05.08 Update for allow change audio output
+
+           New functions:
+
+               GetAudioOutputList
+               GetAudioOutputDeviceList
+               GetAudioOutputDeviceEnum
+               SetAudioOutput
+               SetAudioOutputDevice
+               SetAudioOutputDevice
+
+            Changed functions:
+
+               Play
+               PlayNormal
+               PlayYoutube
+
+           New properties:
+
+               LastAudioOutput
+               LastAudioOutputDeviceId
+
+2016.02.12 Update for better compatibility with libvlc 2.2.2
+
+           New events:
+
+               libvlc_MediaPlayerCorked
+               libvlc_MediaPlayerUncorked,
+               libvlc_MediaPlayerMuted,
+               libvlc_MediaPlayerUnmuted,
+               libvlc_MediaPlayerAudioVolume
+
+2015.02.28 Updated for better support version 2.2.0
+
+           New functions:
+
+               EqualizerGetPresetList(): TStringList;
+               EqualizerGetBandCount(): Word;
+               EqualizerGetBandFrequency(bandIndex : Word): Single;
+
+               EqualizerCreate(APreset : Word = $FFFF) : TPasLibVlcEqualizer;
+               EqualizerApply(AEqualizer : TPasLibVlcEqualizer);
+               EqualizerSetPreset(APreset : Word = $FFFF);
+
+               GetAudioOutputDeviceEnumList(): TStringList;
+               SetAudioOutputDevice(aOut: WideString; device_id: WideString);
+               SetAudioOutputDevice(device_id: WideString);
+
+           New events:
+
+               libvlc_MediaPlayerVout
+               libvlc_MediaPlayerScrambledChanged
+
+           fix function SetAudioMute
+
+           reported by "Moisés Ribeiro" <moisesrms@gmail.com>
+
+2015.02.01 New property:
+
+               MouseEventsHandler
+
+               inspired by: Beat Schlösser <beat.schloesser@softron.ch>
+
+           New functions:
+
+               GetAudioOutputList(): TStringList;
+               GetAudioOutputDeviceList(aOut : WideString): TStringList;
+
+               inspired by: Tom Wideroe <tom.wideroe@gmail.com>
+
+               GetVideoDimension(var width, height: LongWord): Boolean;
+
+               GetVideoChapterCountByTitleId(const title_id : Integer): Integer;
+
+               GetVideoSubtitleList(): TStringList;
+               GetVideoSubtitleCount(): Integer;
+               GetVideoSubtitleCountByTitleId(const title_id : Integer): Integer;
+               GetVideoSubtitleId(): Integer;
+               SetVideoSubtitleById(const subtitle_id : Integer);
+               GetVideoSubtitleNo(): Integer;
+               SetVideoSubtitleByNo(subtitle_no : Integer);
+               GetVideoSubtitleDescriptionById(const subtitle_id : Integer): WideString;
+               GetVideoSubtitleDescriptionByNo(subtitle_no : Integer): WideString;
+               SetVideoSubtitleFile(filename : WideString);
+
+               GetVideoTitleList() : TStringList;
+               GetVideoTitleCount(): Integer;
+               GetVideoTitleId():Integer;
+               SetVideoTitleById(const title_id:Integer);
+               GetVideoTitleNo(): Integer;
+               SetVideoTitleByNo(title_no : Integer);
+               GetVideoTitleDescriptionById(const track_id : Integer): WideString;
+               GetVideoTitleDescriptionByNo(title_no : Integer): WideString;
+
+               inspired by: Sebastián Mayorá <s.mayora@gmail.com>
+
+            Rename functions:
+
+               GetAspectRatio() to GetVideoAspectRatio()
+               SetAspectRatio() to SetVideoAspectRatio()
+
+               GetChannel() to GetAudioChannel()
+               SetChannel() to SetAudioChannel()
+
+2015.01.31 New functions:
+
+           GetAudioOutputList(): TStringList;
+           GetAudioOutputDeviceList(aOut : WideString): TStringList;
+
+           inspired by: Tom Widerøe <tom.wideroe@gmail.com>
+
+2015.01.06 New property
+
+           MouseEventsHandler
+
+           inspired by: Beat Schlösser <beat.schloesser@softron.ch>
+
+           New function:
+
+           GetVideoDimension(var width, height: LongWord): Boolean;
+
+2014.07.12 Add new functions:
+
+           GetVideoChapterCountByTitleId(const title_id : Integer): Integer;
+
+           GetVideoSubtitleList(): TStringList;
+           GetVideoSubtitleCount(): Integer;
+           GetVideoSubtitleCountByTitleId(const title_id : Integer): Integer;
+           GetVideoSubtitleId(): Integer;
+           SetVideoSubtitleById(const subtitle_id : Integer);
+           GetVideoSubtitleNo(): Integer;
+           SetVideoSubtitleByNo(subtitle_no : Integer);
+           GetVideoSubtitleDescriptionById(const subtitle_id : Integer): WideString;
+           GetVideoSubtitleDescriptionByNo(subtitle_no : Integer): WideString;
+           SetVideoSubtitleFile(filename : WideString);
+
+           GetVideoTitleList() : TStringList;
+           GetVideoTitleCount(): Integer;
+           GetVideoTitleId():Integer;
+           SetVideoTitleById(const title_id:Integer);
+           GetVideoTitleNo(): Integer;
+           SetVideoTitleByNo(title_no : Integer);
+           GetVideoTitleDescriptionById(const track_id : Integer): WideString;
+           GetVideoTitleDescriptionByNo(title_no : Integer): WideString;
+
+           inspired by: Sebastián Mayorá <s.mayora@gmail.com>
+
+           rename functions:
+
+           GetAspectRatio() to GetVideoAspectRatio()
+           SetAspectRatio() to SetVideoAspectRatio()
+
+           GetChannel() to GetAudioChannel()
+           SetChannel() to SetAudioChannel()
+
+2014.06.28 Add new functions:
+
+           MarqueeShowText();
+           MarqueeHide();
+
+           MarqueeSetText(marquee_text : WideString);
+           MarqueeSetPosition(position_x, position_y : Integer); overload;
+           MarqueeSetPosition(position : libvlc_position_t); overload;
+           MarqueeSetColor(color : libvlc_video_marquee_color_t);
+           MarqueeSetFontSize(font_size: Integer);
+           MarqueeSetOpacity(opacity: libvlc_opacity_t);
+           MarqueeSetTimeOut(time_out_ms: Integer);
+           MarqueeSetRefresh(refresh_after_ms: Integer);
+           MarqueeSetEnable(enable : Integer);
+
+           LogoShowFile();
+           LogoShowFiles();
+           LogoHide();
+
+           LogoSetFile();
+           LogoSetFiles();
+           LogoSetPosition();
+           LogoSetOpacity();
+           LogoSetDelay();
+           LogoSetRepeat();
+           LogoSetEnable();
+
+           GetAudioTrackList();
+           GetAudioTrackId();
+           SetAudioTrackById();
+           SetAudioTrackByNo();
+           GetAudioTrackDescriptionByNo();
+           GetAudioTrackDescriptionById();
+
+           Remove functions:
+
+           SetAudioTrack();
+           GetAudioTrackDescription();
+
+           Add new deinterlace filters:
+
+           dmPHOSPHOR, dmIVTC
+
+           inspired by Chris <dhwz@gulli.com>
+
+           Improve to play normal and youtube streams
+
+           Play();
+
+2013.12.11 Add new functions:
+
+           IsPause()
+           GetMediaMrl();
+           GetStateName();
+
+           writed by John Brookman <j.a.brookman@hotmail.co.uk>
+
+           Add better support for Delphi XE2 and up
+
+           Add 64 bit demo compiled with Delphi XE2
+           this demo request 64 bit  VideoLAN
+
+           requested by John Brookman <j.a.brookman@hotmail.co.uk>
+
+           Repair small bug in function TPasLibVlcPlayer.GetVideoHeight(): LongInt;
+           return wideo width not height
+
+           Reported by: "Dr Christoph Camphausen" <ckc@unsw.edu.au>
+
+           Rewrite OnMediaChanged event handler
+           Now report current media MRL
+
+           Requested by: "Eduan Slabbert" <wizardno.7@gmail.com>
+
+           Check compatibility with version 2.1.2
+
+2013.11.23 New properties
+
+           AudioOutput
+           VideoOutput
+
+2013.10.20 Verify compatibility with libvlc 2.1.0
+
+           Add local UTF8Encode and UTF8Decode for Delphi 3, 4, 5
+
+           Requested by: "Johan Keizer" <j.keizer36@upcmail.nl>
+
+2013.08.25 Add support for FPC LCL QT4 and FPC LCL GTK2 (LINUX, WIN)
+
+           Test on Kubuntu and Windows XP SP2 + VLC 2.0.8
+
+2013.08.18 Fix incorrect position of MouseEventWinCtrl if Player
+           placed inside TPanel control aligned to right side of form.
+
+           Request by: wilber27@users.sourceforge.net
+
+2013.04.26 Improve events handling
+
+           Add new properties:
+
+           OsdShow default true
+           SpuShow default true
+           SnapshotPrv default false
+
+           Add conditional code compilation for support Delphi 7
+           Thanks to: 1024317@qq.com
+
+2013.01.31 Rewrite events handling
+
+2012.10.28 Add compiler options {$A4,Z4} or {A+,Z+} for Delphi < 6
+           Add property TPasLibVlcPlayer.StartOptions
+           Now each player component use own instance of libvlc.
+
+2012.07.27 new property TPasLibVlcPlayer.UseEvents default FALSE
+           fix bug in TPasLibVlcPlayer.function EventsEnable:
+           if (p_mi = NIL) then -> if (p_mi <> NIL) then
+           add function TPasLibVlcPlayer.Stop
+           add try..finally in TPasLibVlcPlayer.Destroy
+
+2012.07.20 Add critical section to improve calls from event handlers
+
+2011.08.22 Crossplatform modifications (Linux)
+
+           Request by: "Maloupi" <maloupi@2n-tech.com>
+
+2011.08.20 add new functions:
+
+           function  GetChannel(): Integer;
+           function  GetAudioDelay(): Int64;
+
+           procedure SetChannel(chanel: Integer);
+           procedure SetAudioDelay(delay: Int64);
+
+2011.08.20 add new functions:
+
+           function  GetAudioTrackCount(): Integer;
+           function  GetAudioTrackDescription(track: Integer): String;
+           function  GetAudioTrack(): Integer;
+           procedure SetAudioTrack(track: Integer);
+
+           Request by: Mark Schneider <dhwz@gmx.net>
+
+2011.08.20 add new feature: load vlc.dll from custom path
+
+           VLC.Path := YOUR CUSTOM PATH
+
+           Requested by: "Mark Schneider" <dhwz@users.sourceforge.net>
+
+2011.08.19 add properties to deinterlace filter
+
+           Requested by: "Mark Schneider" <dhwz@users.sourceforge.net
+
+2011.04.07 add new component: TPasLibVlcMediaList
+
+           Methods for change play list mode:
+
+           PlayerSetPlayModeNormal;
+           PlayerSetPlayModeLoop;
+           PlayerSetPlayModeRepeat;
+
+           Methods for play, stop, pause:
+
+           Play;
+           Pause;
+           Stop;
+           Next;
+           Prev;
+           IsPlay(): Boolean;
+           GetState(): TPasLibVlcPlayerState;
+           PlayItem(item: libvlc_media_t_ptr);
+
+           Methods for operate on play list:
+
+           Add(mrl: WideString);
+           Get(index: Integer);
+           Count(): Integer;
+           Delete(index: Integer);
+           Insert(index: Integer; mrl: WideString);
+           GetItemAtIndex(index: Integer): libvlc_media_t_ptr;
+           IndexOfItem(item: libvlc_media_t_ptr): Integer;
+
+           After execute any method application will be notified about it via events:
+
+           OnItemAdded - after LIBVLC add item to play list
+           OnWillAddItem - before LIBVLC add item to play list
+           OnItemDeleted - after LIBVLC del item from play list
+           OnWillDeleteItem - before LIBVLC del item from play list
+           OnPlayed - after player start play
+           OnStopped - after player stop
+           OnNextItemSet - afer player play next item
+
+           Requested by: Christian cf. Fillion <christian@rhesus.net>
+
+2011.04.06 add new functions:
+
+           SetPlayRate() - change current play rate
+           GetPlayRate() - return current play rate
+
+           playRate = 100 - play with normal speed
+           playRate = 200 - play with speed x 2
+           playRate =  50 - play with slow speed is 0.5
+
+           Requested by: Johann Mitterhauser <>
+
+2011.02.11 make compatibile with Lazarus
+
+           Requested by: Christian cf. Fillion <christian@rhesus.net>
+
+2011.02.08 simple help for play YouTube video links
+
+           Now Play function detect YouTube link, and play it correctly.
+
+           Requested by: Christian cf. Fillion <christian@rhesus.net>
+
+2011.01.05 add new functions:
+
+           GetVideoLenStr() - return video length as time string
+           GetVideoPosStr() - return video position as time string
+
+           Requested by: Edijs van Kole de McSnikovics <terminedijs@yahoo.com>
+
+2011.01.05 add new properties: PopupMenu, etc.
+
+           Requested by: Edijs van Kole de McSnikovics <terminedijs@yahoo.com>
+
+2011.01.04 correct creation of VCL at runtime, error: control '' has no parent window
+
+           This error will be found by: Edijs van Kole de McSnikovics <terminedijs@yahoo.com>
+
+2011.01.03 rename variable: FHideTitle to FShowTitle
+
+           if ShowTitle = TRUE  then SHOW title at begin of play
+           if ShowTitle = FALSE then HIDE title at begin of play
+
+           default value: FALSE
+
+2010.12.08 Add support for version 1.1.5, new properties:
+
+           HideTitle - if TRUE prevent display title at begin of play, default TRUE
+           UseEvents - if TRUE then enable event propagation, default FALSE
+
+2010.10.01 Add support for unicode file names
+
+2010.07.22 Add support for set/get Audio Volume Level
+
+2010.09.02 Add support for version 1.1.4
+
+2010.07.14 Change PChar to PAnsiChar
+
+           Requested by: David Nottage, davidnottage@gmail.com

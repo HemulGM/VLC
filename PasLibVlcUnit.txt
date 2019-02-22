@@ -1,0 +1,329 @@
+2019.01.08 Fix THandle type for some functions, 
+
+           Lazarus has several definitions of THandle type (LCLQT5 Linux 64bit):
+
+               System.THandle = LongInt;
+               LCLType.THandle = type PtrUInt;
+               dynlibs.THandle = PtrInt;
+
+           This is no problem when run 32-bit app, 
+           but generate exceptions when run 64-bit app.
+
+2018.09.18 Fix small bugs in FMX component
+
+           Change load shared libraries
+
+2018.07.12 Fix untyped Dispose bug
+
+        affected procedures:
+
+            procedure libvlc_media_close_cb_stm(mctx : Pointer); cdecl;
+
+2018.07.01 Add support for media callbacks
+
+           inspired by Mark Adamson <markadamson83@gmail.com>
+
+2018.06.19 Update for compatibility with Fedora
+
+           inspired by Jim Lee <jlee54@gmail.com>
+
+                new search path /usr/lib64 for Fedora
+                disable require function libvlc_media_player_set_evas_object
+                because is not availiable in VLC release for Fedora
+           
+2018.06.11 Correct function read_dec_number
+
+           reported by Wortmann Sándor <wortmann@visualsolutions.hu>
+           
+2018-04-23 Correct video callbacks declarations
+
+2018-03-11 Update for compatibility with libvlc 3.0.0
+
+        New events:
+
+            libvlc_MediaPlayerESAdded,
+            libvlc_MediaPlayerESDeleted,
+            libvlc_MediaPlayerESSelected,
+            libvlc_MediaPlayerAudioDevice,
+            libvlc_MediaPlayerChapterChanged,
+            libvlc_RendererDiscovererItemAdded,
+            libvlc_RendererDiscovererItemDeleted,
+
+        New functions:
+
+            libvlc_dialog_set_callbacks
+            libvlc_dialog_set_context
+            libvlc_dialog_get_context
+            libvlc_dialog_post_login
+            libvlc_dialog_post_action
+            libvlc_dialog_dismiss
+
+            libvlc_renderer_item_hold
+            libvlc_renderer_item_release
+            libvlc_renderer_item_name
+            libvlc_renderer_item_type
+            libvlc_renderer_item_icon_uri
+            libvlc_renderer_item_flags
+
+            libvlc_renderer_discoverer_new
+            libvlc_renderer_discoverer_release
+            libvlc_renderer_discoverer_start
+            libvlc_renderer_discoverer_stop
+            libvlc_renderer_discoverer_event_manager
+            libvlc_renderer_discoverer_list_get
+            libvlc_renderer_discoverer_list_release
+
+            libvlc_media_new_callbacks(p_instance, open_cb, read_cb, seek_cb, close_cb, opaque );
+
+            libvlc_media_parse_with_options
+            libvlc_media_parse_stop
+            libvlc_media_get_parsed_status
+
+            libvlc_media_get_codec_description
+
+            libvlc_media_get_type
+            libvlc_media_slaves_add
+            libvlc_media_slaves_clear
+            libvlc_media_slaves_get
+            libvlc_media_slaves_release
+
+            libvlc_media_discoverer_new
+            libvlc_media_discoverer_start
+            libvlc_media_discoverer_stop
+            libvlc_media_discoverer_list_get
+            libvlc_media_discoverer_list_release
+
+            libvlc_media_list_player_get_media_player
+            libvlc_media_list_player_set_pause
+
+            libvlc_media_player_set_renderer
+            libvlc_media_player_set_android_context
+            libvlc_media_player_set_evas_object
+            libvlc_media_player_add_slave
+
+            libvlc_video_new_viewpoint
+            libvlc_video_update_viewpoint
+
+            libvlc_media_player_get_full_title_descriptions
+            libvlc_title_descriptions_release
+
+            libvlc_media_player_get_full_chapter_descriptions
+            libvlc_chapter_descriptions_release
+
+            libvlc_audio_output_device_get
+
+            libvlc_media_player_get_role
+            libvlc_media_player_set_role
+
+2018-01-08 Better support for FreeBSD11 + FPC:
+
+        correct THandle => TLibHandle
+
+2017.12.05 Correct struct declarations
+
+        libvlc_audio_track_t_ptr
+        libvlc_video_track_t_ptr
+        libvlc_subtitle_track_t_ptr
+        libvlc_media_track_union_t
+        libvlc_media_track_list_t_ptr
+
+2017.11.30 Update library search path for Ubuntu 17
+
+2016.11.28 Update Equalizer function declarations for compile with BC6.
+
+           reported by "Woldemar Unknown" <djvk@mail.ru>
+           
+2016.10.18 Updated for compile under Lazarus 1.6.0 + FPC 3.0.0.
+
+2016.10.08 Cleanup and prepare for use with FMX component
+
+2016.10.04 Add demo with libvlc_log_cb usage.
+
+2016.09.28 Correct declarations for libvlc_log_cb
+
+           reported by: Technosite <kbt901@gmail.com>
+
+2016.08.19 Correct struct declarations for better work with 64 bit
+
+           reported by: Chris <dhwz@gmx.net>
+
+2016.05.15 Correct function definitions:
+
+           reported by: Reiner Sombrowsky <reiner@somby.de>
+
+        Updated functions:
+
+            libvlc_video_unlock_cb  = procedure(...); cdecl;
+            libvlc_video_display_cb = procedure(...); cdecl;
+            libvlc_video_format_cb  = function(...): LongWord; cdecl;
+
+2016.02.12 Update for better compatibility with libvlc 2.2.2
+
+        New events:
+           
+            libvlc_MediaPlayerCorked
+            libvlc_MediaPlayerUncorked,
+            libvlc_MediaPlayerMuted,
+            libvlc_MediaPlayerUnmuted,
+            libvlc_MediaPlayerAudioVolume
+
+2015.02.28 Update for better compatibility with libvlc 2.2.0
+
+        LibVlc.dll exposes new API:
+
+            libvlc_media_player_program_scrambled
+            libvlc_audio_output_device_enum
+
+            libvlc_audio_equalizer_get_preset_count
+            libvlc_audio_equalizer_get_preset_name
+            libvlc_audio_equalizer_get_band_count
+            libvlc_audio_equalizer_get_band_frequency
+            libvlc_audio_equalizer_new
+            libvlc_audio_equalizer_new_from_preset
+            libvlc_audio_equalizer_release
+            libvlc_audio_equalizer_set_preamp
+            libvlc_audio_equalizer_get_preamp
+            libvlc_audio_equalizer_set_amp_at_index
+            libvlc_audio_equalizer_get_amp_at_index
+            libvlc_media_player_set_equalizer
+
+        New events:
+           
+            libvlc_MediaPlayerVout
+            libvlc_MediaPlayerScrambledChanged
+             
+        New meta data types:
+           
+            libvlc_meta_TrackTotal
+            libvlc_meta_Director
+            libvlc_meta_Season
+            libvlc_meta_Episode
+            libvlc_meta_ShowName
+            libvlc_meta_Actors
+
+2014.04.08 Add function libvlc_reset_function_pointers
+
+           inspired by "Marcio Wesley Borges" <marciowb@gmail.com>
+
+           fix get address of function libvlc_vlm_set_enabled
+
+           reported by "Marcio Wesley Borges" <marciowb@gmail.com>
+
+2013.12.11 Add better support for Delphi XE2 and up         
+
+           inspired by John Brookman <j.a.brookman@hotmail.co.uk>
+
+2013.10.20 Add new functions from libvlc 2.1.0
+
+           libvlc_media_player_set_video_title_display
+           libvlc_audio_output_device_list_get
+           libvlc_audio_output_device_list_release
+           libvlc_media_tracks_get
+           libvlc_media_tracks_release
+           libvlc_set_app_id
+           libvlc_log_get_context
+           libvlc_log_get_object
+           libvlc_log_set
+           libvlc_log_unset
+           libvlc_log_set_file
+
+           Verify compatibility with libvlc 2.1.0:
+
+           FUNCTION libvlc_audio_set_volume NOT WORK
+           EXCEPTION Invalid floating point operation.
+
+           https://forum.videolan.org/viewtopic.php?f=32&t=114264
+
+           Add local UTF8Encode and UTF8Decode for Delphi 3, 4, 5
+
+           Requested by: "Johan Keizer" <j.keizer36@upcmail.nl>
+
+2013.08.25 Add support for FPC LCL QT4 and FPC LCL GTK2 (LINUX, WIN)
+           Test on Kubuntu and Windows XP SP2 + VLC 2.0.8 
+
+           Add unified function for display player in window
+
+           libvlc_media_player_set_display_window
+
+           FPC For Windows : LCL GTK2+, LCL QT4, WIN32
+           FPC For Linux   : LCL GTK2+, LCL QT4
+
+           Verify compatibility with libvlc 2.0.8
+
+2012.10.28 Add compiler options {$A4,Z4}, {$A+,Z+} for Delphi < 6
+
+2012.07.21 Add new functions from libvlc 2.0.0
+
+           libvlc_set_exit_handler
+           libvlc_free
+           libvlc_module_description_list_release
+           libvlc_audio_filter_list_get
+           libvlc_video_filter_list_get
+           libvlc_clock
+           libvlc_media_list_player_retain
+           libvlc_video_set_format_callbacks
+           libvlc_video_get_spu_delay
+           libvlc_video_set_spu_delay
+           libvlc_audio_set_callbacks
+           libvlc_audio_set_volume_callback
+           libvlc_audio_set_format_callbacks
+           libvlc_audio_set_format
+           libvlc_media_player_navigate
+
+2011.08.22 Crossplatform modifications (Linux)
+
+           Request by: "Maloupi" <maloupi@2n-tech.com>
+
+2011.08.20 Add new function:
+
+           libvlc_dynamic_dll_init_with_path(vlc_install_path: string);
+
+2010.12.08 Add new functions from libvlc 1.1.5
+
+           libvlc_media_new_fd
+
+2010.11.24 Fix incorrect declaration in functions (stdcall calling convention instead of cdecl)
+
+           lock_call_fun
+           unlock_call_fun
+           display_call_fun
+
+           Request by: Alexey lelikz@users.sourceforge.net
+
+2010.09.07 Fix incorrect declaration of function (stdcall calling convention instead of cdecl)
+
+           libvlc_log_iterator_has_next
+
+           Request by: Alain Gawlik a.gawlik@gmx.com
+
+2010.09.06 Fix incorrect declaration of function (stdcall calling convention instead of cdecl)
+
+           libvlc_media_player_set_hwnd
+
+           Request by: Alain Gawlik a.gawlik@gmx.com
+
+2010.09.02 Add support for libvlc 1.1.4
+
+2010.07.22 Add new functions from libvlc 1.1.1
+
+           libvlc_set_user_agent
+           libvlc_media_player_set_pause
+           libvlc_video_set_callbacks
+           libvlc_video_set_format
+           libvlc_video_get_adjust_int
+           libvlc_video_set_adjust_int
+           libvlc_video_get_adjust_float
+           libvlc_video_set_adjust_float
+           libvlc_audio_get_delay
+           libvlc_audio_set_delay
+
+2010.07.14 Change PChar to PAnsiChar
+
+           Request by: David Nottage, davidnottage@gmail.com
+
+2010.07.13 Change registry read mode from default KEY_ALL_ACCESS to KEY_READ.
+
+           Request by: David Nottage, davidnottage@gmail.com
+
+2010.07.01 Start
+
