@@ -63,7 +63,7 @@ uses
   {$IFDEF LCLQT5}Qt5, QtWidgets,{$ENDIF}
   {$IFDEF UNIX}Dialogs,{$ENDIF}
   {$IFDEF MACOS}FMX.Dialogs,Posix.Unistd,{$ENDIF}
-  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math, Forms;
+  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math;
 
 {$IFDEF HAS_EXCEPTION_MASK}
 const
@@ -7491,7 +7491,7 @@ end;
 function libvlc_get_install_path() : string;
 
 {$IFDEF MSWINDOWS}
-{var
+var
   reKey : HKEY;
   reRes : Longint;
   vType : DWORD;
@@ -7512,9 +7512,7 @@ begin
       Result := string(PChar(@vBuff));
     end;
   end;
-  RegCloseKey(reKey); }
-begin
-  Result:= ExtractFilePath(Application.ExeName);
+  RegCloseKey(reKey);
 end;
 {$ENDIF}
 

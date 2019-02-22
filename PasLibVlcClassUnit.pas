@@ -61,21 +61,6 @@ type
 
   TVideoRatio = (ra_NONE, ra_16_9, ra_16_10, ra_185_100, ra_221_100, ra_235_100, ra_239_100, ra_4_3, ra_5_4, ra_5_3, ra_1_1);
 
-  {
-  proto=
-This selects the transport protocol to carry RTP packets.
-
-Possible values include:
-
-dccp, accept incoming DCCP connections at the specified IP address (dst=),
-sctp, accept SCTP connections at the specified IP address (dst=), not implemented yet,
-tcp, accept TCP connections at the specified IP address (dst=) and use RFC 4571 RTP framing, not implemented yet,
-udp, send UDP packets to the specified destination (either unicast or multicast); this is the default value,
-udplite
-  }
-
-  TProto = (tpDccp, tpSctp, tpTcp, tpUdp, tpUdplite);
-
   TMux = (muxTS, muxPS, muxMp4, muxOgg, muxAvi);
 
   TVideoOutput = (
@@ -291,28 +276,28 @@ type
   TPasLibVlcEqualizer = class
   private
     FVLC       : TPasLibVlc;
-    FEqualizer : Pointer;
+    FEqualizer : libvlc_equalizer_t_ptr;
     FPreset    : Word;
   public
-    constructor Create(AVLC: TPasLibVlc; APreset : UINT = $FFFF);
+    constructor Create(AVLC: TPasLibVlc; APreset : unsigned_t = $FFFF);
     destructor Destroy; override;
 
     function GetPreAmp() : Single;
     procedure SetPreAmp(value : Single);
 
-    function GetAmp(index: UINT) :  Single;
-    procedure SetAmp(index : UINT; value : Single);
+    function GetAmp(index: unsigned_t) :  Single;
+    procedure SetAmp(index : unsigned_t; value : Single);
 
-    function GetBandCount() : UINT;
-    function GetBandFrequency(index : UINT) : Single;
+    function GetBandCount() : unsigned_t;
+    function GetBandFrequency(index : unsigned_t) : Single;
 
-    function GetPresetCount() : UINT;
-    function GetPresetName(index : UINT) : WideString; overload;
+    function GetPresetCount() : unsigned_t;
+    function GetPresetName(index : unsigned_t) : WideString; overload;
     function GetPresetName() : WideString; overload;
-    function GetPreset() : UINT;
-    procedure SetPreset(APreset : UINT = $FFFF);
+    function GetPreset() : unsigned_t;
+    procedure SetPreset(APreset : unsigned_t = $FFFF);
 
-    function GetHandle() : Pointer;
+    function GetHandle() : libvlc_equalizer_t_ptr;
   end;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -837,7 +822,7 @@ end;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-constructor TPasLibVlcEqualizer.Create(AVLC: TPasLibVlc; aPreset : UINT = $FFFF);
+constructor TPasLibVlcEqualizer.Create(AVLC: TPasLibVlc; aPreset : unsigned_t = $FFFF);
 begin
   inherited Create;
   FVLC       := AVLC;
@@ -868,41 +853,41 @@ begin
   libvlc_audio_equalizer_set_preamp(FEqualizer, value);
 end;
 
-function TPasLibVlcEqualizer.GetAmp(index: UINT) :  Single;
+function TPasLibVlcEqualizer.GetAmp(index: unsigned_t) :  Single;
 begin
   Result := 0;
   if (SELF.GetHandle() = NIL) then exit;
   Result := libvlc_audio_equalizer_get_amp_at_index(FEqualizer, index);
 end;
 
-procedure TPasLibVlcEqualizer.SetAmp(index : UINT; value : Single);
+procedure TPasLibVlcEqualizer.SetAmp(index : unsigned_t; value : Single);
 begin
   if (SELF.GetHandle() = NIL) then exit;
   libvlc_audio_equalizer_set_amp_at_index(FEqualizer, value, index);
 end;
 
-function TPasLibVlcEqualizer.GetBandCount() : UINT;
+function TPasLibVlcEqualizer.GetBandCount() : unsigned_t;
 begin
   Result := 0;
   if (FVLC.GetHandle() = NIL) then exit;  
   Result := libvlc_audio_equalizer_get_band_count();
 end;
 
-function TPasLibVlcEqualizer.GetBandFrequency(index : UINT) : Single;
+function TPasLibVlcEqualizer.GetBandFrequency(index : unsigned_t) : Single;
 begin
   Result := 0;
   if (FVLC.GetHandle() = NIL) then exit;
   Result := libvlc_audio_equalizer_get_band_frequency(index);
 end;
 
-function TPasLibVlcEqualizer.GetPresetCount() : UINT;
+function TPasLibVlcEqualizer.GetPresetCount() : unsigned_t;
 begin
   Result := 0;
   if (FVLC.GetHandle() = NIL) then exit;
   Result := libvlc_audio_equalizer_get_preset_count();
 end;
 
-function TPasLibVlcEqualizer.GetPresetName(index : UINT) : WideString;
+function TPasLibVlcEqualizer.GetPresetName(index : unsigned_t) : WideString;
 var
   preset : PAnsiChar;
 begin
@@ -917,12 +902,12 @@ begin
   Result := GetPresetName(FPreset);
 end;
 
-function TPasLibVlcEqualizer.GetPreset() : UINT;
+function TPasLibVlcEqualizer.GetPreset() : unsigned_t;
 begin
   Result := FPreset;
 end;
 
-procedure TPasLibVlcEqualizer.SetPreset(APreset : UINT = $FFFF);
+procedure TPasLibVlcEqualizer.SetPreset(APreset : unsigned_t = $FFFF);
 begin
   FPreset := aPreset;
   if (FEqualizer <> NIL) then
@@ -932,7 +917,7 @@ begin
   end;
 end;
 
-function TPasLibVlcEqualizer.GetHandle() : Pointer;
+function TPasLibVlcEqualizer.GetHandle() : libvlc_equalizer_t_ptr;
 begin
   Result := NIL;
   if (FVLC.GetHandle() = NIL) then exit;
