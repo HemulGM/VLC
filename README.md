@@ -1,4 +1,4 @@
-# VLC
+# VLC for Delphi VCL
 
 VLC with my fix
 
