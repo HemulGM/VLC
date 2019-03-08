@@ -4,8 +4,7 @@
  *
  * See copyright notice below.
  *
- * Last modified: 2019.02.22 [HemulGM]
- * Last modified: Fix create player (del middle panel)
+ * Last modified: 2019.01.10
  *
  * author: Robert Jędrzejczyk
  * e-mail: robert@prog.olsztyn.pl
@@ -55,21 +54,13 @@ unit PasLibVlcPlayerUnit;
 interface
 
 uses
-  {$IFDEF UNIX}Unix,{$ENDIF}
-  {$IFDEF MSWINDOWS}Windows,{$ENDIF}
-  {$IFDEF FPC}
-  LCLType, LCLIntf, LazarusPackageIntf, LMessages, LResources, Forms, Dialogs,
-  {$ELSE}
-  Messages,
-  {$ENDIF}
-  Classes, SysUtils, Controls, ExtCtrls, Graphics,
-  PasLibVlcUnit,
-  PasLibVlcClassUnit;
+  Windows, Messages, Classes, SysUtils, Controls, ExtCtrls, Graphics,
+  PasLibVlcUnit, PasLibVlcClassUnit;
 
 type
   TPasLibVlcMouseEventWinCtrl = class(TWinControl)
   private
-    procedure WMEraseBkgnd(var msg: {$IFDEF FPC}TLMEraseBkgnd{$ELSE}TWMEraseBkGnd{$ENDIF}); message {$IFDEF FPC}LM_EraseBkgnd{$ELSE}WM_ERASEBKGND{$ENDIF};
+    procedure WMEraseBkgnd(var msg: TWMEraseBkGnd); message WM_ERASEBKGND;
   protected
     procedure CreateParams(var params: TCreateParams); override;
   public
@@ -77,14 +68,10 @@ type
   published
     property OnClick;
     property OnDblClick;
-    {$IFDEF DELPHI2005_UP}
     property OnMouseActivate;
-    {$ENDIF}
     property OnMouseDown;
-    {$IFDEF DELPHI2006_UP}
     property OnMouseEnter;
     property OnMouseLeave;
-    {$ENDIF}
     property OnMouseMove;
     property OnMouseUp;
   end;
@@ -95,7 +82,7 @@ const
   WM_START = WM_USER;
 
 type
-  TVlcMessage = {$IFDEF FPC}TLMessage{$ELSE}TMessage{$ENDIF};
+  TVlcMessage = TMessage;
 
 const
   WM_MEDIA_PLAYER_MEDIA_CHANGED       = WM_START + Integer(libvlc_MediaPlayerMediaChanged);
@@ -134,21 +121,13 @@ const
   WM_RENDERED_DISCOVERED_ITEM_DELETED = WM_START + Integer(libvlc_RendererDiscovererItemDeleted);
 
 type
-  TPasLibVlcPlayerState = (
-    plvPlayer_NothingSpecial,
-    plvPlayer_Opening,
-    plvPlayer_Buffering,
-    plvPlayer_Playing,
-    plvPlayer_Paused,
-    plvPlayer_Stopped,
-    plvPlayer_Ended,
-    plvPlayer_Error);
+  TPasLibVlcPlayerState = (plvPlayer_NothingSpecial, plvPlayer_Opening,
+                           plvPlayer_Buffering, plvPlayer_Playing,
+                           plvPlayer_Paused, plvPlayer_Stopped,
+                           plvPlayer_Ended, plvPlayer_Error);
 
 type
-  TPasLibVlcPlayerMouseEventsHandler = (
-    mehComponent,
-    mehVideoLAN
-  );
+  TPasLibVlcPlayerMouseEventsHandler = (mehComponent, mehVideoLAN);
 
 type
   TNotifyPlayerEvent        = procedure(p_event: libvlc_event_t_ptr; data : Pointer) of object;
@@ -177,47 +156,34 @@ type
 
   TPasLibVlcPlayer = class;
 
-{$IFDEF FPC}
-  TPasLibVlcPlayer = class(TPanel)
-{$ELSE}
-  {$IFDEF DELPHI_XE7_UP}
   [ComponentPlatformsAttribute(pidWin32 or pidWin64)]
-  {$ENDIF}
   TPasLibVlcPlayer = class(TCustomPanel)
-{$ENDIF}
   private
-    FVLC          : TPasLibVlc;
-    p_mi          : libvlc_media_player_t_ptr;
-    p_mi_ev_mgr   : libvlc_event_manager_t_ptr;
+    FVLC: TPasLibVlc;
+    p_mi: libvlc_media_player_t_ptr;
+    p_mi_ev_mgr: libvlc_event_manager_t_ptr;
 
     //
-    FError        : string;
-    FMute         : Boolean;
+    FError: string;
+    FMute: Boolean;
+    FVideoOutput: TVideoOutput;
+    FAudioOutput: TAudioOutput;
+    FTitleShow: Boolean;
+    FTitleShowPos: TPasLibVlcTitlePosition;
+    FTitleShowTimeOut: LongWord;
 
-    FVideoOutput : TVideoOutput;
-    FAudioOutput : TAudioOutput;
+    FSnapshotFmt: string;
+    FSnapshotPrv: Boolean;
+    FVideoOnTop: Boolean;
+    FUseOverlay: Boolean;
+    FSpuShow: Boolean;
+    FOsdShow: Boolean;
+    FViewTeleText: Boolean;
+    FDeinterlaceFilter: TDeinterlaceFilter;
+    FDeinterlaceMode: TDeinterlaceMode;
+    FLastAudioOutput: WideString;
+    FLastAudioOutputDeviceId: WideString;
 
-    FTitleShow        : Boolean;
-    FTitleShowPos     : TPasLibVlcTitlePosition;
-    FTitleShowTimeOut : LongWord;
-
-    FSnapshotFmt  : string;
-    FSnapshotPrv  : Boolean;
-
-    FVideoOnTop   : Boolean;
-    FUseOverlay   : Boolean;
-
-    FSpuShow      : Boolean;
-    FOsdShow      : Boolean;
-
-    FViewTeleText : Boolean;
-
-    FDeinterlaceFilter : TDeinterlaceFilter;
-    FDeinterlaceMode   : TDeinterlaceMode;
-
-    FLastAudioOutput : WideString;
-    FLastAudioOutputDeviceId : WideString;
-    
     // events handlers
     FOnMediaPlayerMediaChanged       : TNotifyMediaChanged;
     FOnMediaPlayerNothingSpecial     : TNotifyEvent;
@@ -293,15 +259,11 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure InternalOnMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    {$IFDEF DELPHI2005_UP}
     procedure InternalOnMouseActivate(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer;
       var MouseActivate: TMouseActivate);
-    {$ENDIF}
-    {$IFDEF DELPHI2006_UP}
     procedure InternalOnMouseEnter(Sender: TObject);
     procedure InternalOnMouseLeave(Sender: TObject);
-    {$ENDIF}
     procedure InternalOnMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
     procedure InternalOnMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 
@@ -345,63 +307,50 @@ type
     procedure WmRendererDiscoveredItemDeleted(var m: TVlcMessage); message WM_RENDERED_DISCOVERED_ITEM_DELETED;
 
   protected
-  
+    procedure WMEraseBkgnd(var msg: TWMEraseBkGnd); message WM_ERASEBKGND;
+    procedure CreateParams(var params: TCreateParams); override;
     procedure SetHwnd();
 
     procedure DestroyPlayer();
 
     procedure WMNCPaint(var Message: TMessage); message WM_NCPAINT;
+    procedure WMResize(var Message: TMessage); message WM_SIZE;
     procedure PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayContinue(const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
   public
-
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-
     function GetPlayerHandle(): libvlc_media_player_t_ptr;
-
     procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
-
     procedure PlayInWindow(newWindow: TWinControl = NIL; aOut: WideString = ''; aOutDeviceId: WideString = '');
+    procedure Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(stm: TStream; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayNormal(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayYoutube(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
+    procedure Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
 
-    procedure Play       (var media : TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-
-    procedure Play       (mrl : WideString; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure Play       (stm : TStream; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-
-    procedure PlayNormal (mrl : WideString; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayYoutube(mrl : WideString; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
-
-    procedure Play       (mrl : WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure Play       (stm : TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayNormal (mrl : WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayYoutube(mrl : WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
-
-    function  GetMediaMrl(): string;
-
+    function GetMediaMrl(): string;
     procedure Pause();
     procedure Resume();
-    function  IsPlay(): Boolean;
-    function  IsPause(): Boolean;
+    function IsPlay(): Boolean;
+    function IsPause(): Boolean;
     procedure Stop();
-
-    function  GetState(): TPasLibVlcPlayerState;
-    function  GetStateName(): string;
-
-    function  CanPlay(): Boolean;
-    function  CanPause(): Boolean;
-    function  CanSeek(): Boolean;
-
-    function HasVout() : Boolean;
-    function IsScrambled() : Boolean;
-
+    function GetState(): TPasLibVlcPlayerState;
+    function GetStateName(): string;
+    function CanPlay(): Boolean;
+    function CanPause(): Boolean;
+    function CanSeek(): Boolean;
+    function HasVout(): Boolean;
+    function IsScrambled(): Boolean;
     function Snapshot(fileName: WideString): Boolean; overload;
     function Snapshot(fileName: WideString; width, height: LongWord): Boolean; overload;
-
     procedure NextFrame();
-
     procedure SetPlayRate(rate: Integer);
-    function  GetPlayRate(): Integer;
+    function GetPlayRate(): Integer;
 
     function  GetVideoWidth(): LongInt;
     function  GetVideoHeight(): LongInt;
@@ -426,32 +375,30 @@ type
     function GetVideoPosStr(fmt: string = 'hh:mm:ss'): string;
 
     procedure SetTeleText(page: Integer);
-    function  GetTeleText() : Integer;
-    function  ShowTeleText() : Boolean;
-    function  HideTeleText() : Boolean;
+    function GetTeleText(): Integer;
+    function ShowTeleText(): Boolean;
+    function HideTeleText(): Boolean;
 
-    function  GetAudioMute(): Boolean;
+    function GetAudioMute(): Boolean;
     procedure SetAudioMute(mute: Boolean);
-    function  GetAudioVolume(): Integer;
+    function GetAudioVolume(): Integer;
     procedure SetAudioVolume(volumeLevel: Integer);
-
-    function  GetAudioChannel(): libvlc_audio_output_channel_t;
+    function GetAudioChannel(): libvlc_audio_output_channel_t;
     procedure SetAudioChannel(chanel: libvlc_audio_output_channel_t);
-
-    function  GetAudioDelay(): Int64;
+    function GetAudioDelay(): Int64;
     procedure SetAudioDelay(delay: Int64);
 
-    function  GetAudioFilterList(return_name_type : Integer = 0): TStringList;
-    function  GetVideoFilterList(return_name_type : Integer = 0): TStringList;
+    function GetAudioFilterList(return_name_type: Integer = 0): TStringList;
+    function GetVideoFilterList(return_name_type: Integer = 0): TStringList;
 
-    function  GetAudioTrackList(): TStringList;
-    function  GetAudioTrackCount(): Integer;
-    function  GetAudioTrackId(): Integer;
-    procedure SetAudioTrackById(const track_id : Integer);
-    function  GetAudioTrackNo(): Integer;
-    procedure SetAudioTrackByNo(track_no : Integer);
-    function  GetAudioTrackDescriptionById(const track_id : Integer): WideString;
-    function  GetAudioTrackDescriptionByNo(track_no : Integer): WideString;
+    function GetAudioTrackList(): TStringList;
+    function GetAudioTrackCount(): Integer;
+    function GetAudioTrackId(): Integer;
+    procedure SetAudioTrackById(const track_id: Integer);
+    function GetAudioTrackNo(): Integer;
+    procedure SetAudioTrackByNo(track_no: Integer);
+    function GetAudioTrackDescriptionById(const track_id: Integer): WideString;
+    function GetAudioTrackDescriptionByNo(track_no: Integer): WideString;
 
     function GetAudioOutputList(withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
     function GetAudioOutputDeviceList(aOut : WideString; withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
@@ -556,10 +503,15 @@ type
     procedure UpdateTitleShow();
 
     property  VLC : TPasLibVlc read GetVlcInstance;
+    property LastError: string read FError write FError;
+    property LastAudioOutput : WideString read FLastAudioOutput;
+    property LastAudioOutputDeviceId : WideString read FLastAudioOutputDeviceId;
     
   published
   
     property Align;
+    property AlignWithMargins;
+    property Anchors;
     property Color  default clBlack;
     property Width  default 320;
     property Height default 240;
@@ -574,9 +526,7 @@ type
     {$IFDEF DELPHI2005_UP}
     property OnAlignPosition;
     {$ENDIF}
-    {$IFNDEF FPC}
     property OnCanResize;
-    {$ENDIF}
     property OnClick;
     property OnConstrainedResize;
     {$IFDEF HAS_OnContextPopup}
@@ -592,14 +542,10 @@ type
     property OnEnter;
     property OnExit;
     property OnGetSiteInfo;
-    {$IFDEF DELPHI2005_UP}
     property OnMouseActivate;
-    {$ENDIF}
     property OnMouseDown;
-    {$IFDEF DELPHI2006_UP}
     property OnMouseEnter;
     property OnMouseLeave;
-    {$ENDIF}
     property OnMouseMove;
     property OnMouseUp;
     property OnMouseWheelUp;
@@ -610,231 +556,56 @@ type
     property OnUnDock;
     property TabOrder;
     property TabStop default True;
-
-    property SpuShow : Boolean
-      read    FSpuShow
-      write   SetSpuShow
-      default TRUE;
-
-    property OsdShow : Boolean
-      read    FOsdShow
-      write   SetOsdShow
-      default TRUE;
-
-    property TitleShow : Boolean
-      read    FTitleShow
-      write   SetTitleShow
-      default FALSE;
-
-    property TitleShowPos : TPasLibVlcTitlePosition
-      read FTitleShowPos
-      write SetTitleShowPos
-      default plvPosCenter;
-
-    property TitleShowTimeOut : LongWord
-      read FTitleShowTimeOut
-      write SetTitleShowTimeOut
-      default 2000;
-
-    property VideoOutput : TVideoOutput
-      read FVideoOutput
-      write FVideoOutput
-      default voDefault;
-
-    property AudioOutput : TAudioOutput
-      read FAudioOutput
-      write FAudioOutput
-      default aoDefault;
-
-    property VideoOnTop : Boolean
-      read    FVideoOnTop
-      write   SetVideoOnTop
-      default FALSE;
-
-    property UseOverlay : Boolean
-      read    FUseOverlay
-      write   SetUseOverlay
-      default FALSE;
-
-    property SnapShotFmt : string
-      read    FSnapShotFmt
-      write   SetSnapshotFmt;
-
-    property SnapshotPrv : Boolean
-      read    FSnapShotPrv
-      write   SetSnapshotPrv
-      default FALSE;
-
-    property DeinterlaceFilter : TDeinterlaceFilter
-      read    FDeinterlaceFilter
-      write   SetDeinterlaceFilter
-      default deOFF;
-
-    property DeinterlaceMode : TDeinterlaceMode
-      read    FDeinterlaceMode
-      write   SetDeinterlaceMode
-      default dmDISCARD;
-
-    property ViewTeletext : Boolean
-      read    FViewTeleText
-      write   SetViewTeleText
-      default FALSE;
-
-    property LastError: string
-      read   FError
-      write  FError;
-
-    property StartOptions : TStringList
-      read FStartOptions
-      write SetStartOptions;
-
-    property OnMediaPlayerEvent : TNotifyPlayerEvent
-      read FOnMediaPlayerEvent
-      write FOnMediaPlayerEvent;
-
-    property OnMediaPlayerMediaChanged : TNotifyMediaChanged
-      read  FOnMediaPlayerMediaChanged
-      write FOnMediaPlayerMediaChanged;
-
-    property OnMediaPlayerNothingSpecial : TNotifyEvent
-      read  FOnMediaPlayerNothingSpecial
-      write FOnMediaPlayerNothingSpecial;
-
-    property OnMediaPlayerOpening : TNotifyEvent
-      read  FOnMediaPlayerOpening
-      write FOnMediaPlayerOpening;
-
-    property OnMediaPlayerBuffering : TNotifyEvent
-      read  FOnMediaPlayerBuffering
-      write FOnMediaPlayerBuffering;
-
-    property OnMediaPlayerPlaying : TNotifyEvent
-      read  FOnMediaPlayerPlaying
-      write FOnMediaPlayerPlaying;
-
-    property OnMediaPlayerPaused : TNotifyEvent
-      read  FOnMediaPlayerPaused
-      write FOnMediaPlayerPaused;
-
-    property OnMediaPlayerStopped : TNotifyEvent
-      read  FOnMediaPlayerStopped
-      write FOnMediaPlayerStopped;
-
-    property OnMediaPlayerForward : TNotifyEvent
-      read  FOnMediaPlayerForward
-      write FOnMediaPlayerForward;
-
-    property OnMediaPlayerBackward : TNotifyEvent
-      read  FOnMediaPlayerBackward
-      write FOnMediaPlayerBackward;
-
-    property OnMediaPlayerEndReached : TNotifyEvent
-      read  FOnMediaPlayerEndReached
-      write FOnMediaPlayerEndReached;
-
-    property OnMediaPlayerEncounteredError : TNotifyEvent
-      read  FOnMediaPlayerEncounteredError
-      write FOnMediaPlayerEncounteredError;
-
-    property OnMediaPlayerTimeChanged : TNotifyTimeChanged
-      read  FOnMediaPlayerTimeChanged
-      write FOnMediaPlayerTimeChanged;
-
-    property OnMediaPlayerPositionChanged : TNotifyPositionChanged
-      read  FOnMediaPlayerPositionChanged
-      write FOnMediaPlayerPositionChanged;
-
-    property OnMediaPlayerSeekableChanged : TNotifySeekableChanged
-      read  FOnMediaPlayerSeekableChanged
-      write FOnMediaPlayerSeekableChanged;
-
-    property OnMediaPlayerPausableChanged : TNotifyPausableChanged
-      read  FOnMediaPlayerPausableChanged
-      write FOnMediaPlayerPausableChanged;
-
-    property OnMediaPlayerTitleChanged : TNotifyTitleChanged
-      read  FOnMediaPlayerTitleChanged
-      write FOnMediaPlayerTitleChanged;
-
-    property OnMediaPlayerSnapshotTaken : TNotifySnapshotTaken
-      read  FOnMediaPlayerSnapshotTaken
-      write FOnMediaPlayerSnapshotTaken;
-
-    property OnMediaPlayerLengthChanged : TNotifyLengthChanged
-      read  FOnMediaPlayerLengthChanged
-      write FOnMediaPlayerLengthChanged;
-
-    property OnMediaPlayerVideoOutChanged : TNotifyVideoOutChanged
-      read  FOnMediaPlayerVideoOutChanged
-      write FOnMediaPlayerVideoOutChanged;
-
-    property OnMediaPlayerScrambledChanged : TNotifyScrambledChanged
-      read  FOnMediaPlayerScrambledChanged
-      write FOnMediaPlayerScrambledChanged;
-
-    property OnMediaPlayerCorked : TNotifyEvent
-      read  FOnMediaPlayerCorked
-      write FOnMediaPlayerCorked;
-
-    property OnMediaPlayerUnCorked : TNotifyEvent
-      read  FOnMediaPlayerUnCorked
-      write FOnMediaPlayerUnCorked;
-
-    property OnMediaPlayerMuted : TNotifyEvent
-      read  FOnMediaPlayerMuted
-      write FOnMediaPlayerMuted;
-
-    property OnMediaPlayerUnMuted : TNotifyEvent
-      read  FOnMediaPlayerUnMuted
-      write FOnMediaPlayerUnMuted;
-
-    property OnMediaPlayerAudioVolumeChanged : TNotifyAudioVolumeChanged
-      read  FOnMediaPlayerAudioVolumeChanged
-      write FOnMediaPlayerAudioVolumeChanged;
-
-    property OnMediaPlayerEsAdded : TNotifyMediaPlayerEsAdded
-      read  FOnMediaPlayerEsAdded
-      write FOnMediaPlayerEsAdded;
-
-    property OnMediaPlayerEsDeleted : TNotifyMediaPlayerEsDeleted
-      read  FOnMediaPlayerEsDeleted
-      write FOnMediaPlayerEsDeleted;
-
-    property OnMediaPlayerEsSelected : TNotifyMediaPlayerEsSelected
-      read  FOnMediaPlayerEsSelected
-      write FOnMediaPlayerEsSelected;
-
-    property OnMediaPlayerAudioDevice : TNotifyMediaPlayerAudioDevice
-      read   FOnMediaPlayerAudioDevice
-      write FOnMediaPlayerAudioDevice;
-
-    property OnMediaPlayerChapterChanged : TNotifyMediaPlayerChapterChanged
-      read  FOnMediaPlayerChapterChanged
-      write FOnMediaPlayerChapterChanged;
-
-    property OnRendererDiscoveredItemAdded : TNotifyRendererDiscoveredItemAdded
-      read  FOnRendererDiscoveredItemAdded
-      write FOnRendererDiscoveredItemAdded;
-
-    property OnRendererDiscoveredItemDeleted : TNotifyRendererDiscoveredItemDeleted
-      read  FOnRendererDiscoveredItemDeleted
-      write FOnRendererDiscoveredItemDeleted;
-
-    property UseEvents : boolean
-      read  FUseEvents
-      write FUseEvents default TRUE;
-
-    property MouseEventsHandler : TPasLibVlcPlayerMouseEventsHandler
-      read  FMouseEventsHandler
-      write SetMouseEventHandler default mehVideoLAN;
-
-    property
-      LastAudioOutput : WideString
-      read FLastAudioOutput;
-
-    property
-      LastAudioOutputDeviceId : WideString
-      read FLastAudioOutputDeviceId;
+    property SpuShow : Boolean read FSpuShow write SetSpuShow default TRUE;
+    property OsdShow : Boolean read FOsdShow write SetOsdShow default TRUE;
+    property TitleShow : Boolean read FTitleShow write SetTitleShow default FALSE;
+    property TitleShowPos : TPasLibVlcTitlePosition read FTitleShowPos write SetTitleShowPos default plvPosCenter;
+    property TitleShowTimeOut : LongWord read FTitleShowTimeOut write SetTitleShowTimeOut default 2000;
+    property VideoOutput : TVideoOutput read FVideoOutput write FVideoOutput default voDefault;
+    property AudioOutput : TAudioOutput read FAudioOutput write FAudioOutput default aoDefault;
+    property VideoOnTop : Boolean read    FVideoOnTop write   SetVideoOnTop default FALSE;
+    property UseOverlay : Boolean read    FUseOverlay write   SetUseOverlay default FALSE;
+    property SnapShotFmt: string read FSnapShotFmt write SetSnapshotFmt;
+    property SnapshotPrv: Boolean read FSnapShotPrv write SetSnapshotPrv default FALSE;
+    property DeinterlaceFilter: TDeinterlaceFilter read FDeinterlaceFilter write SetDeinterlaceFilter default deOFF;
+    property DeinterlaceMode: TDeinterlaceMode read FDeinterlaceMode write SetDeinterlaceMode default dmDISCARD;
+    property ViewTeletext: Boolean read FViewTeleText write SetViewTeleText default FALSE;
+    property StartOptions: TStringList read FStartOptions write SetStartOptions;
+    property OnMediaPlayerEvent: TNotifyPlayerEvent read FOnMediaPlayerEvent write FOnMediaPlayerEvent;
+    property OnMediaPlayerMediaChanged: TNotifyMediaChanged read FOnMediaPlayerMediaChanged write FOnMediaPlayerMediaChanged;
+    property OnMediaPlayerNothingSpecial: TNotifyEvent read FOnMediaPlayerNothingSpecial write FOnMediaPlayerNothingSpecial;
+    property OnMediaPlayerOpening: TNotifyEvent read FOnMediaPlayerOpening write FOnMediaPlayerOpening;
+    property OnMediaPlayerBuffering: TNotifyEvent read FOnMediaPlayerBuffering write FOnMediaPlayerBuffering;
+    property OnMediaPlayerPlaying: TNotifyEvent read FOnMediaPlayerPlaying write FOnMediaPlayerPlaying;
+    property OnMediaPlayerPaused: TNotifyEvent read FOnMediaPlayerPaused write FOnMediaPlayerPaused;
+    property OnMediaPlayerStopped: TNotifyEvent read FOnMediaPlayerStopped write FOnMediaPlayerStopped;
+    property OnMediaPlayerForward: TNotifyEvent read FOnMediaPlayerForward write FOnMediaPlayerForward;
+    property OnMediaPlayerBackward: TNotifyEvent read FOnMediaPlayerBackward write FOnMediaPlayerBackward;
+    property OnMediaPlayerEndReached: TNotifyEvent read FOnMediaPlayerEndReached write FOnMediaPlayerEndReached;
+    property OnMediaPlayerEncounteredError: TNotifyEvent read FOnMediaPlayerEncounteredError write FOnMediaPlayerEncounteredError;
+    property OnMediaPlayerTimeChanged: TNotifyTimeChanged read FOnMediaPlayerTimeChanged write FOnMediaPlayerTimeChanged;
+    property OnMediaPlayerPositionChanged: TNotifyPositionChanged read FOnMediaPlayerPositionChanged write FOnMediaPlayerPositionChanged;
+    property OnMediaPlayerSeekableChanged: TNotifySeekableChanged read FOnMediaPlayerSeekableChanged write FOnMediaPlayerSeekableChanged;
+    property OnMediaPlayerPausableChanged: TNotifyPausableChanged read FOnMediaPlayerPausableChanged write FOnMediaPlayerPausableChanged;
+    property OnMediaPlayerTitleChanged: TNotifyTitleChanged read FOnMediaPlayerTitleChanged write FOnMediaPlayerTitleChanged;
+    property OnMediaPlayerSnapshotTaken: TNotifySnapshotTaken read FOnMediaPlayerSnapshotTaken write FOnMediaPlayerSnapshotTaken;
+    property OnMediaPlayerLengthChanged: TNotifyLengthChanged read FOnMediaPlayerLengthChanged write FOnMediaPlayerLengthChanged;
+    property OnMediaPlayerVideoOutChanged: TNotifyVideoOutChanged read FOnMediaPlayerVideoOutChanged write FOnMediaPlayerVideoOutChanged;
+    property OnMediaPlayerScrambledChanged: TNotifyScrambledChanged read FOnMediaPlayerScrambledChanged write FOnMediaPlayerScrambledChanged;
+    property OnMediaPlayerCorked: TNotifyEvent read FOnMediaPlayerCorked write FOnMediaPlayerCorked;
+    property OnMediaPlayerUnCorked: TNotifyEvent read FOnMediaPlayerUnCorked write FOnMediaPlayerUnCorked;
+    property OnMediaPlayerMuted: TNotifyEvent read FOnMediaPlayerMuted write FOnMediaPlayerMuted;
+    property OnMediaPlayerUnMuted: TNotifyEvent read FOnMediaPlayerUnMuted write FOnMediaPlayerUnMuted;
+    property OnMediaPlayerAudioVolumeChanged: TNotifyAudioVolumeChanged read FOnMediaPlayerAudioVolumeChanged write FOnMediaPlayerAudioVolumeChanged;
+    property OnMediaPlayerEsAdded: TNotifyMediaPlayerEsAdded read FOnMediaPlayerEsAdded write FOnMediaPlayerEsAdded;
+    property OnMediaPlayerEsDeleted: TNotifyMediaPlayerEsDeleted read FOnMediaPlayerEsDeleted write FOnMediaPlayerEsDeleted;
+    property OnMediaPlayerEsSelected: TNotifyMediaPlayerEsSelected read FOnMediaPlayerEsSelected write FOnMediaPlayerEsSelected;
+    property OnMediaPlayerAudioDevice: TNotifyMediaPlayerAudioDevice read FOnMediaPlayerAudioDevice write FOnMediaPlayerAudioDevice;
+    property OnMediaPlayerChapterChanged: TNotifyMediaPlayerChapterChanged read FOnMediaPlayerChapterChanged write FOnMediaPlayerChapterChanged;
+    property OnRendererDiscoveredItemAdded: TNotifyRendererDiscoveredItemAdded read FOnRendererDiscoveredItemAdded write FOnRendererDiscoveredItemAdded;
+    property OnRendererDiscoveredItemDeleted: TNotifyRendererDiscoveredItemDeleted read FOnRendererDiscoveredItemDeleted write FOnRendererDiscoveredItemDeleted;
+    property UseEvents: boolean read FUseEvents write FUseEvents default TRUE;
+    property MouseEventsHandler: TPasLibVlcPlayerMouseEventsHandler read FMouseEventsHandler write SetMouseEventHandler default mehVideoLAN;
   end;
 
   TNotifyMediaListItem = procedure(Sender: TObject; mrl: WideString; item: Pointer; index: Integer) of object;
@@ -842,23 +613,19 @@ type
   TPasLibVlcMediaList = class(TComponent)
 
   private
-    p_ml              : libvlc_media_list_t_ptr;
-    p_mlp             : libvlc_media_list_player_t_ptr;
-
-    p_ml_ev_mgr       : libvlc_event_manager_t_ptr;
-    p_mlp_ev_mgr      : libvlc_event_manager_t_ptr;
-
-    FPlayer           : TPasLibVlcPlayer;
-    FError            : string;
-
-    FOnItemAdded      : TNotifyMediaListItem;
-    FOnWillAddItem    : TNotifyMediaListItem;
-    FOnItemDeleted    : TNotifyMediaListItem;
-    FOnWillDeleteItem : TNotifyMediaListItem;
-    FOnNextItemSet    : TNotifyMediaListItem;
-    
-    FOnPlayed         : TNotifyEvent;
-    FOnStopped        : TNotifyEvent;
+    p_ml: libvlc_media_list_t_ptr;
+    p_mlp: libvlc_media_list_player_t_ptr;
+    p_ml_ev_mgr: libvlc_event_manager_t_ptr;
+    p_mlp_ev_mgr: libvlc_event_manager_t_ptr;
+    FPlayer: TPasLibVlcPlayer;
+    FError: string;
+    FOnItemAdded: TNotifyMediaListItem;
+    FOnWillAddItem: TNotifyMediaListItem;
+    FOnItemDeleted: TNotifyMediaListItem;
+    FOnWillDeleteItem: TNotifyMediaListItem;
+    FOnNextItemSet: TNotifyMediaListItem;
+    FOnPlayed: TNotifyEvent;
+    FOnStopped: TNotifyEvent;
 
     procedure SetPlayer(aPlayer: TPasLibVlcPlayer);
 
@@ -867,7 +634,6 @@ type
     procedure InternalHandleEventWillAddItem(item: libvlc_media_t_ptr; index: Integer);
     procedure InternalHandleEventWillDeleteItem(item: libvlc_media_t_ptr; index: Integer);
     procedure InternalHandleEventPlayerNextItemSet(item: libvlc_media_t_ptr);
-  protected
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -905,40 +671,15 @@ type
     procedure EventsEnable();
     
   published
-  
-    property Player: TPasLibVlcPlayer
-      read FPlayer
-      write SetPlayer;
-      
-    property LastError: string
-      read FError
-      write FError;
-
-    property OnItemAdded : TNotifyMediaListItem
-      read  FOnItemAdded
-      write FOnItemAdded;
-
-    property OnWillAddItem : TNotifyMediaListItem
-      read  FOnWillAddItem
-      write FOnWillAddItem;
-
-    property OnItemDeleted : TNotifyMediaListItem
-      read  FOnItemDeleted
-      write FOnItemDeleted;
-
-    property OnWillDeleteItem : TNotifyMediaListItem
-      read  FOnWillDeleteItem
-      write FOnWillDeleteItem;
-
-    property OnPlayed : TNotifyEvent
-      read  FOnPlayed write FOnPlayed;
-
-    property OnStopped : TNotifyEvent
-      read  FOnStopped write FOnStopped;
-
-    property OnNextItemSet : TNotifyMediaListItem
-      read  FOnNextItemSet
-      write FOnNextItemSet;
+    property Player: TPasLibVlcPlayer read FPlayer write SetPlayer;
+    property LastError: string read FError write FError;
+    property OnItemAdded: TNotifyMediaListItem read FOnItemAdded write FOnItemAdded;
+    property OnWillAddItem: TNotifyMediaListItem read FOnWillAddItem write FOnWillAddItem;
+    property OnItemDeleted: TNotifyMediaListItem read FOnItemDeleted write FOnItemDeleted;
+    property OnWillDeleteItem: TNotifyMediaListItem read FOnWillDeleteItem write FOnWillDeleteItem;
+    property OnPlayed: TNotifyEvent read FOnPlayed write FOnPlayed;
+    property OnStopped: TNotifyEvent read FOnStopped write FOnStopped;
+    property OnNextItemSet: TNotifyMediaListItem read FOnNextItemSet write FOnNextItemSet;
   end;
 
 procedure Register;
@@ -1504,7 +1245,7 @@ end;
 constructor TPasLibVlcPlayer.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  
+  ControlStyle := ControlStyle - [csOpaque];
   Color      := clBlack;
   Width      := 320;
   Height     := 240;
@@ -1537,7 +1278,7 @@ begin
   ParentColor := False;
   //{$ENDIF}
 
-  DoubleBuffered     := True;
+  DoubleBuffered:=True;
 
   Caption            := '';
   BevelOuter         := bvNone;
@@ -1582,6 +1323,12 @@ begin
 
   FMouseEventWinCtrl.OnMouseWheelDown:= InternalOnMouseWheelDown;
   FMouseEventWinCtrl.OnMouseWheelUp  := InternalOnMouseWheelUp;
+end;
+
+procedure TPasLibVlcPlayer.CreateParams(var params: TCreateParams);
+begin
+  inherited CreateParams(params);
+  params.ExStyle := params.ExStyle or WS_EX_TRANSPARENT;
 end;
 
 procedure TPasLibVlcPlayer.SetBounds(ALeft, ATop, AWidth, AHeight: Integer);
@@ -1924,6 +1671,7 @@ begin
     end;
 
     FVLC.AddOption('--drop-late-frames');
+    FVLC.AddOption('--verbose=0');
 
     // for versions before 2.1.0
     FVLC.TitleShow := FTitleShow;
@@ -2167,7 +1915,7 @@ begin
 
   if (p_mi = NIL) then exit;
 
-  Stop();
+  //Stop();
 
   // create media
   media := TPasLibVlcMedia.Create(VLC, mrl);
@@ -3329,7 +3077,7 @@ begin
     end
     else
     begin
-      libvlc_audio_output_device_set(p_mi, NIL, PAnsiChar(Utf8Encode(aOutDeviceId)));
+      libvlc_audio_output_device_set(p_mi, NIL, nil);
       FLastAudioOutput         := '';
       FLastAudioOutputDeviceId := aOutDeviceId;
     end;
@@ -4376,7 +4124,10 @@ end;
 
 procedure TPasLibVlcPlayer.WMNCPaint(var Message: TMessage);
 begin
- //Invalidate;
+  //Invalidate;
+  //BitBlt(Canvas.Handle, 0, 0, ClientRect.Width, ClientRect.Height, FHDC, 0, 0, SRCCOPY);
+  //Canvas.Brush.Color := clRed;
+  //Canvas.FillRect(ClientRect);
 end;
 
 procedure TPasLibVlcPlayer.WmMediaPlayerScrambledChanged(var m: TVlcMessage);
@@ -4455,8 +4206,19 @@ begin
   m.Result := 0;
 end;
 
+procedure TPasLibVlcPlayer.WMEraseBkgnd(var msg: TWMEraseBkGnd);
+begin
+ if (msg.DC <> 0) then
+  begin
+    SetBkMode (msg.DC, TRANSPARENT);
+    FillRect(msg.DC, Rect(0, 0, Width, Height), HBRUSH({$IFDEF FPC}Brush.Reference.Handle{$ELSE}Brush.Handle{$ENDIF}));
+  end;
+  msg.result := 1;
+end;
+
 {$WARNINGS OFF}
 {$HINTS OFF}
+
 procedure TPasLibVlcPlayer.WmMediaPlayerAudioDevice(var m: TVlcMessage);
 var
   {$IFDEF CPUX64}
@@ -4536,6 +4298,26 @@ begin
     FOnRendererDiscoveredItemDeleted(SELF, item);
   end;
   m.Result := 0;
+end;
+
+procedure TPasLibVlcPlayer.WMResize(var Message: TMessage);
+
+function EnumProc(wnd: HWND; Lines: TStrings): BOOL; stdcall;
+var
+  buf, Caption: array[0..255] of char;
+begin
+  Result := True;
+  //GetClassName(wnd, buf, SizeOf(buf) - 1);
+  RedrawWindow(wnd, nil, 0, RDW_INVALIDATE or RDW_UPDATENOW or RDW_ALLCHILDREN);
+  {SendMessage(wnd, WM_GETTEXT, 256, Integer(@Caption));
+  Lines.Add(Format('HWND: %d, ClassName: %s, Caption: %s',
+           [wnd, buf, Caption]));}
+end;
+
+begin
+  inherited;
+  //EnumChildWindows(Handle, @EnumProc, 0);
+
 end;
 
 {$WARNINGS ON}
