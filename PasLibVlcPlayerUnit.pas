@@ -85,74 +85,83 @@ type
   TVlcMessage = TMessage;
 
 const
-  WM_MEDIA_PLAYER_MEDIA_CHANGED       = WM_START + Integer(libvlc_MediaPlayerMediaChanged);
-  WM_MEDIA_PLAYER_NOTHING_SPECIAL     = WM_START + Integer(libvlc_MediaPlayerNothingSpecial);
-  WM_MEDIA_PLAYER_OPENING             = WM_START + Integer(libvlc_MediaPlayerOpening);
-  WM_MEDIA_PLAYER_BUFFERING           = WM_START + Integer(libvlc_MediaPlayerBuffering);
-  WM_MEDIA_PLAYER_PLAYING             = WM_START + Integer(libvlc_MediaPlayerPlaying);
-  WM_MEDIA_PLAYER_PAUSED              = WM_START + Integer(libvlc_MediaPlayerPaused);
-  WM_MEDIA_PLAYER_STOPPED             = WM_START + Integer(libvlc_MediaPlayerStopped);
-  WM_MEDIA_PLAYER_FORWARD             = WM_START + Integer(libvlc_MediaPlayerForward);
-  WM_MEDIA_PLAYER_BACKWARD            = WM_START + Integer(libvlc_MediaPlayerBackward);
-  WM_MEDIA_PLAYER_END_REACHED         = WM_START + Integer(libvlc_MediaPlayerEndReached);
-  WM_MEDIA_PLAYER_ENCOUNTERED_ERROR   = WM_START + Integer(libvlc_MediaPlayerEncounteredError);
-  WM_MEDIA_PLAYER_TIME_CHANGED        = WM_START + Integer(libvlc_MediaPlayerTimeChanged);
-  WM_MEDIA_PLAYER_POSITION_CHANGED    = WM_START + Integer(libvlc_MediaPlayerPositionChanged);
-  WM_MEDIA_PLAYER_SEEKABLE_CHANGED    = WM_START + Integer(libvlc_MediaPlayerSeekableChanged);
-  WM_MEDIA_PLAYER_PAUSABLE_CHANGED    = WM_START + Integer(libvlc_MediaPlayerPausableChanged);
-  WM_MEDIA_PLAYER_TITLE_CHANGED       = WM_START + Integer(libvlc_MediaPlayerTitleChanged);
-  WM_MEDIA_PLAYER_SNAPSHOT_TAKEN      = WM_START + Integer(libvlc_MediaPlayerSnapshotTaken);
-  WM_MEDIA_PLAYER_LENGTH_CHANGED      = WM_START + Integer(libvlc_MediaPlayerLengthChanged);
-  WM_MEDIA_PLAYER_VOUT_CHANGED        = WM_START + Integer(libvlc_MediaPlayerVout);
-  WM_MEDIA_PLAYER_SCRAMBLED_CHANGED   = WM_START + Integer(libvlc_MediaPlayerScrambledChanged);
-  WM_MEDIA_PLAYER_CORKED              = WM_START + Integer(libvlc_MediaPlayerCorked);
-  WM_MEDIA_PLAYER_UNCORKED            = WM_START + Integer(libvlc_MediaPlayerUncorked);
-  WM_MEDIA_PLAYER_MUTED               = WM_START + Integer(libvlc_MediaPlayerMuted);
-  WM_MEDIA_PLAYER_UNMUTED             = WM_START + Integer(libvlc_MediaPlayerUnmuted);
-  WM_MEDIA_PLAYER_AUDIO_VOLUME        = WM_START + Integer(libvlc_MediaPlayerAudioVolume);
-
-  WM_MEDIA_PLAYER_ES_ADDED            = WM_START + Integer(libvlc_MediaPlayerESAdded);
-  WM_MEDIA_PLAYER_ES_DELETED          = WM_START + Integer(libvlc_MediaPlayerESDeleted);
-  WM_MEDIA_PLAYER_ES_SELECTED         = WM_START + Integer(libvlc_MediaPlayerESSelected);
-  WM_MEDIA_PLAYER_AUDIO_DEVICE        = WM_START + Integer(libvlc_MediaPlayerAudioDevice);
-  WM_MEDIA_PLAYER_CHAPTER_CHANGED     = WM_START + Integer(libvlc_MediaPlayerChapterChanged);
-
-  WM_RENDERED_DISCOVERED_ITEM_ADDED   = WM_START + Integer(libvlc_RendererDiscovererItemAdded);
+  WM_MEDIA_PLAYER_MEDIA_CHANGED = WM_START + Integer(libvlc_MediaPlayerMediaChanged);
+  WM_MEDIA_PLAYER_NOTHING_SPECIAL = WM_START + Integer(libvlc_MediaPlayerNothingSpecial);
+  WM_MEDIA_PLAYER_OPENING = WM_START + Integer(libvlc_MediaPlayerOpening);
+  WM_MEDIA_PLAYER_BUFFERING = WM_START + Integer(libvlc_MediaPlayerBuffering);
+  WM_MEDIA_PLAYER_PLAYING = WM_START + Integer(libvlc_MediaPlayerPlaying);
+  WM_MEDIA_PLAYER_PAUSED = WM_START + Integer(libvlc_MediaPlayerPaused);
+  WM_MEDIA_PLAYER_STOPPED = WM_START + Integer(libvlc_MediaPlayerStopped);
+  WM_MEDIA_PLAYER_FORWARD = WM_START + Integer(libvlc_MediaPlayerForward);
+  WM_MEDIA_PLAYER_BACKWARD = WM_START + Integer(libvlc_MediaPlayerBackward);
+  WM_MEDIA_PLAYER_END_REACHED = WM_START + Integer(libvlc_MediaPlayerEndReached);
+  WM_MEDIA_PLAYER_ENCOUNTERED_ERROR = WM_START + Integer(libvlc_MediaPlayerEncounteredError);
+  WM_MEDIA_PLAYER_TIME_CHANGED = WM_START + Integer(libvlc_MediaPlayerTimeChanged);
+  WM_MEDIA_PLAYER_POSITION_CHANGED = WM_START + Integer(libvlc_MediaPlayerPositionChanged);
+  WM_MEDIA_PLAYER_SEEKABLE_CHANGED = WM_START + Integer(libvlc_MediaPlayerSeekableChanged);
+  WM_MEDIA_PLAYER_PAUSABLE_CHANGED = WM_START + Integer(libvlc_MediaPlayerPausableChanged);
+  WM_MEDIA_PLAYER_TITLE_CHANGED = WM_START + Integer(libvlc_MediaPlayerTitleChanged);
+  WM_MEDIA_PLAYER_SNAPSHOT_TAKEN = WM_START + Integer(libvlc_MediaPlayerSnapshotTaken);
+  WM_MEDIA_PLAYER_LENGTH_CHANGED = WM_START + Integer(libvlc_MediaPlayerLengthChanged);
+  WM_MEDIA_PLAYER_VOUT_CHANGED = WM_START + Integer(libvlc_MediaPlayerVout);
+  WM_MEDIA_PLAYER_SCRAMBLED_CHANGED = WM_START + Integer(libvlc_MediaPlayerScrambledChanged);
+  WM_MEDIA_PLAYER_CORKED = WM_START + Integer(libvlc_MediaPlayerCorked);
+  WM_MEDIA_PLAYER_UNCORKED = WM_START + Integer(libvlc_MediaPlayerUncorked);
+  WM_MEDIA_PLAYER_MUTED = WM_START + Integer(libvlc_MediaPlayerMuted);
+  WM_MEDIA_PLAYER_UNMUTED = WM_START + Integer(libvlc_MediaPlayerUnmuted);
+  WM_MEDIA_PLAYER_AUDIO_VOLUME = WM_START + Integer(libvlc_MediaPlayerAudioVolume);
+  WM_MEDIA_PLAYER_ES_ADDED = WM_START + Integer(libvlc_MediaPlayerESAdded);
+  WM_MEDIA_PLAYER_ES_DELETED = WM_START + Integer(libvlc_MediaPlayerESDeleted);
+  WM_MEDIA_PLAYER_ES_SELECTED = WM_START + Integer(libvlc_MediaPlayerESSelected);
+  WM_MEDIA_PLAYER_AUDIO_DEVICE = WM_START + Integer(libvlc_MediaPlayerAudioDevice);
+  WM_MEDIA_PLAYER_CHAPTER_CHANGED = WM_START + Integer(libvlc_MediaPlayerChapterChanged);
+  WM_RENDERED_DISCOVERED_ITEM_ADDED = WM_START + Integer(libvlc_RendererDiscovererItemAdded);
   WM_RENDERED_DISCOVERED_ITEM_DELETED = WM_START + Integer(libvlc_RendererDiscovererItemDeleted);
 
 type
-  TPasLibVlcPlayerState = (plvPlayer_NothingSpecial, plvPlayer_Opening,
-                           plvPlayer_Buffering, plvPlayer_Playing,
-                           plvPlayer_Paused, plvPlayer_Stopped,
-                           plvPlayer_Ended, plvPlayer_Error);
+  TPasLibVlcPlayerState = (plvPlayer_NothingSpecial, plvPlayer_Opening, plvPlayer_Buffering, plvPlayer_Playing, plvPlayer_Paused, plvPlayer_Stopped, plvPlayer_Ended, plvPlayer_Error);
 
 type
   TPasLibVlcPlayerMouseEventsHandler = (mehComponent, mehVideoLAN);
 
 type
-  TNotifyPlayerEvent        = procedure(p_event: libvlc_event_t_ptr; data : Pointer) of object;
-  
-  TNotifySeekableChanged    = procedure(Sender : TObject; val             : Boolean) of object;
-  TNotifyPausableChanged    = procedure(Sender : TObject; val             : Boolean) of object;
-  TNotifyTitleChanged       = procedure(Sender : TObject; title           : Integer) of object;
-  TNotifySnapshotTaken      = procedure(Sender : TObject; fileName        : string)  of object;
-  TNotifyTimeChanged        = procedure(Sender : TObject; time            : Int64)   of object;
-  TNotifyLengthChanged      = procedure(Sender : TObject; time            : Int64)   of object;
-  TNotifyPositionChanged    = procedure(Sender : TObject; position        : Single)  of object;
-  TNotifyMediaChanged       = procedure(Sender : TObject; mrl             : string)  of object;
-  TNotifyVideoOutChanged    = procedure(Sender : TObject; video_out       : Integer) of object;
-  TNotifyScrambledChanged   = procedure(Sender : TObject; scrambled       : Integer) of object;
-  TNotifyAudioVolumeChanged = procedure(Sender : TObject; volume          : Single)  of object;
+  TNotifyPlayerEvent = procedure(p_event: libvlc_event_t_ptr; data: Pointer) of object;
 
-  TNotifyMediaPlayerEsAdded            = procedure(Sender : TObject; i_type : libvlc_track_type_t; i_id : Integer) of object;
-  TNotifyMediaPlayerEsDeleted          = procedure(Sender : TObject; i_type : libvlc_track_type_t; i_id : Integer) of object;
-  TNotifyMediaPlayerEsSelected         = procedure(Sender : TObject; i_type : libvlc_track_type_t; i_id : Integer) of object;
-  
-  TNotifyMediaPlayerAudioDevice        = procedure(Sender : TObject; audio_device    : string) of object;
-  TNotifyMediaPlayerChapterChanged     = procedure(Sender : TObject; chapter         : Integer) of object;
+  TNotifySeekableChanged = procedure(Sender: TObject; val: Boolean) of object;
 
-  TNotifyRendererDiscoveredItemAdded   = procedure(Sender : TObject; item : libvlc_renderer_item_t_ptr) of object;
-  TNotifyRendererDiscoveredItemDeleted = procedure(Sender : TObject; item : libvlc_renderer_item_t_ptr) of object;
+  TNotifyPausableChanged = procedure(Sender: TObject; val: Boolean) of object;
+
+  TNotifyTitleChanged = procedure(Sender: TObject; title: Integer) of object;
+
+  TNotifySnapshotTaken = procedure(Sender: TObject; fileName: string) of object;
+
+  TNotifyTimeChanged = procedure(Sender: TObject; time: Int64) of object;
+
+  TNotifyLengthChanged = procedure(Sender: TObject; time: Int64) of object;
+
+  TNotifyPositionChanged = procedure(Sender: TObject; position: Single) of object;
+
+  TNotifyMediaChanged = procedure(Sender: TObject; mrl: string) of object;
+
+  TNotifyVideoOutChanged = procedure(Sender: TObject; video_out: Integer) of object;
+
+  TNotifyScrambledChanged = procedure(Sender: TObject; scrambled: Integer) of object;
+
+  TNotifyAudioVolumeChanged = procedure(Sender: TObject; volume: Single) of object;
+
+  TNotifyMediaPlayerEsAdded = procedure(Sender: TObject; i_type: libvlc_track_type_t; i_id: Integer) of object;
+
+  TNotifyMediaPlayerEsDeleted = procedure(Sender: TObject; i_type: libvlc_track_type_t; i_id: Integer) of object;
+
+  TNotifyMediaPlayerEsSelected = procedure(Sender: TObject; i_type: libvlc_track_type_t; i_id: Integer) of object;
+
+  TNotifyMediaPlayerAudioDevice = procedure(Sender: TObject; audio_device: string) of object;
+
+  TNotifyMediaPlayerChapterChanged = procedure(Sender: TObject; chapter: Integer) of object;
+
+  TNotifyRendererDiscoveredItemAdded = procedure(Sender: TObject; item: libvlc_renderer_item_t_ptr) of object;
+
+  TNotifyRendererDiscoveredItemDeleted = procedure(Sender: TObject; item: libvlc_renderer_item_t_ptr) of object;
 
   TPasLibVlcPlayer = class;
 
@@ -171,7 +180,6 @@ type
     FTitleShow: Boolean;
     FTitleShowPos: TPasLibVlcTitlePosition;
     FTitleShowTimeOut: LongWord;
-
     FSnapshotFmt: string;
     FSnapshotPrv: Boolean;
     FVideoOnTop: Boolean;
@@ -185,141 +193,113 @@ type
     FLastAudioOutputDeviceId: WideString;
 
     // events handlers
-    FOnMediaPlayerMediaChanged       : TNotifyMediaChanged;
-    FOnMediaPlayerNothingSpecial     : TNotifyEvent;
-    FOnMediaPlayerOpening            : TNotifyEvent;
-    FOnMediaPlayerBuffering          : TNotifyEvent;
-    FOnMediaPlayerPlaying            : TNotifyEvent;
-    FOnMediaPlayerPaused             : TNotifyEvent;
-    FOnMediaPlayerStopped            : TNotifyEvent;
-    FOnMediaPlayerForward            : TNotifyEvent;
-    FOnMediaPlayerBackward           : TNotifyEvent;
-    FOnMediaPlayerEndReached         : TNotifyEvent;
-    FOnMediaPlayerEncounteredError   : TNotifyEvent;
-    FOnMediaPlayerTimeChanged        : TNotifyTimeChanged;
-    FOnMediaPlayerPositionChanged    : TNotifyPositionChanged;
-    FOnMediaPlayerSeekableChanged    : TNotifySeekableChanged;
-    FOnMediaPlayerPausableChanged    : TNotifyPausableChanged;
-    FOnMediaPlayerTitleChanged       : TNotifyTitleChanged;
-    FOnMediaPlayerSnapshotTaken      : TNotifySnapshotTaken;
-    FOnMediaPlayerLengthChanged      : TNotifyLengthChanged;
-    FOnMediaPlayerVideoOutChanged    : TNotifyVideoOutChanged;
-    FOnMediaPlayerScrambledChanged   : TNotifyScrambledChanged;
-    FOnMediaPlayerEvent              : TNotifyPlayerEvent;
-    FOnMediaPlayerCorked             : TNotifyEvent;
-    FOnMediaPlayerUnCorked           : TNotifyEvent;
-    FOnMediaPlayerMuted              : TNotifyEvent;
-    FOnMediaPlayerUnMuted            : TNotifyEvent;
-    FOnMediaPlayerAudioVolumeChanged : TNotifyAudioVolumeChanged;
-
-    FOnMediaPlayerEsAdded            : TNotifyMediaPlayerEsAdded;
-    FOnMediaPlayerEsDeleted          : TNotifyMediaPlayerEsDeleted;
-    FOnMediaPlayerEsSelected         : TNotifyMediaPlayerEsSelected;
-    FOnMediaPlayerAudioDevice        : TNotifyMediaPlayerAudioDevice;
-    FOnMediaPlayerChapterChanged     : TNotifyMediaPlayerChapterChanged;
-
-    FOnRendererDiscoveredItemAdded   : TNotifyRendererDiscoveredItemAdded;
-    FOnRendererDiscoveredItemDeleted : TNotifyRendererDiscoveredItemDeleted;
-
-    FUseEvents                     : boolean;
-
-    FMouseEventWinCtrl             : TPasLibVlcMouseEventWinCtrl;
-
-    FMouseEventsHandler            : TPasLibVlcPlayerMouseEventsHandler;
-
-    FStartOptions                  : TStringList;
-
-    function  GetVlcInstance() : TPasLibVlc;
+    FOnMediaPlayerMediaChanged: TNotifyMediaChanged;
+    FOnMediaPlayerNothingSpecial: TNotifyEvent;
+    FOnMediaPlayerOpening: TNotifyEvent;
+    FOnMediaPlayerBuffering: TNotifyEvent;
+    FOnMediaPlayerPlaying: TNotifyEvent;
+    FOnMediaPlayerPaused: TNotifyEvent;
+    FOnMediaPlayerStopped: TNotifyEvent;
+    FOnMediaPlayerForward: TNotifyEvent;
+    FOnMediaPlayerBackward: TNotifyEvent;
+    FOnMediaPlayerEndReached: TNotifyEvent;
+    FOnMediaPlayerEncounteredError: TNotifyEvent;
+    FOnMediaPlayerTimeChanged: TNotifyTimeChanged;
+    FOnMediaPlayerPositionChanged: TNotifyPositionChanged;
+    FOnMediaPlayerSeekableChanged: TNotifySeekableChanged;
+    FOnMediaPlayerPausableChanged: TNotifyPausableChanged;
+    FOnMediaPlayerTitleChanged: TNotifyTitleChanged;
+    FOnMediaPlayerSnapshotTaken: TNotifySnapshotTaken;
+    FOnMediaPlayerLengthChanged: TNotifyLengthChanged;
+    FOnMediaPlayerVideoOutChanged: TNotifyVideoOutChanged;
+    FOnMediaPlayerScrambledChanged: TNotifyScrambledChanged;
+    FOnMediaPlayerEvent: TNotifyPlayerEvent;
+    FOnMediaPlayerCorked: TNotifyEvent;
+    FOnMediaPlayerUnCorked: TNotifyEvent;
+    FOnMediaPlayerMuted: TNotifyEvent;
+    FOnMediaPlayerUnMuted: TNotifyEvent;
+    FOnMediaPlayerAudioVolumeChanged: TNotifyAudioVolumeChanged;
+    FOnMediaPlayerEsAdded: TNotifyMediaPlayerEsAdded;
+    FOnMediaPlayerEsDeleted: TNotifyMediaPlayerEsDeleted;
+    FOnMediaPlayerEsSelected: TNotifyMediaPlayerEsSelected;
+    FOnMediaPlayerAudioDevice: TNotifyMediaPlayerAudioDevice;
+    FOnMediaPlayerChapterChanged: TNotifyMediaPlayerChapterChanged;
+    FOnRendererDiscoveredItemAdded: TNotifyRendererDiscoveredItemAdded;
+    FOnRendererDiscoveredItemDeleted: TNotifyRendererDiscoveredItemDeleted;
+    FUseEvents: boolean;
+    FMouseEventWinCtrl: TPasLibVlcMouseEventWinCtrl;
+    FMouseEventsHandler: TPasLibVlcPlayerMouseEventsHandler;
+    FStartOptions: TStringList;
+    function GetVlcInstance(): TPasLibVlc;
     procedure SetStartOptions(Value: TStringList);
-
-    procedure SetMouseEventHandler(aValue : TPasLibVlcPlayerMouseEventsHandler);
-
+    procedure SetMouseEventHandler(aValue: TPasLibVlcPlayerMouseEventsHandler);
     procedure SetSnapshotFmt(aFormat: string);
-    procedure SetSnapshotPrv(aValue : Boolean);
-
+    procedure SetSnapshotPrv(aValue: Boolean);
     procedure SetSpuShow(aValue: Boolean);
     procedure SetOsdShow(aValue: Boolean);
-    procedure SetVideoOnTop(aValue : Boolean);
-    procedure SetUseOverlay(aValue : Boolean);
-    procedure SetViewTeleText(aValue : Boolean);
-    
+    procedure SetVideoOnTop(aValue: Boolean);
+    procedure SetUseOverlay(aValue: Boolean);
+    procedure SetViewTeleText(aValue: Boolean);
     procedure SetTitleShow(aValue: Boolean);
     procedure SetTitleShowPos(aValue: TPasLibVlcTitlePosition);
     procedure SetTitleShowTimeOut(aValue: LongWord);
-
     procedure SetDeinterlaceFilter(aValue: TDeinterlaceFilter);
     procedure SetDeinterlaceMode(aValue: TDeinterlaceMode);
-    function  GetDeinterlaceModeName(): WideString;
-
     procedure InternalOnClick(Sender: TObject);
     procedure InternalOnDblClick(Sender: TObject);
-    procedure InternalOnMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure InternalOnMouseMove(Sender: TObject;
-      Shift: TShiftState; X, Y: Integer);
-    procedure InternalOnMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure InternalOnMouseActivate(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer;
-      var MouseActivate: TMouseActivate);
+    procedure InternalOnMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure InternalOnMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure InternalOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure InternalOnMouseActivate(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer; var MouseActivate: TMouseActivate);
     procedure InternalOnMouseEnter(Sender: TObject);
     procedure InternalOnMouseLeave(Sender: TObject);
     procedure InternalOnMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
     procedure InternalOnMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
-
-    procedure WmMediaPlayerMediaChanged      (var m: TVlcMessage); message WM_MEDIA_PLAYER_MEDIA_CHANGED;
-    procedure WmMediaPlayerNothingSpecial    (var m: TVlcMessage); message WM_MEDIA_PLAYER_NOTHING_SPECIAL;
-    procedure WmMediaPlayerOpening           (var m: TVlcMessage); message WM_MEDIA_PLAYER_OPENING;
-    procedure WmMediaPlayerBuffering         (var m: TVlcMessage); message WM_MEDIA_PLAYER_BUFFERING;
-    procedure WmMediaPlayerPlaying           (var m: TVlcMessage); message WM_MEDIA_PLAYER_PLAYING;
-    procedure WmMediaPlayerPaused            (var m: TVlcMessage); message WM_MEDIA_PLAYER_PAUSED;
-    procedure WmMediaPlayerStopped           (var m: TVlcMessage); message WM_MEDIA_PLAYER_STOPPED;
-    procedure WmMediaPlayerForward           (var m: TVlcMessage); message WM_MEDIA_PLAYER_FORWARD;
-    procedure WmMediaPlayerBackward          (var m: TVlcMessage); message WM_MEDIA_PLAYER_BACKWARD;
-    procedure WmMediaPlayerEndReached        (var m: TVlcMessage); message WM_MEDIA_PLAYER_END_REACHED;
-    procedure WmMediaPlayerEncounteredError  (var m: TVlcMessage); message WM_MEDIA_PLAYER_ENCOUNTERED_ERROR;
-
-    procedure WmMediaPlayerTimeChanged       (var m: TVlcMessage); message WM_MEDIA_PLAYER_TIME_CHANGED;
-    procedure WmMediaPlayerPositionChanged   (var m: TVlcMessage); message WM_MEDIA_PLAYER_POSITION_CHANGED;
-
-    procedure WmMediaPlayerSeekableChanged   (var m: TVlcMessage); message WM_MEDIA_PLAYER_SEEKABLE_CHANGED;
-    procedure WmMediaPlayerPausableChanged   (var m: TVlcMessage); message WM_MEDIA_PLAYER_PAUSABLE_CHANGED;
-    procedure WmMediaPlayerTitleChanged      (var m: TVlcMessage); message WM_MEDIA_PLAYER_TITLE_CHANGED;
-    procedure WmMediaPlayerSnapshotTaken     (var m: TVlcMessage); message WM_MEDIA_PLAYER_SNAPSHOT_TAKEN;
-
-    procedure WmMediaPlayerLengthChanged     (var m: TVlcMessage); message WM_MEDIA_PLAYER_LENGTH_CHANGED;
-
-    procedure WmMediaPlayerVOutChanged       (var m: TVlcMessage); message WM_MEDIA_PLAYER_VOUT_CHANGED;
-    procedure WmMediaPlayerScrambledChanged  (var m: TVlcMessage); message WM_MEDIA_PLAYER_SCRAMBLED_CHANGED;
-
-    procedure WmMediaPlayerCorked            (var m: TVlcMessage); message WM_MEDIA_PLAYER_CORKED;
-    procedure WmMediaPlayerUnCorked          (var m: TVlcMessage); message WM_MEDIA_PLAYER_UNCORKED;
-    procedure WmMediaPlayerMuted             (var m: TVlcMessage); message WM_MEDIA_PLAYER_MUTED;
-    procedure WmMediaPlayerUnMuted           (var m: TVlcMessage); message WM_MEDIA_PLAYER_UNMUTED;
+    procedure WmMediaPlayerMediaChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_MEDIA_CHANGED;
+    procedure WmMediaPlayerNothingSpecial(var m: TVlcMessage); message WM_MEDIA_PLAYER_NOTHING_SPECIAL;
+    procedure WmMediaPlayerOpening(var m: TVlcMessage); message WM_MEDIA_PLAYER_OPENING;
+    procedure WmMediaPlayerBuffering(var m: TVlcMessage); message WM_MEDIA_PLAYER_BUFFERING;
+    procedure WmMediaPlayerPlaying(var m: TVlcMessage); message WM_MEDIA_PLAYER_PLAYING;
+    procedure WmMediaPlayerPaused(var m: TVlcMessage); message WM_MEDIA_PLAYER_PAUSED;
+    procedure WmMediaPlayerStopped(var m: TVlcMessage); message WM_MEDIA_PLAYER_STOPPED;
+    procedure WmMediaPlayerForward(var m: TVlcMessage); message WM_MEDIA_PLAYER_FORWARD;
+    procedure WmMediaPlayerBackward(var m: TVlcMessage); message WM_MEDIA_PLAYER_BACKWARD;
+    procedure WmMediaPlayerEndReached(var m: TVlcMessage); message WM_MEDIA_PLAYER_END_REACHED;
+    procedure WmMediaPlayerEncounteredError(var m: TVlcMessage); message WM_MEDIA_PLAYER_ENCOUNTERED_ERROR;
+    procedure WmMediaPlayerTimeChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_TIME_CHANGED;
+    procedure WmMediaPlayerPositionChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_POSITION_CHANGED;
+    procedure WmMediaPlayerSeekableChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_SEEKABLE_CHANGED;
+    procedure WmMediaPlayerPausableChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_PAUSABLE_CHANGED;
+    procedure WmMediaPlayerTitleChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_TITLE_CHANGED;
+    procedure WmMediaPlayerSnapshotTaken(var m: TVlcMessage); message WM_MEDIA_PLAYER_SNAPSHOT_TAKEN;
+    procedure WmMediaPlayerLengthChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_LENGTH_CHANGED;
+    procedure WmMediaPlayerVOutChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_VOUT_CHANGED;
+    procedure WmMediaPlayerScrambledChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_SCRAMBLED_CHANGED;
+    procedure WmMediaPlayerCorked(var m: TVlcMessage); message WM_MEDIA_PLAYER_CORKED;
+    procedure WmMediaPlayerUnCorked(var m: TVlcMessage); message WM_MEDIA_PLAYER_UNCORKED;
+    procedure WmMediaPlayerMuted(var m: TVlcMessage); message WM_MEDIA_PLAYER_MUTED;
+    procedure WmMediaPlayerUnMuted(var m: TVlcMessage); message WM_MEDIA_PLAYER_UNMUTED;
     procedure WmMediaPlayerAudioVolumeChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_AUDIO_VOLUME;
-
-    procedure WmMediaPlayerEsAdded           (var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_ADDED;
-    procedure WmMediaPlayerEsDeleted         (var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_DELETED;
-    procedure WmMediaPlayerEsSelected        (var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_SELECTED;
-    procedure WmMediaPlayerAudioDevice       (var m: TVlcMessage); message WM_MEDIA_PLAYER_AUDIO_DEVICE;
-    procedure WmMediaPlayerChapterChanged    (var m: TVlcMessage); message WM_MEDIA_PLAYER_CHAPTER_CHANGED;
-    procedure WmRendererDiscoveredItemAdded  (var m: TVlcMessage); message WM_RENDERED_DISCOVERED_ITEM_ADDED;
+    procedure WmMediaPlayerEsAdded(var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_ADDED;
+    procedure WmMediaPlayerEsDeleted(var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_DELETED;
+    procedure WmMediaPlayerEsSelected(var m: TVlcMessage); message WM_MEDIA_PLAYER_ES_SELECTED;
+    procedure WmMediaPlayerAudioDevice(var m: TVlcMessage); message WM_MEDIA_PLAYER_AUDIO_DEVICE;
+    procedure WmMediaPlayerChapterChanged(var m: TVlcMessage); message WM_MEDIA_PLAYER_CHAPTER_CHANGED;
+    procedure WmRendererDiscoveredItemAdded(var m: TVlcMessage); message WM_RENDERED_DISCOVERED_ITEM_ADDED;
     procedure WmRendererDiscoveredItemDeleted(var m: TVlcMessage); message WM_RENDERED_DISCOVERED_ITEM_DELETED;
-
   protected
     procedure WMEraseBkgnd(var msg: TWMEraseBkGnd); message WM_ERASEBKGND;
     procedure CreateParams(var params: TCreateParams); override;
     procedure SetHwnd();
-
     procedure DestroyPlayer();
-
     procedure WMNCPaint(var Message: TMessage); message WM_NCPAINT;
     procedure WMResize(var Message: TMessage); message WM_SIZE;
     procedure PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayContinue(const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayContinue(const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    function GetDeinterlaceModeName(): WideString;
     function GetPlayerHandle(): libvlc_media_player_t_ptr;
     procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
     procedure PlayInWindow(newWindow: TWinControl = NIL; aOut: WideString = ''; aOutDeviceId: WideString = '');
@@ -332,7 +312,6 @@ type
     procedure Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
-
     function GetMediaMrl(): string;
     procedure Pause();
     procedure Resume();
@@ -351,34 +330,27 @@ type
     procedure NextFrame();
     procedure SetPlayRate(rate: Integer);
     function GetPlayRate(): Integer;
-
-    function  GetVideoWidth(): LongInt;
-    function  GetVideoHeight(): LongInt;
-    function  GetVideoDimension(var width, height: LongWord) : Boolean;
-    function  GetVideoScaleInPercent(): Single;
-    function  GetVideoAspectRatio(): string; overload;
-    function  GetVideoSampleAspectRatio(var sar_num, sar_den : LongWord): Boolean; overload;
-    function  GetVideoSampleAspectRatio() : Single; overload;
-
+    function GetVideoWidth(): LongInt;
+    function GetVideoHeight(): LongInt;
+    function GetVideoDimension(var width, height: LongWord): Boolean;
+    function GetVideoScaleInPercent(): Single;
+    function GetVideoAspectRatio(): string; overload;
+    function GetVideoSampleAspectRatio(var sar_num, sar_den: LongWord): Boolean; overload;
+    function GetVideoSampleAspectRatio(): Single; overload;
     procedure SetVideoScaleInPercent(newScaleInPercent: Single);
     procedure SetVideoAspectRatio(newAspectRatio: string);
-
-    function  GetVideoLenInMs(): Int64;
-    function  GetVideoPosInMs(): Int64;
-    function  GetVideoPosInPercent(): Single;
-    function  GetVideoFps(): Single;
-
+    function GetVideoLenInMs(): Int64;
+    function GetVideoPosInMs(): Int64;
+    function GetVideoPosInPercent(): Single;
+    function GetVideoFps(): Single;
     procedure SetVideoPosInMs(newPos: Int64);
     procedure SetVideoPosInPercent(newPos: Single);
-
     function GetVideoLenStr(fmt: string = 'hh:mm:ss'): string;
     function GetVideoPosStr(fmt: string = 'hh:mm:ss'): string;
-
     procedure SetTeleText(page: Integer);
     function GetTeleText(): Integer;
     function ShowTeleText(): Boolean;
     function HideTeleText(): Boolean;
-
     function GetAudioMute(): Boolean;
     procedure SetAudioMute(mute: Boolean);
     function GetAudioVolume(): Integer;
@@ -387,10 +359,8 @@ type
     procedure SetAudioChannel(chanel: libvlc_audio_output_channel_t);
     function GetAudioDelay(): Int64;
     procedure SetAudioDelay(delay: Int64);
-
     function GetAudioFilterList(return_name_type: Integer = 0): TStringList;
     function GetVideoFilterList(return_name_type: Integer = 0): TStringList;
-
     function GetAudioTrackList(): TStringList;
     function GetAudioTrackCount(): Integer;
     function GetAudioTrackId(): Integer;
@@ -399,123 +369,103 @@ type
     procedure SetAudioTrackByNo(track_no: Integer);
     function GetAudioTrackDescriptionById(const track_id: Integer): WideString;
     function GetAudioTrackDescriptionByNo(track_no: Integer): WideString;
-
-    function GetAudioOutputList(withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
-    function GetAudioOutputDeviceList(aOut : WideString; withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
-    function GetAudioOutputDeviceEnum(withDescription : Boolean = FALSE; separator : string = '|') : TStringList;
-
-    function SetAudioOutput(aOut: WideString) : Boolean;
-    procedure SetAudioOutputDevice(aOut: WideString; aOutDeviceId: WideString); overload;
-    procedure SetAudioOutputDevice(aOutDeviceId: WideString); overload;
+    function GetAudioOutputList(withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
+    function GetAudioOutputDeviceList(aOut: string; withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
+    function GetAudioOutputDeviceEnum(withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
+    function SetAudioOutput(aOut: string): Boolean;
+    procedure SetAudioOutputDevice(aOut: string; aOutDeviceId: string); overload;
+    procedure SetAudioOutputDevice(aOutDeviceId: string); overload;
 
     {$IFDEF USE_VLC_DEPRECATED_API}
     function GetAudioOutputDeviceCount(aOut: WideString): Integer;
-    function GetAudioOutputDeviceId(aOut: WideString; deviceIdx : Integer) : WideString;
-    function GetAudioOutputDeviceName(aOut: WideString; deviceIdx : Integer): WideString;
+    function GetAudioOutputDeviceId(aOut: WideString; deviceIdx: Integer): WideString;
+    function GetAudioOutputDeviceName(aOut: WideString; deviceIdx: Integer): WideString;
     {$ENDIF}
 
     function EqualizerGetPresetList(): TStringList;
     function EqualizerGetBandCount(): unsigned_t;
-    function EqualizerGetBandFrequency(bandIndex : unsigned_t): Single;
-
-    function EqualizerCreate(APreset : unsigned_t = $FFFF) : TPasLibVlcEqualizer;
-    procedure EqualizerApply(AEqualizer : TPasLibVlcEqualizer);
-    procedure EqualizerSetPreset(APreset : unsigned_t = $FFFF);
-
-    procedure SetVideoAdjustEnable(value : Boolean);
-    function  GetVideoAdjustEnable(): Boolean;
-
-    procedure SetVideoAdjustContrast(value : Single);
-    function  GetVideoAdjustContrast() : Single;
-
-    procedure SetVideoAdjustBrightness(value : Single);
-    function  GetVideoAdjustBrightness() : Single;
-
-    procedure SetVideoAdjustHue(value : Integer);
-    function  GetVideoAdjustHue() : Integer;
-
-    procedure SetVideoAdjustSaturation(value : Single);
-    function  GetVideoAdjustSaturation() : Single;
-
-    procedure SetVideoAdjustGamma(value : Single);
-    function  GetVideoAdjustGamma() : Single;
-
-    function  GetVideoChapter(): Integer;
+    function EqualizerGetBandFrequency(bandIndex: unsigned_t): Single;
+    function EqualizerCreate(APreset: unsigned_t = $FFFF): TPasLibVlcEqualizer;
+    procedure EqualizerApply(AEqualizer: TPasLibVlcEqualizer);
+    procedure EqualizerSetPreset(APreset: unsigned_t = $FFFF);
+    procedure SetVideoAdjustEnable(value: Boolean);
+    function GetVideoAdjustEnable(): Boolean;
+    procedure SetVideoAdjustContrast(value: Single);
+    function GetVideoAdjustContrast(): Single;
+    procedure SetVideoAdjustBrightness(value: Single);
+    function GetVideoAdjustBrightness(): Single;
+    procedure SetVideoAdjustHue(value: Integer);
+    function GetVideoAdjustHue(): Integer;
+    procedure SetVideoAdjustSaturation(value: Single);
+    function GetVideoAdjustSaturation(): Single;
+    procedure SetVideoAdjustGamma(value: Single);
+    function GetVideoAdjustGamma(): Single;
+    function GetVideoChapter(): Integer;
     procedure SetVideoChapter(newChapter: Integer);
-    function  GetVideoChapterCount(): Integer;
-    function  GetVideoChapterCountByTitleId(const title_id : Integer): Integer;
-
-    function  GetVideoSubtitleList(): TStringList;
-    function  GetVideoSubtitleCount(): Integer;
-    function  GetVideoSubtitleId(): Integer;
-    procedure SetVideoSubtitleById(const subtitle_id : Integer);
-    function  GetVideoSubtitleNo(): Integer;
-    procedure SetVideoSubtitleByNo(subtitle_no : Integer);
-    function  GetVideoSubtitleDescriptionById(const subtitle_id : Integer): WideString;
-    function  GetVideoSubtitleDescriptionByNo(subtitle_no : Integer): WideString;
-    procedure SetVideoSubtitleFile(subtitle_file : WideString);
-
-    function  GetVideoTitleList() : TStringList;
-    function  GetVideoTitleCount(): Integer;
-    function  GetVideoTitleId():Integer;
-    procedure SetVideoTitleById(const title_id:Integer);
-    function  GetVideoTitleNo(): Integer;
-    procedure SetVideoTitleByNo(title_no : Integer);
-    function  GetVideoTitleDescriptionById(const track_id : Integer): WideString;
-    function  GetVideoTitleDescriptionByNo(title_no : Integer): WideString;
+    function GetVideoChapterCount(): Integer;
+    function GetVideoChapterCountByTitleId(const title_id: Integer): Integer;
+    function GetVideoSubtitleList(): TStringList;
+    function GetVideoSubtitleCount(): Integer;
+    function GetVideoSubtitleId(): Integer;
+    procedure SetVideoSubtitleById(const subtitle_id: Integer);
+    function GetVideoSubtitleNo(): Integer;
+    procedure SetVideoSubtitleByNo(subtitle_no: Integer);
+    function GetVideoSubtitleDescriptionById(const subtitle_id: Integer): WideString;
+    function GetVideoSubtitleDescriptionByNo(subtitle_no: Integer): WideString;
+    procedure SetVideoSubtitleFile(subtitle_file: WideString);
+    function GetVideoTitleList(): TStringList;
+    function GetVideoTitleCount(): Integer;
+    function GetVideoTitleId(): Integer;
+    procedure SetVideoTitleById(const title_id: Integer);
+    function GetVideoTitleNo(): Integer;
+    procedure SetVideoTitleByNo(title_no: Integer);
+    function GetVideoTitleDescriptionById(const track_id: Integer): WideString;
+    function GetVideoTitleDescriptionByNo(title_no: Integer): WideString;
 
     // https://wiki.videolan.org/Documentation:Modules/logo/
-    procedure LogoSetFile(file_name : WideString);
-    procedure LogoSetFiles(file_names : array of WideString; delay_ms : Integer = 1000; loop : Boolean = TRUE);
-    procedure LogoSetPosition(position_x, position_y : Integer); overload;
-    procedure LogoSetPosition(position : libvlc_position_t); overload;
-    procedure LogoSetOpacity(opacity : libvlc_opacity_t);
-    procedure LogoSetDelay(delay_ms : Integer = 1000);  // delay before show next logo file, default 1000
-    procedure LogoSetRepeat(loop : boolean = TRUE);
-    procedure LogoSetRepeatCnt(loop : Integer = 0); 
-    procedure LogoSetEnable(enable : Integer);
-    
-    procedure LogoShowFile(file_name : WideString; position_x, position_y : Integer; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
-    procedure LogoShowFile(file_name : WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
-    procedure LogoShowFiles(file_names : array of WideString; position_x, position_y : Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms : Integer = 1000; loop : Boolean = TRUE); overload;
-    procedure LogoShowFiles(file_names : array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms : Integer = 1000; loop : Boolean = TRUE); overload;
+    procedure LogoSetFile(file_name: string);
+    procedure LogoSetFiles(file_names: array of WideString; delay_ms: Integer = 1000; loop: Boolean = TRUE);
+    procedure LogoSetPosition(position_x, position_y: Integer); overload;
+    procedure LogoSetPosition(position: libvlc_position_t); overload;
+    procedure LogoSetOpacity(opacity: libvlc_opacity_t);
+    procedure LogoSetDelay(delay_ms: Integer = 1000);  // delay before show next logo file, default 1000
+    procedure LogoSetRepeat(loop: boolean = TRUE);
+    procedure LogoSetRepeatCnt(loop: Integer = 0);
+    procedure LogoSetEnable(enable: Integer);
+    procedure LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
+    procedure LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
+    procedure LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
+    procedure LogoShowFiles(file_names: array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
     procedure LogoHide();
 
     // https://wiki.videolan.org/Documentation:Modules/marq/
-    procedure MarqueeSetText(marquee_text : WideString);
-    procedure MarqueeSetPosition(position_x, position_y : Integer); overload;
-    procedure MarqueeSetPosition(position : libvlc_position_t); overload;
-    procedure MarqueeSetColor(color : libvlc_video_marquee_color_t);
+    procedure MarqueeSetText(marquee_text: WideString);
+    procedure MarqueeSetPosition(position_x, position_y: Integer); overload;
+    procedure MarqueeSetPosition(position: libvlc_position_t); overload;
+    procedure MarqueeSetColor(color: libvlc_video_marquee_color_t);
     procedure MarqueeSetFontSize(font_size: Integer);
     procedure MarqueeSetOpacity(opacity: libvlc_opacity_t);
     procedure MarqueeSetTimeOut(time_out_ms: Integer);
     procedure MarqueeSetRefresh(refresh_after_ms: Integer);
-    procedure MarqueeSetEnable(enable : Integer);
-
-    procedure MarqueeShowText(marquee_text : WideString; position_x, position_y : Integer; color : libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
-    procedure MarqueeShowText(marquee_text : WideString; position : libvlc_position_t = libvlc_position_bottom; color : libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
+    procedure MarqueeSetEnable(enable: Integer);
+    procedure MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
+    procedure MarqueeShowText(marquee_text: WideString; position: libvlc_position_t = libvlc_position_bottom; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
     procedure MarqueeHide();
-
     procedure EventsDisable();
     procedure EventsEnable();
-
     procedure UpdateDeInterlace();
     procedure UpdateTitleShow();
-
-    property  VLC : TPasLibVlc read GetVlcInstance;
+    property VLC: TPasLibVlc read GetVlcInstance;
     property LastError: string read FError write FError;
-    property LastAudioOutput : WideString read FLastAudioOutput;
-    property LastAudioOutputDeviceId : WideString read FLastAudioOutputDeviceId;
-    
+    property LastAudioOutput: WideString read FLastAudioOutput;
+    property LastAudioOutputDeviceId: WideString read FLastAudioOutputDeviceId;
   published
-  
     property Align;
     property AlignWithMargins;
     property Anchors;
-    property Color  default clBlack;
-    property Width  default 320;
+    property Color default clBlack;
+    property Width default 320;
     property Height default 240;
-
     property Constraints;
     property DragKind;
     property DragMode;
@@ -556,15 +506,15 @@ type
     property OnUnDock;
     property TabOrder;
     property TabStop default True;
-    property SpuShow : Boolean read FSpuShow write SetSpuShow default TRUE;
-    property OsdShow : Boolean read FOsdShow write SetOsdShow default TRUE;
-    property TitleShow : Boolean read FTitleShow write SetTitleShow default FALSE;
-    property TitleShowPos : TPasLibVlcTitlePosition read FTitleShowPos write SetTitleShowPos default plvPosCenter;
-    property TitleShowTimeOut : LongWord read FTitleShowTimeOut write SetTitleShowTimeOut default 2000;
-    property VideoOutput : TVideoOutput read FVideoOutput write FVideoOutput default voDefault;
-    property AudioOutput : TAudioOutput read FAudioOutput write FAudioOutput default aoDefault;
-    property VideoOnTop : Boolean read    FVideoOnTop write   SetVideoOnTop default FALSE;
-    property UseOverlay : Boolean read    FUseOverlay write   SetUseOverlay default FALSE;
+    property SpuShow: Boolean read FSpuShow write SetSpuShow default TRUE;
+    property OsdShow: Boolean read FOsdShow write SetOsdShow default TRUE;
+    property TitleShow: Boolean read FTitleShow write SetTitleShow default FALSE;
+    property TitleShowPos: TPasLibVlcTitlePosition read FTitleShowPos write SetTitleShowPos default plvPosCenter;
+    property TitleShowTimeOut: LongWord read FTitleShowTimeOut write SetTitleShowTimeOut default 2000;
+    property VideoOutput: TVideoOutput read FVideoOutput write FVideoOutput default voDefault;
+    property AudioOutput: TAudioOutput read FAudioOutput write FAudioOutput default aoDefault;
+    property VideoOnTop: Boolean read FVideoOnTop write SetVideoOnTop default FALSE;
+    property UseOverlay: Boolean read FUseOverlay write SetUseOverlay default FALSE;
     property SnapShotFmt: string read FSnapShotFmt write SetSnapshotFmt;
     property SnapshotPrv: Boolean read FSnapShotPrv write SetSnapshotPrv default FALSE;
     property DeinterlaceFilter: TDeinterlaceFilter read FDeinterlaceFilter write SetDeinterlaceFilter default deOFF;
@@ -611,7 +561,6 @@ type
   TNotifyMediaListItem = procedure(Sender: TObject; mrl: WideString; item: Pointer; index: Integer) of object;
 
   TPasLibVlcMediaList = class(TComponent)
-
   private
     p_ml: libvlc_media_list_t_ptr;
     p_mlp: libvlc_media_list_player_t_ptr;
@@ -626,9 +575,7 @@ type
     FOnNextItemSet: TNotifyMediaListItem;
     FOnPlayed: TNotifyEvent;
     FOnStopped: TNotifyEvent;
-
     procedure SetPlayer(aPlayer: TPasLibVlcPlayer);
-
     procedure InternalHandleEventItemAdded(item: libvlc_media_t_ptr; index: Integer);
     procedure InternalHandleEventItemDeleted(item: libvlc_media_t_ptr; index: Integer);
     procedure InternalHandleEventWillAddItem(item: libvlc_media_t_ptr; index: Integer);
@@ -637,39 +584,30 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-
     procedure SetPlayModeNormal;
     procedure SetPlayModeLoop;
     procedure SetPlayModeRepeat;
-
     procedure Play();
     procedure Pause();
     procedure Stop();
     procedure Next();
     procedure Prev();
-
-    function  IsPlay(): Boolean;
-    function  IsPause(): Boolean;
-
-    function  GetState(): TPasLibVlcPlayerState;
-    function  GetStateName() : string;
-
+    function IsPlay(): Boolean;
+    function IsPause(): Boolean;
+    function GetState(): TPasLibVlcPlayerState;
+    function GetStateName(): string;
     procedure PlayItem(item: libvlc_media_t_ptr);
-
     procedure Clear();
-    procedure Add(mrl : WideString); overload;
-    procedure Add(mrl : WideString; mediaOptions: array of WideString); overload;
-    function  Get(index : Integer): WideString;
-    function  Count(): Integer;
-    procedure Delete(index : Integer);
-    procedure Insert(index : Integer; mrl : WideString);
-
-    function GetItemAtIndex(index : Integer): libvlc_media_t_ptr;
-    function IndexOfItem(item : libvlc_media_t_ptr): Integer;
-
+    procedure Add(mrl: WideString); overload;
+    procedure Add(mrl: WideString; mediaOptions: array of WideString); overload;
+    function Get(index: Integer): WideString;
+    function Count(): Integer;
+    procedure Delete(index: Integer);
+    procedure Insert(index: Integer; mrl: WideString);
+    function GetItemAtIndex(index: Integer): libvlc_media_t_ptr;
+    function IndexOfItem(item: libvlc_media_t_ptr): Integer;
     procedure EventsDisable();
     procedure EventsEnable();
-    
   published
     property Player: TPasLibVlcPlayer read FPlayer write SetPlayer;
     property LastError: string read FError write FError;
@@ -684,7 +622,6 @@ type
 
 procedure Register;
 
-
 implementation
 
 {$R *.RES}
@@ -695,6 +632,7 @@ uses
 {$ENDIF}
 
 {$IFDEF FPC}
+
 procedure RegisterPasLibVlcPlayerUnit;
 begin
   RegisterComponents('PasLibVlc', [TPasLibVlcPlayer, TPasLibVlcMediaList]);
@@ -712,6 +650,7 @@ end;
 {$ENDIF}
 
 {$IFNDEF HAS_WS_EX_TRANSPARENT}
+
 const
   WS_EX_TRANSPARENT = $20;
 {$ENDIF}
@@ -734,7 +673,7 @@ procedure TPasLibVlcMouseEventWinCtrl.WMEraseBkgnd(var msg: {$IFDEF FPC}TLMErase
 begin
   if (msg.DC <> 0) then
   begin
-    SetBkMode (msg.DC, TRANSPARENT);
+    SetBkMode(msg.DC, TRANSPARENT);
     FillRect(msg.DC, Rect(0, 0, Width, Height), HBRUSH({$IFDEF FPC}Brush.Reference.Handle{$ELSE}Brush.Handle{$ENDIF}));
   end;
   msg.result := 1;
@@ -743,7 +682,9 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 procedure lib_vlc_player_event_hdlr(p_event: libvlc_event_t_ptr; data: Pointer); cdecl; forward;
+
 procedure lib_vlc_media_list_event_hdlr(p_event: libvlc_event_t_ptr; data: Pointer); cdecl; forward;
+
 procedure lib_vlc_media_list_player_event_hdlr(p_event: libvlc_event_t_ptr; data: Pointer); cdecl; forward;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -752,15 +693,16 @@ constructor TPasLibVlcMediaList.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  p_ml         := NIL;
-  p_mlp        := NIL;
-  
-  p_ml_ev_mgr  := NIL;
+  p_ml := NIL;
+  p_mlp := NIL;
+
+  p_ml_ev_mgr := NIL;
   p_mlp_ev_mgr := NIL;
 
-  FPlayer      := NIL;
+  FPlayer := NIL;
 
-  if (csDesigning in ComponentState) then exit;
+  if (csDesigning in ComponentState) then
+    exit;
 end;
 
 destructor TPasLibVlcMediaList.Destroy;
@@ -796,16 +738,16 @@ begin
   if Assigned(p_mlp_ev_mgr) then
   begin
     libvlc_event_detach(p_mlp_ev_mgr, libvlc_MediaListPlayerNextItemSet, lib_vlc_media_list_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mlp_ev_mgr, libvlc_MediaListPlayerStopped,     lib_vlc_media_list_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mlp_ev_mgr, libvlc_MediaListPlayerPlayed,      lib_vlc_media_list_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mlp_ev_mgr, libvlc_MediaListPlayerStopped, lib_vlc_media_list_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mlp_ev_mgr, libvlc_MediaListPlayerPlayed, lib_vlc_media_list_player_event_hdlr, SELF);
   end;
 
   if Assigned(p_ml_ev_mgr) then
   begin
     libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListWillDeleteItem, lib_vlc_media_list_event_hdlr, SELF);
-    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListItemDeleted,    lib_vlc_media_list_event_hdlr, SELF);
-    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListWillAddItem,    lib_vlc_media_list_event_hdlr, SELF);
-    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListItemAdded,      lib_vlc_media_list_event_hdlr, SELF);
+    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListItemDeleted, lib_vlc_media_list_event_hdlr, SELF);
+    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListWillAddItem, lib_vlc_media_list_event_hdlr, SELF);
+    libvlc_event_detach(p_ml_ev_mgr, libvlc_MediaListItemAdded, lib_vlc_media_list_event_hdlr, SELF);
   end;
 
   p_mlp_ev_mgr := NIL;
@@ -822,9 +764,9 @@ begin
 
     if Assigned(p_ml_ev_mgr) then
     begin
-      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListItemAdded,      lib_vlc_media_list_event_hdlr, SELF);
-      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListWillAddItem,    lib_vlc_media_list_event_hdlr, SELF);
-      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListItemDeleted,    lib_vlc_media_list_event_hdlr, SELF);
+      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListItemAdded, lib_vlc_media_list_event_hdlr, SELF);
+      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListWillAddItem, lib_vlc_media_list_event_hdlr, SELF);
+      libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListItemDeleted, lib_vlc_media_list_event_hdlr, SELF);
       libvlc_event_attach(p_ml_ev_mgr, libvlc_MediaListWillDeleteItem, lib_vlc_media_list_event_hdlr, SELF);
     end;
 
@@ -832,8 +774,8 @@ begin
 
     if Assigned(p_mlp_ev_mgr) then
     begin
-      libvlc_event_attach(p_mlp_ev_mgr, libvlc_MediaListPlayerPlayed,      lib_vlc_media_list_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mlp_ev_mgr, libvlc_MediaListPlayerStopped,     lib_vlc_media_list_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mlp_ev_mgr, libvlc_MediaListPlayerPlayed, lib_vlc_media_list_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mlp_ev_mgr, libvlc_MediaListPlayerStopped, lib_vlc_media_list_player_event_hdlr, SELF);
       libvlc_event_attach(p_mlp_ev_mgr, libvlc_MediaListPlayerNextItemSet, lib_vlc_media_list_player_event_hdlr, SELF);
     end;
   end;
@@ -843,11 +785,12 @@ procedure TPasLibVlcMediaList.SetPlayer(aPlayer: TPasLibVlcPlayer);
 begin
   FPlayer := aPlayer;
 
-  if (csDesigning in ComponentState) then exit;
+  if (csDesigning in ComponentState) then
+    exit;
 
   if (FPlayer.VLC.Handle <> NIL) then
   begin
-    p_ml  := libvlc_media_list_new(FPlayer.VLC.Handle);
+    p_ml := libvlc_media_list_new(FPlayer.VLC.Handle);
     p_mlp := libvlc_media_list_player_new(FPlayer.VLC.Handle);
 
     libvlc_media_list_player_set_media_list(p_mlp, p_ml);
@@ -858,7 +801,8 @@ end;
 
 procedure TPasLibVlcMediaList.SetPlayModeNormal;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -868,7 +812,8 @@ end;
 
 procedure TPasLibVlcMediaList.SetPlayModeLoop;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -878,7 +823,8 @@ end;
 
 procedure TPasLibVlcMediaList.SetPlayModeRepeat;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -888,7 +834,8 @@ end;
 
 procedure TPasLibVlcMediaList.Play;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -901,7 +848,8 @@ end;
 
 procedure TPasLibVlcMediaList.PlayItem(item: libvlc_media_t_ptr);
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -913,7 +861,8 @@ end;
 
 procedure TPasLibVlcMediaList.Pause();
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -923,7 +872,8 @@ end;
 
 procedure TPasLibVlcMediaList.Stop();
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -942,7 +892,8 @@ end;
 
 procedure TPasLibVlcMediaList.Next();
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -954,7 +905,8 @@ end;
 
 procedure TPasLibVlcMediaList.Prev();
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -967,7 +919,8 @@ end;
 function TPasLibVlcMediaList.IsPlay(): Boolean;
 begin
   Result := FALSE;
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -978,7 +931,8 @@ end;
 function TPasLibVlcMediaList.IsPause(): Boolean;
 begin
   Result := FALSE;
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_mlp <> NIL) then
   begin
@@ -990,19 +944,29 @@ function TPasLibVlcMediaList.GetState(): TPasLibVlcPlayerState;
 begin
   Result := plvPlayer_NothingSpecial;
 
-  if not Assigned(FPlayer) then exit;
-  
-  if (p_mlp = NIL) then exit;
+  if not Assigned(FPlayer) then
+    exit;
+
+  if (p_mlp = NIL) then
+    exit;
 
   case libvlc_media_list_player_get_state(p_mlp) of
-    libvlc_NothingSpecial: Result := plvPlayer_NothingSpecial;
-    libvlc_Opening:        Result := plvPlayer_Opening;
-    libvlc_Buffering:      Result := plvPlayer_Buffering;
-    libvlc_Playing:        Result := plvPlayer_Playing;
-    libvlc_Paused:         Result := plvPlayer_Paused;
-    libvlc_Stopped:        Result := plvPlayer_Stopped;
-    libvlc_Ended:          Result := plvPlayer_Ended;
-    libvlc_Error:          Result := plvPlayer_Error;
+    libvlc_NothingSpecial:
+      Result := plvPlayer_NothingSpecial;
+    libvlc_Opening:
+      Result := plvPlayer_Opening;
+    libvlc_Buffering:
+      Result := plvPlayer_Buffering;
+    libvlc_Playing:
+      Result := plvPlayer_Playing;
+    libvlc_Paused:
+      Result := plvPlayer_Paused;
+    libvlc_Stopped:
+      Result := plvPlayer_Stopped;
+    libvlc_Ended:
+      Result := plvPlayer_Ended;
+    libvlc_Error:
+      Result := plvPlayer_Error;
   end;
 end;
 
@@ -1013,39 +977,53 @@ begin
     if (p_mlp <> NIL) then
     begin
       case GetState() of
-        plvPlayer_NothingSpecial: Result := 'Nothing Special';
-        plvPlayer_Opening:        Result := 'Opening';
-        plvPlayer_Buffering:      Result := 'Buffering';
-        plvPlayer_Playing:        Result := 'Playing';
-        plvPlayer_Paused:         Result := 'Paused';
-        plvPlayer_Stopped:        Result := 'Stopped';
-        plvPlayer_Ended:          Result := 'Ended';
-        plvPlayer_Error:          Result := 'Error';
-        else                      Result := 'Invalid State';
+        plvPlayer_NothingSpecial:
+          Result := 'Nothing Special';
+        plvPlayer_Opening:
+          Result := 'Opening';
+        plvPlayer_Buffering:
+          Result := 'Buffering';
+        plvPlayer_Playing:
+          Result := 'Playing';
+        plvPlayer_Paused:
+          Result := 'Paused';
+        plvPlayer_Stopped:
+          Result := 'Stopped';
+        plvPlayer_Ended:
+          Result := 'Ended';
+        plvPlayer_Error:
+          Result := 'Error';
+      else
+        Result := 'Invalid State';
       end;
     end
-    else Result := 'VLC Media List not initialised';
+    else
+      Result := 'VLC Media List not initialised';
   end
-  else Result:='VLC Media List no player assigned';
+  else
+    Result := 'VLC Media List no player assigned';
 end;
 
 procedure TPasLibVlcMediaList.Clear();
 begin
-  if not Assigned(FPlayer) then exit;
-  
+  if not Assigned(FPlayer) then
+    exit;
+
   while (Count() > 0) do
   begin
     Delete(0);
   end;
 end;
 
-procedure TPasLibVlcMediaList.Add(mrl : WideString);
+procedure TPasLibVlcMediaList.Add(mrl: WideString);
 var
-  media : TPasLibVlcMedia;
+  media: TPasLibVlcMedia;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
-  if (p_ml = NIL) then SetPlayer(FPlayer);
+  if (p_ml = NIL) then
+    SetPlayer(FPlayer);
 
   media := TPasLibVlcMedia.Create(FPlayer.VLC, mrl);
   if Assigned(SELF.FPlayer) then
@@ -1063,14 +1041,16 @@ begin
   media.Free;
 end;
 
-procedure TPasLibVlcMediaList.Add(mrl : WideString; mediaOptions : array of WideString);
+procedure TPasLibVlcMediaList.Add(mrl: WideString; mediaOptions: array of WideString);
 var
-  media : TPasLibVlcMedia;
-  mediaOptionIdx : Integer;
+  media: TPasLibVlcMedia;
+  mediaOptionIdx: Integer;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
-  if (p_ml = NIL) then SetPlayer(FPlayer);
+  if (p_ml = NIL) then
+    SetPlayer(FPlayer);
 
   media := TPasLibVlcMedia.Create(FPlayer.VLC, mrl);
   if Assigned(SELF.FPlayer) then
@@ -1095,12 +1075,13 @@ end;
 
 function TPasLibVlcMediaList.Get(index: Integer): WideString;
 var
-  p_md : libvlc_media_t_ptr;
-  mrl  : PAnsiChar;
+  p_md: libvlc_media_t_ptr;
+  mrl: PAnsiChar;
 begin
   Result := '';
-  if not Assigned(FPlayer) then exit;
-  
+  if not Assigned(FPlayer) then
+    exit;
+
   p_md := GetItemAtIndex(index);
   if Assigned(p_md) then
   begin
@@ -1112,7 +1093,8 @@ end;
 function TPasLibVlcMediaList.Count(): Integer;
 begin
   Result := 0;
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_ml <> NIL) then
   begin
@@ -1124,7 +1106,8 @@ end;
 
 procedure TPasLibVlcMediaList.Delete(index: Integer);
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_ml <> NIL) then
   begin
@@ -1138,7 +1121,8 @@ procedure TPasLibVlcMediaList.Insert(index: Integer; mrl: WideString);
 var
   media: TPasLibVlcMedia;
 begin
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   media := TPasLibVlcMedia.Create(FPlayer.VLC, mrl);
 
@@ -1158,7 +1142,8 @@ end;
 function TPasLibVlcMediaList.GetItemAtIndex(index: Integer): libvlc_media_t_ptr;
 begin
   Result := NIL;
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_ml <> NIL) then
   begin
@@ -1171,7 +1156,8 @@ end;
 function TPasLibVlcMediaList.IndexOfItem(item: libvlc_media_t_ptr): Integer;
 begin
   Result := -1;
-  if not Assigned(FPlayer) then exit;
+  if not Assigned(FPlayer) then
+    exit;
 
   if (p_ml <> NIL) then
   begin
@@ -1246,11 +1232,11 @@ constructor TPasLibVlcPlayer.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   //ControlStyle := ControlStyle - [csOpaque];
-  Color      := clBlack;
-  Width      := 320;
-  Height     := 240;
+  Color := clBlack;
+  Width := 320;
+  Height := 240;
 
-  TabStop:=True;
+  TabStop := True;
 
   FVideoOutput := voDefault;
   FAudioOutput := aoDefault;
@@ -1258,58 +1244,58 @@ begin
   FLastAudioOutput := '';
   FLastAudioOutputDeviceId := '';
 
-  FTitleShow        := FALSE;
-  FTitleShowPos     := plvPosCenter;
+  FTitleShow := FALSE;
+  FTitleShowPos := plvPosCenter;
   FTitleShowTimeOut := 2000;
 
-  FSnapshotFmt  := 'png';
-  FSnapShotPrv  := FALSE;
+  FSnapshotFmt := 'png';
+  FSnapShotPrv := FALSE;
 
-  FSpuShow      := TRUE;
-  FOsdShow      := TRUE;
+  FSpuShow := TRUE;
+  FOsdShow := TRUE;
 
-  FUseOverlay   := FALSE;
-  FVideoOnTop   := FALSE;
+  FUseOverlay := FALSE;
+  FVideoOnTop := FALSE;
 
   FViewTeleText := FALSE;
 
   ParentBackground := False;
   ParentColor := False;
 
-  DoubleBuffered:=True;
+  DoubleBuffered := True;
 
-  Caption            := '';
-  BevelOuter         := bvNone;
-  p_mi               := NIL;
-  p_mi_ev_mgr        := NIL;
-  FMute              := FALSE;
+  Caption := '';
+  BevelOuter := bvNone;
+  p_mi := NIL;
+  p_mi_ev_mgr := NIL;
+  FMute := FALSE;
   FMouseEventWinCtrl := NIL;
-  FVLC               := NIL;
-  p_mi               := NIL;
+  FVLC := NIL;
 
-  FUseEvents         := TRUE;
+  FUseEvents := TRUE;
 
   FMouseEventsHandler := mehComponent;
 
-  FStartOptions      := TStringList.Create;
+  FStartOptions := TStringList.Create;
 
-  if (csDesigning in ComponentState) then exit;
+  if (csDesigning in ComponentState) then
+    exit;
 
   FMouseEventWinCtrl := TPasLibVlcMouseEventWinCtrl.Create(SELF);
   SELF.InsertControl(FMouseEventWinCtrl);
   FMouseEventWinCtrl.SetBounds(0, 0, SELF.Width, SELF.Height);
 
-  FMouseEventWinCtrl.OnClick         := InternalOnClick;
-  FMouseEventWinCtrl.OnDblClick      := InternalOnDblClick;
-  FMouseEventWinCtrl.OnMouseDown     := InternalOnMouseDown;
-  FMouseEventWinCtrl.OnMouseMove     := InternalOnMouseMove;
-  FMouseEventWinCtrl.OnMouseUp       := InternalOnMouseUp;
+  FMouseEventWinCtrl.OnClick := InternalOnClick;
+  FMouseEventWinCtrl.OnDblClick := InternalOnDblClick;
+  FMouseEventWinCtrl.OnMouseDown := InternalOnMouseDown;
+  FMouseEventWinCtrl.OnMouseMove := InternalOnMouseMove;
+  FMouseEventWinCtrl.OnMouseUp := InternalOnMouseUp;
   FMouseEventWinCtrl.OnMouseActivate := InternalOnMouseActivate;
-  FMouseEventWinCtrl.OnMouseEnter    := InternalOnMouseEnter;
-  FMouseEventWinCtrl.OnMouseLeave    := InternalOnMouseLeave;
+  FMouseEventWinCtrl.OnMouseEnter := InternalOnMouseEnter;
+  FMouseEventWinCtrl.OnMouseLeave := InternalOnMouseLeave;
 
-  FMouseEventWinCtrl.OnMouseWheelDown:= InternalOnMouseWheelDown;
-  FMouseEventWinCtrl.OnMouseWheelUp  := InternalOnMouseWheelUp;
+  FMouseEventWinCtrl.OnMouseWheelDown := InternalOnMouseWheelDown;
+  FMouseEventWinCtrl.OnMouseWheelUp := InternalOnMouseWheelUp;
 end;
 
 procedure TPasLibVlcPlayer.CreateParams(var params: TCreateParams);
@@ -1322,7 +1308,8 @@ procedure TPasLibVlcPlayer.SetBounds(ALeft, ATop, AWidth, AHeight: Integer);
 begin
   inherited SetBounds(ALeft, ATop, AWidth, AHeight);
 
-  if (csDesigning in ComponentState) then exit;
+  if (csDesigning in ComponentState) then
+    exit;
 
   if (Assigned(FMouseEventWinCtrl)) then
   begin
@@ -1332,8 +1319,8 @@ begin
         {$IFDEF LCLQT}
           // Get mouse events using transparent window is not compatible with LINUX QT4,
           // because window created over player is draw opaque not transparent
-          FMouseEventWinCtrl.SetBounds(-1, -1, 1, 1);
-          exit;
+      FMouseEventWinCtrl.SetBounds(-1, -1, 1, 1);
+      exit;
         {$ENDIF}
       {$ENDIF}
       FMouseEventWinCtrl.SetBounds(0, 0, SELF.Width, SELF.Height);
@@ -1389,43 +1376,43 @@ begin
 
     if Assigned(p_mi_ev_mgr) then
     begin
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerMediaChanged,       lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerNothingSpecial,     lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerOpening,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerBuffering,          lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPlaying,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPaused,             lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerStopped,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerForward,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerBackward,           lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerEndReached,         lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerEncounteredError,   lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerTimeChanged,        lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPositionChanged,    lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerSeekableChanged,    lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPausableChanged,    lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerTitleChanged,       lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerSnapshotTaken,      lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerLengthChanged,      lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerMediaChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerNothingSpecial, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerOpening, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerBuffering, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPlaying, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPaused, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerStopped, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerForward, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerBackward, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerEndReached, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerEncounteredError, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerTimeChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPositionChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerSeekableChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerPausableChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerTitleChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerSnapshotTaken, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerLengthChanged, lib_vlc_player_event_hdlr, SELF);
 
       // availiable from 2.2.0
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerVout,               lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerScrambledChanged,   lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerVout, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerScrambledChanged, lib_vlc_player_event_hdlr, SELF);
 
       // availiable from 2.2.2
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerCorked,             lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerUncorked,           lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerMuted,              lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerUnmuted,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerAudioVolume,        lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerCorked, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerUncorked, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerMuted, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerUnmuted, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerAudioVolume, lib_vlc_player_event_hdlr, SELF);
 
       // availiable from 3.0.0
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESAdded,            lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESDeleted,          lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESSelected,         lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerAudioDevice,        lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerChapterChanged,     lib_vlc_player_event_hdlr, SELF);
-      libvlc_event_attach(p_mi_ev_mgr, libvlc_RendererDiscovererItemAdded,   lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESAdded, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESDeleted, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerESSelected, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerAudioDevice, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_MediaPlayerChapterChanged, lib_vlc_player_event_hdlr, SELF);
+      libvlc_event_attach(p_mi_ev_mgr, libvlc_RendererDiscovererItemAdded, lib_vlc_player_event_hdlr, SELF);
       libvlc_event_attach(p_mi_ev_mgr, libvlc_RendererDiscovererItemDeleted, lib_vlc_player_event_hdlr, SELF);
     end;
   end;
@@ -1436,49 +1423,49 @@ begin
   if Assigned(p_mi_ev_mgr) then
   begin
     libvlc_event_detach(p_mi_ev_mgr, libvlc_RendererDiscovererItemDeleted, lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_RendererDiscovererItemAdded,   lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerChapterChanged,     lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerAudioDevice,        lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESSelected,         lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESDeleted,          lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESAdded,            lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_RendererDiscovererItemAdded, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerChapterChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerAudioDevice, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESSelected, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESDeleted, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerESAdded, lib_vlc_player_event_hdlr, SELF);
 
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerAudioVolume,        lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerUnmuted,            lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerMuted,              lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerUncorked,           lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerCorked,             lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerAudioVolume, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerUnmuted, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerMuted, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerUncorked, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerCorked, lib_vlc_player_event_hdlr, SELF);
 
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerScrambledChanged,   lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerVout,               lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerLengthChanged,      lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerSnapshotTaken,      lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerTitleChanged,       lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPausableChanged,    lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerSeekableChanged,    lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPositionChanged,    lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerTimeChanged,        lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerEncounteredError,   lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerEndReached,         lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerBackward,           lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerForward,            lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerStopped,            lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPaused,             lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPlaying,            lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerBuffering,          lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerOpening,            lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerNothingSpecial,     lib_vlc_player_event_hdlr, SELF);
-    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerMediaChanged,       lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerScrambledChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerVout, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerLengthChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerSnapshotTaken, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerTitleChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPausableChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerSeekableChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPositionChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerTimeChanged, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerEncounteredError, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerEndReached, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerBackward, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerForward, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerStopped, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPaused, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerPlaying, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerBuffering, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerOpening, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerNothingSpecial, lib_vlc_player_event_hdlr, SELF);
+    libvlc_event_detach(p_mi_ev_mgr, libvlc_MediaPlayerMediaChanged, lib_vlc_player_event_hdlr, SELF);
 
     p_mi_ev_mgr := NIL;
-    
+
     Sleep(50);
   end;
 end;
 
 procedure TPasLibVlcPlayer.SetSnapshotFmt(aFormat: string);
 var
-  lcFormat : string;
+  lcFormat: string;
 begin
   FSnapShotFmt := 'png';
   lcFormat := LowerCase(aFormat);
@@ -1519,15 +1506,24 @@ begin
     if FTitleShow then
     begin
       case FTitleShowPos of
-        plvPosCenter:      libvlc_media_player_set_video_title_display(p_mi, libvlc_position_center,       FTitleShowTimeOut);
-        plvPosLeft:        libvlc_media_player_set_video_title_display(p_mi, libvlc_position_left,         FTitleShowTimeOut);
-        plvPosRight:       libvlc_media_player_set_video_title_display(p_mi, libvlc_position_right,        FTitleShowTimeOut);
-        plvPosTop:         libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top,          FTitleShowTimeOut);
-        plvPosTopLeft:     libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top_left,     FTitleShowTimeOut);
-        plvPosTopRight:    libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top_right,    FTitleShowTimeOut);
-        plvPosBottom:      libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom,       FTitleShowTimeOut);
-        plvPosBottomLeft:  libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom_left,  FTitleShowTimeOut);
-        plvPosBottomRight: libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom_right, FTitleShowTimeOut);
+        plvPosCenter:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_center, FTitleShowTimeOut);
+        plvPosLeft:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_left, FTitleShowTimeOut);
+        plvPosRight:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_right, FTitleShowTimeOut);
+        plvPosTop:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top, FTitleShowTimeOut);
+        plvPosTopLeft:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top_left, FTitleShowTimeOut);
+        plvPosTopRight:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_top_right, FTitleShowTimeOut);
+        plvPosBottom:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom, FTitleShowTimeOut);
+        plvPosBottomLeft:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom_left, FTitleShowTimeOut);
+        plvPosBottomRight:
+          libvlc_media_player_set_video_title_display(p_mi, libvlc_position_bottom_right, FTitleShowTimeOut);
       end;
     end
     else
@@ -1564,7 +1560,7 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetVideoOnTop(aValue : Boolean);
+procedure TPasLibVlcPlayer.SetVideoOnTop(aValue: Boolean);
 begin
   if (FVideoOnTop <> aValue) then
   begin
@@ -1572,7 +1568,7 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetUseOverlay(aValue : Boolean);
+procedure TPasLibVlcPlayer.SetUseOverlay(aValue: Boolean);
 begin
   if (FUseOverlay <> aValue) then
   begin
@@ -1580,11 +1576,14 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetViewTeleText(aValue : Boolean);
+procedure TPasLibVlcPlayer.SetViewTeleText(aValue: Boolean);
 begin
   if (FViewTeleText <> aValue) then
   begin
-    if aValue then ShowTeleText() else HideTeleText();
+    if aValue then
+      ShowTeleText()
+    else
+      HideTeleText();
   end;
 end;
 
@@ -1592,7 +1591,8 @@ procedure TPasLibVlcPlayer.UpdateDeInterlace();
 var
   dm: string;
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   if (FDeinterlaceFilter = deON) then
   begin
@@ -1605,7 +1605,7 @@ begin
 
   if (dm <> '') then
   begin
-    libvlc_video_set_deinterlace(p_mi, PAnsiChar(Utf8Encode(dm)));
+    libvlc_video_set_deinterlace(p_mi, PAnsiChar(AnsiString(dm)));
   end
   else
   begin
@@ -1644,9 +1644,9 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetVlcInstance() : TPasLibVlc;
+function TPasLibVlcPlayer.GetVlcInstance(): TPasLibVlc;
 var
-  oIdx : Integer;
+  oIdx: Integer;
 begin
   if not Assigned(FVLC) then
   begin
@@ -1658,19 +1658,36 @@ begin
     end;
 
     FVLC.AddOption('--drop-late-frames');
-    //FVLC.AddOption('--verbose=0');
+    //FVLC.AddOption('--verbose=1');
 
     // for versions before 2.1.0
     FVLC.TitleShow := FTitleShow;
 
-    if not FSpuShow     then FVLC.AddOption('--no-spu')              else FVLC.AddOption('--spu');
-    if not FOsdShow     then FVLC.AddOption('--no-osd')              else FVLC.AddOption('--osd');
-    if not FVideoOnTop  then FVLC.AddOption('--no-video-on-top')     else FVLC.AddOption('--video-on-top');
-    if not FUseOverlay  then FVLC.AddOption('--no-overlay')          else FVLC.AddOption('--overlay');
-    if not FSnapshotPrv then FVLC.AddOption('--no-snapshot-preview') else FVLC.AddOption('--snapshot-preview');
+    if not FSpuShow then
+      FVLC.AddOption('--no-spu')
+    else
+      FVLC.AddOption('--spu');
+    if not FOsdShow then
+      FVLC.AddOption('--no-osd')
+    else
+      FVLC.AddOption('--osd');
+    if not FVideoOnTop then
+      FVLC.AddOption('--no-video-on-top')
+    else
+      FVLC.AddOption('--video-on-top');
+    if not FUseOverlay then
+      FVLC.AddOption('--no-overlay')
+    else
+      FVLC.AddOption('--overlay');
+    if not FSnapshotPrv then
+      FVLC.AddOption('--no-snapshot-preview')
+    else
+      FVLC.AddOption('--snapshot-preview');
 
-    if (FVideoOutput <> voDefault) then FVLC.AddOption('--vout=' + vlcVideoOutputNames[FVideoOutput]);
-    if (FAudioOutput <> aoDefault) then FVLC.AddOption('--aout=' + vlcAudioOutputNames[FAudioOutput]);
+    if (FVideoOutput <> voDefault) then
+      FVLC.AddOption('--vout=' + vlcVideoOutputNames[FVideoOutput]);
+    if (FAudioOutput <> aoDefault) then
+      FVLC.AddOption('--aout=' + vlcAudioOutputNames[FAudioOutput]);
   end;
   Result := FVLC;
 end;
@@ -1680,11 +1697,12 @@ begin
   FStartOptions.Assign(Value);
 end;
 
-procedure TPasLibVlcPlayer.SetMouseEventHandler(aValue : TPasLibVlcPlayerMouseEventsHandler);
+procedure TPasLibVlcPlayer.SetMouseEventHandler(aValue: TPasLibVlcPlayerMouseEventsHandler);
 begin
   FMouseEventsHandler := aValue;
 
-  if (csDesigning in ComponentState) then exit;
+  if (csDesigning in ComponentState) then
+    exit;
 
   if (p_mi <> NIL) then
   begin
@@ -1708,8 +1726,8 @@ begin
         {$IFDEF LCLQT}
           // Get mouse events using transparent window is not compatible with LINUX QT4,
           // because window created over player is draw opaque not transparent
-          FMouseEventWinCtrl.SetBounds(-1, -1, 1, 1);
-          exit;
+      FMouseEventWinCtrl.SetBounds(-1, -1, 1, 1);
+      exit;
         {$ENDIF}
       {$ENDIF}
       FMouseEventWinCtrl.SetBounds(0, 0, SELF.Width, SELF.Height);
@@ -1723,9 +1741,9 @@ end;
 
 function TPasLibVlcPlayer.GetPlayerHandle(): libvlc_media_player_t_ptr;
 var
-   p_instance : libvlc_instance_t_ptr;
+  p_instance: libvlc_instance_t_ptr;
 begin
-  
+
   if (p_mi = NIL) then
   begin
     // get instance
@@ -1751,10 +1769,10 @@ begin
         end;
       end;
     end;
-
   end;
 
   UpdateTitleShow();
+  UpdateDeInterlace();
 
   if FUseEvents then
   begin
@@ -1764,9 +1782,9 @@ begin
   Result := p_mi;
 end;
 
-function GetToSep(var str : WideString; sep : WideString) : WideString;
+function GetToSep(var str: WideString; sep: WideString): WideString;
 var
-  p : Integer;
+  p: Integer;
 begin
   p := Pos(sep, str);
   if (p > 0) then
@@ -1781,8 +1799,7 @@ begin
   end;
 end;
 
-
-procedure TPasLibVlcPlayer.Play(var media : TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TPasLibVlcPlayer.Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   // assign media to player
   libvlc_media_player_set_media(p_mi, media.MD);
@@ -1803,18 +1820,19 @@ begin
     while (libvlc_media_player_is_playing(p_mi) = 0) do
     begin
       Sleep(10);
-      if (audioSetTimeOut < 10) then break;
+      if (audioSetTimeOut < 10) then
+        break;
       Dec(audioSetTimeOut);
     end;
     SetAudioOutputDevice(audioOutput, audioOutputDeviceId);
   end
-  else
-  if ((FLastAudioOutput <> '') or (FLastAudioOutputDeviceId <> '')) then
+  else if ((FLastAudioOutput <> '') or (FLastAudioOutputDeviceId <> '')) then
   begin
     while (libvlc_media_player_is_playing(p_mi) = 0) do
     begin
       Sleep(10);
-      if (audioSetTimeOut < 10) then break;
+      if (audioSetTimeOut < 10) then
+        break;
       Dec(audioSetTimeOut);
     end;
     SetAudioOutputDevice(FLastAudioOutput, FLastAudioOutputDeviceId);
@@ -1831,11 +1849,11 @@ end;
  *              rtp: rstp://host/movie
  *)
 
-procedure TPasLibVlcPlayer.Play(mrl: WideString; const mediaOptions : array of WideString; audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.Play(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
-  lcMRL : WideString;
-  proto : WideString;
-  host  : WideString;
+  lcMRL: WideString;
+  proto: WideString;
+  host: WideString;
 begin
   lcMRL := Trim(LowerCase(mrl));
 
@@ -1844,7 +1862,7 @@ begin
 
   if (proto = 'http') or (proto = 'https') then
   begin
-    host  := GetToSep(lcMRL, '/');
+    host := GetToSep(lcMRL, '/');
     if (host = 'youtube.com') or (host = 'www.youtube.com') then
     begin
       PlayYoutube(mrl, mediaOptions, audioOutput, audioOutputDeviceId);
@@ -1855,21 +1873,23 @@ begin
   PlayNormal(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TPasLibVlcPlayer.Play(stm : TStream; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TPasLibVlcPlayer.Play(stm: TStream; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
-  media : TPasLibVlcMedia;
-  mediaOptionIdx : Integer;
+  media: TPasLibVlcMedia;
+  mediaOptionIdx: Integer;
 begin
   if (SELF.Parent = NIL) then
   begin
     SELF.Parent := SELF.Owner as TWinControl;
   end;
 
-  if (SELF.Parent = NIL) then exit;
+  if (SELF.Parent = NIL) then
+    exit;
 
   GetPlayerHandle();
 
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   Stop();
 
@@ -1886,21 +1906,23 @@ begin
   Play(media, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TPasLibVlcPlayer.PlayNormal(mrl: WideString; const mediaOptions : array of WideString; audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.PlayNormal(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
-  media : TPasLibVlcMedia;
-  mediaOptionIdx : Integer;
+  media: TPasLibVlcMedia;
+  mediaOptionIdx: Integer;
 begin
   if (SELF.Parent = NIL) then
   begin
     SELF.Parent := SELF.Owner as TWinControl;
   end;
 
-  if (SELF.Parent = NIL) then exit;
+  if (SELF.Parent = NIL) then
+    exit;
 
   GetPlayerHandle();
 
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   //Stop();
 
@@ -1917,7 +1939,7 @@ begin
   Play(media, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TPasLibVlcPlayer.PlayYoutube(mrl: WideString; const mediaOptions : array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
+procedure TPasLibVlcPlayer.PlayYoutube(mrl: WideString; const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
 begin
   // http://www.youtube.com/watch?feature=player_detailpage&v=ZHHOYmERmDc
   PlayNormal(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
@@ -1926,7 +1948,8 @@ begin
   while (youtubeTimeout > 0) do
   begin
     Sleep(10);
-    if (youtubeTimeout < 10) then break;
+    if (youtubeTimeout < 10) then
+      break;
     Dec(youtubeTimeout, 10);
     if (GetState() = plvPlayer_Ended) then
     begin
@@ -1942,17 +1965,18 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-procedure TPasLibVlcPlayer.PlayContinue(const mediaOptions : array of WideString; audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.PlayContinue(const mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
-  p_md     : libvlc_media_t_ptr;
-  p_ml     : libvlc_media_list_t_ptr;
-  sub_p_md : libvlc_media_t_ptr;
-  cnt      : Integer;
-  mrl      : String;
+  p_md: libvlc_media_t_ptr;
+  p_ml: libvlc_media_list_t_ptr;
+  sub_p_md: libvlc_media_t_ptr;
+  cnt: Integer;
+  mrl: string;
 begin
   mrl := '';
 
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_md := libvlc_media_player_get_media(p_mi);
   if (p_md <> NIL) then
@@ -1964,7 +1988,8 @@ begin
       cnt := libvlc_media_list_count(p_ml);
       if (cnt > 0) then
       begin
-        sub_p_md := libvlc_media_list_item_at_index(p_ml, 0);if (sub_p_md <> NIL) then
+        sub_p_md := libvlc_media_list_item_at_index(p_ml, 0);
+        if (sub_p_md <> NIL) then
         begin
           mrl := {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(libvlc_media_get_mrl(sub_p_md));
           libvlc_media_release(sub_p_md);
@@ -1976,7 +2001,8 @@ begin
     // libvlc_media_release(p_md);
   end;
 
-  if (mrl <> '') then Play(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
+  if (mrl <> '') then
+    Play(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 {$WARNINGS ON}
 {$HINTS ON}
@@ -1989,17 +2015,17 @@ end;
  *              rtp: rstp://host/movie
  *)
 
-procedure TPasLibVlcPlayer.Play(mrl: WideString; audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   Play(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TPasLibVlcPlayer.Play(stm : TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TPasLibVlcPlayer.Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   Play(stm, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TPasLibVlcPlayer.PlayNormal(mrl: WideString; audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   PlayNormal(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
@@ -2009,7 +2035,7 @@ begin
   PlayYoutube(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut, youtubeTimeout);
 end;
 
-procedure TPasLibVlcPlayer.PlayContinue(audioOutput : WideString = ''; audioOutputDeviceId : WideString = ''; audioSetTimeOut : Cardinal = 1000);
+procedure TPasLibVlcPlayer.PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   PlayContinue([], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
@@ -2018,12 +2044,13 @@ end;
 {$HINTS OFF}
 function TPasLibVlcPlayer.GetMediaMrl(): string;
 var
-  p_md     : libvlc_media_t_ptr;
-  p_ml     : libvlc_media_list_t_ptr;
-  sub_p_md : libvlc_media_t_ptr;
-  cnt      : Integer;
+  p_md: libvlc_media_t_ptr;
+  p_ml: libvlc_media_list_t_ptr;
+  sub_p_md: libvlc_media_t_ptr;
+  cnt: Integer;
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_md := libvlc_media_player_get_media(p_mi);
   if (p_md <> NIL) then
@@ -2054,7 +2081,8 @@ end;
 
 procedure TPasLibVlcPlayer.Pause();
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   if (GetState() = plvPlayer_Playing) then
   begin
@@ -2064,9 +2092,10 @@ end;
 
 procedure TPasLibVlcPlayer.Resume();
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
-  if (GetState() = plvPlayer_Paused)  then
+  if (GetState() = plvPlayer_Paused) then
   begin
     libvlc_media_player_play(p_mi);
   end;
@@ -2102,17 +2131,26 @@ function TPasLibVlcPlayer.GetState(): TPasLibVlcPlayerState;
 begin
   Result := plvPlayer_NothingSpecial;
 
-  if (p_mi = NIL) then exit;
-  
+  if (p_mi = NIL) then
+    exit;
+
   case libvlc_media_player_get_state(p_mi) of
-    libvlc_NothingSpecial: Result := plvPlayer_NothingSpecial;
-    libvlc_Opening:        Result := plvPlayer_Opening;
-    libvlc_Buffering:      Result := plvPlayer_Buffering;
-    libvlc_Playing:        Result := plvPlayer_Playing;
-    libvlc_Paused:         Result := plvPlayer_Paused;
-    libvlc_Stopped:        Result := plvPlayer_Stopped;
-    libvlc_Ended:          Result := plvPlayer_Ended;
-    libvlc_Error:          Result := plvPlayer_Error;
+    libvlc_NothingSpecial:
+      Result := plvPlayer_NothingSpecial;
+    libvlc_Opening:
+      Result := plvPlayer_Opening;
+    libvlc_Buffering:
+      Result := plvPlayer_Buffering;
+    libvlc_Playing:
+      Result := plvPlayer_Playing;
+    libvlc_Paused:
+      Result := plvPlayer_Paused;
+    libvlc_Stopped:
+      Result := plvPlayer_Stopped;
+    libvlc_Ended:
+      Result := plvPlayer_Ended;
+    libvlc_Error:
+      Result := plvPlayer_Error;
   end;
 end;
 
@@ -2121,18 +2159,28 @@ begin
   if (p_mi <> NIL) then
   begin
     case GetState of
-      plvPlayer_NothingSpecial: Result := 'Nothing Special';
-      plvPlayer_Opening:        Result := 'Opening';
-      plvPlayer_Buffering:      Result := 'Buffering';
-      plvPlayer_Playing:        Result := 'Playing';
-      plvPlayer_Paused:         Result := 'Paused';
-      plvPlayer_Stopped:        Result := 'Stopped';
-      plvPlayer_Ended:          Result := 'Ended';
-      plvPlayer_Error:          Result := 'Error';
-      else                      Result := 'Invalid State';
+      plvPlayer_NothingSpecial:
+        Result := 'Nothing Special';
+      plvPlayer_Opening:
+        Result := 'Opening';
+      plvPlayer_Buffering:
+        Result := 'Buffering';
+      plvPlayer_Playing:
+        Result := 'Playing';
+      plvPlayer_Paused:
+        Result := 'Paused';
+      plvPlayer_Stopped:
+        Result := 'Stopped';
+      plvPlayer_Ended:
+        Result := 'Ended';
+      plvPlayer_Error:
+        Result := 'Error';
+    else
+      Result := 'Invalid State';
     end;
   end
-  else Result := 'Player not initialised';
+  else
+    Result := 'Player not initialised';
 end;
 
 (*
@@ -2150,7 +2198,7 @@ begin
 
   if (Assigned(p_mi) and (libvlc_video_get_size(p_mi, 0, px, py) = 0)) then
   begin
-    Result  := px;
+    Result := px;
   end
   else
   begin
@@ -2173,7 +2221,7 @@ begin
 
   if (Assigned(p_mi) and (libvlc_video_get_size(p_mi, 0, px, py) = 0)) then
   begin
-    Result  := py;
+    Result := py;
   end
   else
   begin
@@ -2181,7 +2229,7 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetVideoDimension(var width, height: LongWord) : Boolean;
+function TPasLibVlcPlayer.GetVideoDimension(var width, height: LongWord): Boolean;
 begin
   width := 0;
   height := 0;
@@ -2198,7 +2246,8 @@ end;
 function TPasLibVlcPlayer.GetVideoScaleInPercent(): Single;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_scale(p_mi) * 100;
 end;
 
@@ -2211,7 +2260,8 @@ end;
 
 procedure TPasLibVlcPlayer.SetVideoScaleInPercent(newScaleInPercent: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_scale(p_mi, newScaleInPercent / 100);
 end;
 
@@ -2219,10 +2269,11 @@ end;
 {$HINTS OFF}
 function TPasLibVlcPlayer.GetVideoAspectRatio(): string;
 var
-  libvlcaspect : PAnsiChar;
+  libvlcaspect: PAnsiChar;
 begin
   Result := '';
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlcaspect := libvlc_video_get_aspect_ratio(p_mi);
   if (libvlcaspect <> NIL) then
   begin
@@ -2234,23 +2285,25 @@ end;
 {$HINTS ON}
 
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetVideoSampleAspectRatio(var sar_num, sar_den : Longword): Boolean;
+
+function TPasLibVlcPlayer.GetVideoSampleAspectRatio(var sar_num, sar_den: Longword): Boolean;
 var
-  md           : libvlc_media_t_ptr;
-  tracks_ptr   : Pointer;
-  tracks_list  : libvlc_media_track_list_t_ptr;
-  tracks_count : Integer;
-  tracks_idx   : Integer;
-  track_record : libvlc_media_track_t_ptr;
+  md: libvlc_media_t_ptr;
+  tracks_ptr: Pointer;
+  tracks_list: libvlc_media_track_list_t_ptr;
+  tracks_count: Integer;
+  tracks_idx: Integer;
+  track_record: libvlc_media_track_t_ptr;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   md := libvlc_media_player_get_media(p_mi);
   tracks_count := libvlc_media_tracks_get(md, tracks_ptr);
   if (tracks_count > 0) then
   begin
     tracks_list := libvlc_media_track_list_t_ptr(@tracks_ptr);
-    for tracks_idx := 0 to tracks_count-1 do
+    for tracks_idx := 0 to tracks_count - 1 do
     begin
       track_record := tracks_list^[tracks_idx];
       if (track_record^.i_type = libvlc_track_video) then
@@ -2266,9 +2319,9 @@ begin
 end;
 {$HINTS ON}
 
-function TPasLibVlcPlayer.GetVideoSampleAspectRatio() : Single;
+function TPasLibVlcPlayer.GetVideoSampleAspectRatio(): Single;
 var
-  sar_num, sar_den : Longword;
+  sar_num, sar_den: Longword;
 begin
   Result := 0;
   sar_num := 0;
@@ -2281,18 +2334,20 @@ end;
 
 procedure TPasLibVlcPlayer.SetVideoAspectRatio(newAspectRatio: string);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_aspect_ratio(p_mi, PAnsiChar(AnsiString(newAspectRatio)));
 end;
 
 (*
  * Return video time length in miliseconds
  *)
- 
+
 function TPasLibVlcPlayer.GetVideoLenInMs(): Int64;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_length(p_mi);
 end;
 
@@ -2312,7 +2367,8 @@ end;
 function TPasLibVlcPlayer.GetVideoPosInMs(): Int64;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_time(p_mi);
 end;
 
@@ -2332,11 +2388,12 @@ end;
 
 procedure TPasLibVlcPlayer.SetVideoPosInMs(newPos: Int64);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_media_player_set_time(p_mi, newPos);
   if (GetState() <> plvPlayer_Playing) then
-  	if Assigned(FOnMediaPlayerTimeChanged) then
-	    FOnMediaPlayerTimeChanged(Self, newPos);
+    if Assigned(FOnMediaPlayerTimeChanged) then
+      FOnMediaPlayerTimeChanged(Self, newPos);
 end;
 
 (*
@@ -2347,7 +2404,8 @@ end;
 function TPasLibVlcPlayer.GetVideoPosInPercent(): Single;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_position(p_mi) * 100;
 end;
 
@@ -2359,7 +2417,8 @@ end;
 
 procedure TPasLibVlcPlayer.SetVideoPosInPercent(newPos: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_media_player_set_position(p_mi, newPos / 100);
   if (GetState() <> plvPlayer_Playing) then
     if Assigned(FOnMediaPlayerPositionChanged) then
@@ -2373,7 +2432,8 @@ end;
 function TPasLibVlcPlayer.GetVideoFps(): Single;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_fps(p_mi);
 end;
 
@@ -2384,7 +2444,8 @@ end;
 function TPasLibVlcPlayer.CanPlay(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_media_player_will_play(p_mi) > 0);
 end;
 
@@ -2395,7 +2456,8 @@ end;
 function TPasLibVlcPlayer.CanPause(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_media_player_can_pause(p_mi) > 0);
 end;
 
@@ -2406,27 +2468,30 @@ end;
 function TPasLibVlcPlayer.CanSeek(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_media_player_is_seekable(p_mi) > 0);
 end;
 
 (*
  * Return true if player has video output
  *)
-function TPasLibVlcPlayer.HasVout() : Boolean;
+function TPasLibVlcPlayer.HasVout(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_media_player_has_vout(p_mi) > 0);
 end;
 
 (*
  * Return true if video is scrambled
  *)
-function TPasLibVlcPlayer.IsScrambled() : Boolean;
+function TPasLibVlcPlayer.IsScrambled(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_media_player_program_scrambled(p_mi) > 0)
 end;
 
@@ -2434,16 +2499,18 @@ end;
  * Create snapshot of current video frame to specified fileName
  * The file is in PNG format
  *)
- 
+
 function TPasLibVlcPlayer.Snapshot(fileName: WideString): Boolean;
 var
   i_width, i_height: LongWord;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   i_width := 0;
   i_height := 0;
-  if (libvlc_video_get_size(p_mi, 0, i_width, i_height) <> 0) then exit;
+  if (libvlc_video_get_size(p_mi, 0, i_width, i_height) <> 0) then
+    exit;
   Result := (libvlc_video_take_snapshot(p_mi, 0, PAnsiChar(Utf8Encode(fileName)), i_width, i_height) = 0);
 end;
 
@@ -2456,13 +2523,15 @@ end;
 function TPasLibVlcPlayer.Snapshot(fileName: WideString; width, height: LongWord): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_video_take_snapshot(p_mi, 0, PAnsiChar(Utf8Encode(fileName)), width, height) = 0);
 end;
 
 procedure TPasLibVlcPlayer.NextFrame();
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_media_player_next_frame(p_mi);
 end;
 
@@ -2473,24 +2542,31 @@ end;
 
 procedure TPasLibVlcPlayer.SetAudioMute(mute: Boolean);
 begin
-  if (p_mi = NIL) then exit;
-  if mute then libvlc_audio_set_mute(p_mi, 1)
-  else         libvlc_audio_set_mute(p_mi, 0);
+  if (p_mi = NIL) then
+    exit;
+  if mute then
+    libvlc_audio_set_mute(p_mi, 1)
+  else
+    libvlc_audio_set_mute(p_mi, 0);
   FMute := mute;
 end;
 
 function TPasLibVlcPlayer.GetAudioVolume(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_audio_get_volume(p_mi);
 end;
 
 procedure TPasLibVlcPlayer.SetAudioVolume(volumeLevel: Integer);
 begin
-  if (p_mi = NIL) then exit;
-  if (volumeLevel < 0) then exit;
-  if (volumeLevel > 200) then exit;
+  if (p_mi = NIL) then
+    exit;
+  if (volumeLevel < 0) then
+    exit;
+  if (volumeLevel > 200) then
+    exit;
 //  if (FVLC.VersionBin < $020100) then
   begin
     libvlc_audio_set_volume(p_mi, volumeLevel);
@@ -2499,23 +2575,28 @@ end;
 
 procedure TPasLibVlcPlayer.SetPlayRate(rate: Integer);
 begin
-  if (p_mi = NIL) then exit;
-  if (rate < 1) then exit;
-  if (rate > 1000) then exit;  
+  if (p_mi = NIL) then
+    exit;
+  if (rate < 1) then
+    exit;
+  if (rate > 1000) then
+    exit;
   libvlc_media_player_set_rate(p_mi, rate / 100);
 end;
 
 function TPasLibVlcPlayer.GetPlayRate(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := Round(100 * libvlc_media_player_get_rate(p_mi));
 end;
 
 procedure TPasLibVlcPlayer.PlayInWindow(newWindow: TWinControl = NIL; aOut: WideString = ''; aOutDeviceId: WideString = '');
 begin
-  if (p_mi = NIL) then exit;
-  
+  if (p_mi = NIL) then
+    exit;
+
   if Assigned(newWindow) then
   begin
     libvlc_media_player_set_display_window(p_mi, newWindow.Handle);
@@ -2535,12 +2616,13 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetAudioFilterList(return_name_type : Integer = 0): TStringList;
+function TPasLibVlcPlayer.GetAudioFilterList(return_name_type: Integer = 0): TStringList;
 var
-  p_list : libvlc_module_description_t_ptr;
+  p_list: libvlc_module_description_t_ptr;
 begin
   Result := TStringList.Create;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_list := libvlc_audio_filter_list_get(p_mi);
 
@@ -2551,8 +2633,7 @@ begin
       if (p_list^.psz_name <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2565,8 +2646,7 @@ begin
       if (p_list^.psz_shortname <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2579,8 +2659,7 @@ begin
       if (p_list^.psz_longname <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2593,8 +2672,7 @@ begin
       if (p_list^.psz_help <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2607,12 +2685,14 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function  TPasLibVlcPlayer.GetVideoFilterList(return_name_type : Integer = 0): TStringList;
+
+function TPasLibVlcPlayer.GetVideoFilterList(return_name_type: Integer = 0): TStringList;
 var
-  p_list : libvlc_module_description_t_ptr;
+  p_list: libvlc_module_description_t_ptr;
 begin
   Result := TStringList.Create;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_list := libvlc_video_filter_list_get(p_mi);
 
@@ -2623,8 +2703,7 @@ begin
       if (p_list^.psz_name <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2637,8 +2716,7 @@ begin
       if (p_list^.psz_shortname <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2651,8 +2729,7 @@ begin
       if (p_list^.psz_longname <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2665,8 +2742,7 @@ begin
       if (p_list^.psz_help <> NIL) then
       begin
         Result.AddObject(
-          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help),
-          NIL);
+          {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2681,12 +2757,14 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetAudioTrackList() : TStringList;
+
+function TPasLibVlcPlayer.GetAudioTrackList(): TStringList;
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := TStringList.Create;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_track := libvlc_audio_get_track_description(p_mi);
 
@@ -2695,8 +2773,7 @@ begin
     if (p_track^.psz_name <> NIL) then
     begin
       Result.AddObject(
-        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name),
-        TObject(p_track^.i_id));
+        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -2707,33 +2784,38 @@ end;
 function TPasLibVlcPlayer.GetAudioTrackCount(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_audio_get_track_count(p_mi);
 end;
 
 function TPasLibVlcPlayer.GetAudioTrackId(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_audio_get_track(p_mi);
 end;
 
-procedure TPasLibVlcPlayer.SetAudioTrackById(const track_id : Integer);
+procedure TPasLibVlcPlayer.SetAudioTrackById(const track_id: Integer);
 begin
-  if (p_mi = NIL) then exit;
-  if (track_id < 0) then exit;
-  
+  if (p_mi = NIL) then
+    exit;
+  if (track_id < 0) then
+    exit;
+
   libvlc_audio_set_track(p_mi, track_id);
 end;
 
 function TPasLibVlcPlayer.GetAudioTrackNo(): Integer;
 var
-  track_id : Integer;
-  p_track  : libvlc_track_description_t_ptr;
+  track_id: Integer;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := 0;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   track_id := libvlc_audio_get_track(p_mi);
 
@@ -2741,7 +2823,8 @@ begin
 
   while (p_track <> NIL) do
   begin
-    if (p_track^.i_id = track_id) then exit;
+    if (p_track^.i_id = track_id) then
+      exit;
     Inc(Result);
     p_track := p_track^.p_next;
   end;
@@ -2749,12 +2832,14 @@ begin
   Result := -1;
 end;
 
-procedure TPasLibVlcPlayer.SetAudioTrackByNo(track_no : Integer);
+procedure TPasLibVlcPlayer.SetAudioTrackByNo(track_no: Integer);
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
-  if (p_mi = NIL) then exit;
-  if (track_no < 0) then exit;
+  if (p_mi = NIL) then
+    exit;
+  if (track_no < 0) then
+    exit;
 
   p_track := libvlc_audio_get_track_description(p_mi);
 
@@ -2770,15 +2855,17 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetAudioTrackDescriptionById(const track_id : Integer): WideString;
+function TPasLibVlcPlayer.GetAudioTrackDescriptionById(const track_id: Integer): WideString;
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := '';
 
-  if (track_id < 0) then exit;
-  
-  if not Assigned(p_mi) then exit;
+  if (track_id < 0) then
+    exit;
+
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_audio_get_track_description(p_mi);
 
@@ -2798,13 +2885,15 @@ end;
 
 function TPasLibVlcPlayer.GetAudioTrackDescriptionByNo(track_no: Integer): WideString;
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := '';
 
-  if (track_no < 0) then exit;
+  if (track_no < 0) then
+    exit;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_audio_get_track_description(p_mi);
 
@@ -2829,13 +2918,14 @@ end;
 {$HINTS OFF}
 function TPasLibVlcPlayer.EqualizerGetPresetList(): TStringList;
 var
-  preset : PAnsiChar;
-  count  : Word;
-  index  : Word;
+  preset: PAnsiChar;
+  count: Word;
+  index: Word;
 begin
   Result := TStringList.Create;
 
-  if (VLC.Handle = NIL) then exit;
+  if (VLC.Handle = NIL) then
+    exit;
 
   count := libvlc_audio_equalizer_get_preset_count();
   index := 0;
@@ -2845,9 +2935,7 @@ begin
     if ((preset <> NIL) and (preset <> '')) then
     begin
       Result.AddObject(
-        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(preset),
-        TObject(index)
-      );
+        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(preset), TObject(index));
     end;
     Inc(index);
   end;
@@ -2858,27 +2946,31 @@ end;
 function TPasLibVlcPlayer.EqualizerGetBandCount(): unsigned_t;
 begin
   Result := 0;
-  if (VLC.Handle = NIL) then exit;
+  if (VLC.Handle = NIL) then
+    exit;
   Result := libvlc_audio_equalizer_get_band_count();
 end;
 
-function TPasLibVlcPlayer.EqualizerGetBandFrequency(bandIndex : unsigned_t): Single;
+function TPasLibVlcPlayer.EqualizerGetBandFrequency(bandIndex: unsigned_t): Single;
 begin
   Result := 0;
-  if (VLC.Handle = NIL) then exit;
+  if (VLC.Handle = NIL) then
+    exit;
   Result := libvlc_audio_equalizer_get_band_frequency(bandIndex);
 end;
 
-function TPasLibVlcPlayer.EqualizerCreate(APreset : unsigned_t = $FFFF) : TPasLibVlcEqualizer;
+function TPasLibVlcPlayer.EqualizerCreate(APreset: unsigned_t = $FFFF): TPasLibVlcEqualizer;
 begin
   Result := TPasLibVlcEqualizer.Create(FVLC, APreset);
 end;
 
-procedure TPasLibVlcPlayer.EqualizerApply(AEqualizer : TPasLibVlcEqualizer);
+procedure TPasLibVlcPlayer.EqualizerApply(AEqualizer: TPasLibVlcEqualizer);
 begin
-  if (VLC.Handle = NIL) then exit;
+  if (VLC.Handle = NIL) then
+    exit;
   GetPlayerHandle();
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   if (AEqualizer <> NIL) then
   begin
@@ -2890,13 +2982,15 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.EqualizerSetPreset(APreset : unsigned_t = $FFFF);
+procedure TPasLibVlcPlayer.EqualizerSetPreset(APreset: unsigned_t = $FFFF);
 var
-  equalizer : TPasLibVlcEqualizer;
+  equalizer: TPasLibVlcEqualizer;
 begin
-  if (VLC.Handle = NIL) then exit;
+  if (VLC.Handle = NIL) then
+    exit;
   GetPlayerHandle();
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   if (APreset <> $FFFF) then
   begin
     equalizer := TPasLibVlcEqualizer.Create(FVLC, APreset);
@@ -2913,10 +3007,10 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetAudioOutputList(withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
+function TPasLibVlcPlayer.GetAudioOutputList(withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
 var
-  p_list_head : libvlc_audio_output_t_ptr;
-  p_list_item : libvlc_audio_output_t_ptr;
+  p_list_head: libvlc_audio_output_t_ptr;
+  p_list_item: libvlc_audio_output_t_ptr;
 begin
   Result := TStringList.Create;
   p_list_head := libvlc_audio_output_list_get(VLC.Handle);
@@ -2931,10 +3025,8 @@ begin
         if (withDescription) then
         begin
           Result.Add(
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_name)
-            + separator +
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description)
-          );
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_name) + separator +
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description));
         end
         else
         begin
@@ -2951,13 +3043,14 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetAudioOutputDeviceList(aOut : WideString; withDescription : Boolean = FALSE; separator : string = '|'): TStringList;
+
+function TPasLibVlcPlayer.GetAudioOutputDeviceList(aOut: string; withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
 var
-  p_list_head : libvlc_audio_output_device_t_ptr;
-  p_list_item : libvlc_audio_output_device_t_ptr;
+  p_list_head: libvlc_audio_output_device_t_ptr;
+  p_list_item: libvlc_audio_output_device_t_ptr;
 begin
   Result := TStringList.Create;
-  p_list_head := libvlc_audio_output_device_list_get(VLC.Handle, PAnsiChar(Utf8Encode(aOut)));
+  p_list_head := libvlc_audio_output_device_list_get(VLC.Handle, PAnsiChar(AnsiString(aOut)));
 
   if (p_list_head <> NIL) then
   begin
@@ -2969,16 +3062,13 @@ begin
         if (withDescription) then
         begin
           Result.Add(
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device)
-            + separator +
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description)
-          );
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device) + separator +
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description));
         end
         else
         begin
           Result.Add(
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device)
-          );
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device));
         end;
       end;
       p_list_item := p_list_item^.p_next;
@@ -2991,17 +3081,20 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
-function TPasLibVlcPlayer.GetAudioOutputDeviceEnum(withDescription : Boolean = FALSE; separator : string = '|') : TStringList;
+
+function TPasLibVlcPlayer.GetAudioOutputDeviceEnum(withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
 var
-  p_list_head : libvlc_audio_output_device_t_ptr;
-  p_list_item : libvlc_audio_output_device_t_ptr;
+  p_list_head: libvlc_audio_output_device_t_ptr;
+  p_list_item: libvlc_audio_output_device_t_ptr;
 begin
   Result := TStringList.Create;
 
-  if (p_mi = NIL) then GetPlayerHandle();
-  
-  if not Assigned(p_mi) then exit;
-  
+  if (p_mi = NIL) then
+    GetPlayerHandle();
+
+  if not Assigned(p_mi) then
+    exit;
+
   p_list_head := libvlc_audio_output_device_enum(p_mi);
 
   if (p_list_head <> NIL) then
@@ -3014,16 +3107,13 @@ begin
         if (withDescription) then
         begin
           Result.Add(
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device)
-            + separator +
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description)
-          );
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device) + separator +
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description));
         end
         else
         begin
           Result.Add(
-            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device)
-          );
+            {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device));
         end;
       end;
       p_list_item := p_list_item^.p_next;
@@ -3034,13 +3124,14 @@ end;
 {$WARNINGS ON}
 {$HINTS ON}
 
-function TPasLibVlcPlayer.SetAudioOutput(aOut: WideString) : Boolean;
+function TPasLibVlcPlayer.SetAudioOutput(aOut: string): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then GetPlayerHandle();
+  if (p_mi = NIL) then
+    GetPlayerHandle();
   if (p_mi <> NIL) then
   begin
-    Result := (libvlc_audio_output_set(p_mi, PAnsiChar(Utf8Encode(aOut))) = 0);
+    Result := (libvlc_audio_output_set(p_mi, PAnsiChar(AnsiString(aOut))) = 0);
     if Result then
     begin
       FLastAudioOutput := aOut;
@@ -3048,7 +3139,7 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetAudioOutputDevice(aOut: WideString; aOutDeviceId: WideString);
+procedure TPasLibVlcPlayer.SetAudioOutputDevice(aOut: string; aOutDeviceId: string);
 begin
   if (p_mi = NIL) then
   begin
@@ -3058,20 +3149,20 @@ begin
   begin
     if (aOut <> '') then
     begin
-      libvlc_audio_output_device_set(p_mi, PAnsiChar(Utf8Encode(aOut)), PAnsiChar(Utf8Encode(aOutDeviceId)));
-      FLastAudioOutput         := aOut;
+      libvlc_audio_output_device_set(p_mi, PAnsiChar(AnsiString(aOut)), PAnsiChar(AnsiString(aOutDeviceId)));
+      FLastAudioOutput := aOut;
       FLastAudioOutputDeviceId := aOutDeviceId;
     end
     else
     begin
-      libvlc_audio_output_device_set(p_mi, NIL, PAnsiChar(Utf8Encode(aOutDeviceId)));
-      FLastAudioOutput         := '';
+      libvlc_audio_output_device_set(p_mi, NIL, PAnsiChar(AnsiString(aOutDeviceId)));
+      FLastAudioOutput := '';
       FLastAudioOutputDeviceId := aOutDeviceId;
     end;
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetAudioOutputDevice(aOutDeviceId: WideString);
+procedure TPasLibVlcPlayer.SetAudioOutputDevice(aOutDeviceId: string);
 begin
   if (p_mi = NIL) then
   begin
@@ -3079,8 +3170,8 @@ begin
   end;
   if (p_mi <> NIL) then
   begin
-    libvlc_audio_output_device_set(p_mi, NIL, PAnsiChar(Utf8Encode(aOutDeviceId)));
-    FLastAudioOutput         := '';
+    libvlc_audio_output_device_set(p_mi, NIL, PAnsiChar(AnsiString(aOutDeviceId)));
+    FLastAudioOutput := '';
     FLastAudioOutputDeviceId := aOutDeviceId;
   end;
 end;
@@ -3091,9 +3182,9 @@ begin
   Result := libvlc_audio_output_device_count(VLC.Handle, PAnsiChar(Utf8Encode(aOut)));
 end;
 
-function TPasLibVlcPlayer.GetAudioOutputDeviceId(aOut: WideString; deviceIdx : Integer) : WideString;
+function TPasLibVlcPlayer.GetAudioOutputDeviceId(aOut: WideString; deviceIdx: Integer): WideString;
 var
-  device_id : PAnsiChar;
+  device_id: PAnsiChar;
 begin
   Result := '';
   device_id := libvlc_audio_output_device_id(VLC.Handle, PAnsiChar(Utf8Encode(aOut)), deviceIdx);
@@ -3104,9 +3195,9 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetAudioOutputDeviceName(aOut: WideString; deviceIdx : Integer): WideString;
+function TPasLibVlcPlayer.GetAudioOutputDeviceName(aOut: WideString; deviceIdx: Integer): WideString;
 var
-  device_name : PAnsiChar;
+  device_name: PAnsiChar;
 begin
   device_name := libvlc_audio_output_device_longname(VLC.Handle, PAnsiChar(Utf8Encode(aOut)), deviceIdx);
   Result := '';
@@ -3120,88 +3211,101 @@ end;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-procedure TPasLibVlcPlayer.SetVideoAdjustEnable(value : Boolean);
+procedure TPasLibVlcPlayer.SetVideoAdjustEnable(value: Boolean);
 begin
-  if (p_mi = NIL) then exit;
-  if (value) then libvlc_video_set_adjust_int(p_mi, libvlc_adjust_Enable, 1)
-  else libvlc_video_set_adjust_int(p_mi, libvlc_adjust_Enable, 0);
+  if (p_mi = NIL) then
+    exit;
+  if (value) then
+    libvlc_video_set_adjust_int(p_mi, libvlc_adjust_Enable, 1)
+  else
+    libvlc_video_set_adjust_int(p_mi, libvlc_adjust_Enable, 0);
 end;
 
 function TPasLibVlcPlayer.GetVideoAdjustEnable(): Boolean;
 begin
   Result := FALSE;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := (libvlc_video_get_adjust_int(p_mi, libvlc_adjust_Enable) <> 0);
 end;
 
 // Set the image contrast, between 0 and 2. Defaults to 1
-procedure TPasLibVlcPlayer.SetVideoAdjustContrast(value : Single);
+procedure TPasLibVlcPlayer.SetVideoAdjustContrast(value: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_adjust_float(p_mi, libvlc_adjust_Contrast, value);
 end;
 
-function TPasLibVlcPlayer.GetVideoAdjustContrast() : Single;
+function TPasLibVlcPlayer.GetVideoAdjustContrast(): Single;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_adjust_float(p_mi, libvlc_adjust_Contrast);
 end;
 
 // Set the image brightness, between 0 and 2. Defaults to 1.
-procedure TPasLibVlcPlayer.SetVideoAdjustBrightness(value : Single);
+procedure TPasLibVlcPlayer.SetVideoAdjustBrightness(value: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_adjust_float(p_mi, libvlc_adjust_Brightness, value);
 end;
 
-function TPasLibVlcPlayer.GetVideoAdjustBrightness() : Single;
+function TPasLibVlcPlayer.GetVideoAdjustBrightness(): Single;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_adjust_float(p_mi, libvlc_adjust_Brightness);
 end;
 
 // Set the image hue, between 0 and 360. Defaults to 0.
-procedure TPasLibVlcPlayer.SetVideoAdjustHue(value : Integer);
+procedure TPasLibVlcPlayer.SetVideoAdjustHue(value: Integer);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_adjust_int(p_mi, libvlc_adjust_Hue, value);
 end;
 
-
-function TPasLibVlcPlayer.GetVideoAdjustHue() : Integer;
+function TPasLibVlcPlayer.GetVideoAdjustHue(): Integer;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_adjust_int(p_mi, libvlc_adjust_Hue);
 end;
 
 // Set the image saturation, between 0 and 3. Defaults to 1.
-procedure TPasLibVlcPlayer.SetVideoAdjustSaturation(value : Single);
+procedure TPasLibVlcPlayer.SetVideoAdjustSaturation(value: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_adjust_float(p_mi, libvlc_adjust_Saturation, value);
 end;
 
-function TPasLibVlcPlayer.GetVideoAdjustSaturation() : Single;
+function TPasLibVlcPlayer.GetVideoAdjustSaturation(): Single;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_adjust_float(p_mi, libvlc_adjust_Saturation);
 end;
 
 // Set the image gamma, between 0.01 and 10. Defaults to 1
-procedure TPasLibVlcPlayer.SetVideoAdjustGamma(value : Single);
+procedure TPasLibVlcPlayer.SetVideoAdjustGamma(value: Single);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_adjust_float(p_mi, libvlc_adjust_Gamma, value);
 end;
 
-function TPasLibVlcPlayer.GetVideoAdjustGamma() : Single;
+function TPasLibVlcPlayer.GetVideoAdjustGamma(): Single;
 begin
   Result := 0;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_adjust_float(p_mi, libvlc_adjust_Gamma);
 end;
 
@@ -3210,27 +3314,31 @@ end;
 function TPasLibVlcPlayer.GetVideoChapter(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_chapter(p_mi);
 end;
 
 procedure TPasLibVlcPlayer.SetVideoChapter(newChapter: Integer);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_media_player_set_chapter(p_mi, newChapter);
 end;
 
 function TPasLibVlcPlayer.GetVideoChapterCount(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_chapter_count(p_mi);
 end;
 
-function TPasLibVlcPlayer.GetVideoChapterCountByTitleId(const title_id : Integer): Integer;
+function TPasLibVlcPlayer.GetVideoChapterCountByTitleId(const title_id: Integer): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_chapter_count_for_title(p_mi, title_id);
 end;
 
@@ -3240,10 +3348,11 @@ end;
 {$HINTS OFF}
 function TPasLibVlcPlayer.GetVideoSubtitleList(): TStringList;
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := TStringList.Create;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_track := libvlc_video_get_spu_description(p_mi);
 
@@ -3252,8 +3361,7 @@ begin
     if (p_track^.psz_name <> NIL) then
     begin
       Result.AddObject(
-        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name),
-        TObject(p_track^.i_id));
+        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -3264,31 +3372,35 @@ end;
 function TPasLibVlcPlayer.GetVideoSubtitleCount(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_video_get_spu_count(p_mi);
 end;
 
 function TPasLibVlcPlayer.GetVideoSubtitleId(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then Exit;
+  if (p_mi = NIL) then
+    Exit;
   Result := libvlc_video_get_spu(p_mi);
 end;
 
-procedure TPasLibVlcPlayer.SetVideoSubtitleById(const subtitle_id : Integer);
+procedure TPasLibVlcPlayer.SetVideoSubtitleById(const subtitle_id: Integer);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_spu(p_mi, subtitle_id);
 end;
 
 function TPasLibVlcPlayer.GetVideoSubtitleNo(): Integer;
 var
-  track_id : Integer;
-  p_track  : libvlc_track_description_t_ptr;
+  track_id: Integer;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := 0;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   track_id := libvlc_video_get_spu(p_mi);
 
@@ -3296,7 +3408,8 @@ begin
 
   while (p_track <> NIL) do
   begin
-    if (p_track^.i_id = track_id) then exit;
+    if (p_track^.i_id = track_id) then
+      exit;
     Inc(Result);
     p_track := p_track^.p_next;
   end;
@@ -3308,8 +3421,10 @@ procedure TPasLibVlcPlayer.SetVideoSubtitleByNo(subtitle_no: Integer);
 var
   p_track: libvlc_track_description_t_ptr;
 begin
-  if (p_mi = NIL) then exit;
-  if (subtitle_no < 0) then exit;
+  if (p_mi = NIL) then
+    exit;
+  if (subtitle_no < 0) then
+    exit;
 
   p_track := libvlc_video_get_spu_description(p_mi);
 
@@ -3325,15 +3440,17 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetVideoSubtitleDescriptionById(const subtitle_id : Integer): WideString;
+function TPasLibVlcPlayer.GetVideoSubtitleDescriptionById(const subtitle_id: Integer): WideString;
 var
   p_track: libvlc_track_description_t_ptr;
 begin
   Result := '';
 
-  if (subtitle_id < 0) then exit;
-  
-  if not Assigned(p_mi) then exit;
+  if (subtitle_id < 0) then
+    exit;
+
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_video_get_spu_description(p_mi);
 
@@ -3357,9 +3474,11 @@ var
 begin
   Result := '';
 
-  if (subtitle_no < 0) then exit;
+  if (subtitle_no < 0) then
+    exit;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_video_get_spu_description(p_mi);
 
@@ -3378,9 +3497,10 @@ begin
   end;
 end;
 
-procedure TPasLibVlcPlayer.SetVideoSubtitleFile(subtitle_file : WideString);
+procedure TPasLibVlcPlayer.SetVideoSubtitleFile(subtitle_file: WideString);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_video_set_subtitle_file(p_mi, PAnsiChar(UTF8Encode(subtitle_file)));
 end;
 
@@ -3390,10 +3510,11 @@ end;
 {$HINTS OFF}
 function TPasLibVlcPlayer.GetVideoTitleList(): TStringList;
 var
-  p_track : libvlc_track_description_t_ptr;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := TStringList.Create;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
 
   p_track := libvlc_video_get_title_description(p_mi);
 
@@ -3402,8 +3523,7 @@ begin
     if (p_track^.psz_name <> NIL) then
     begin
       Result.AddObject(
-        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name),
-        TObject(p_track^.i_id));
+        {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -3411,34 +3531,38 @@ end;
 {$WARNINGS ON}
 {$HINTS ON}
 
-function  TPasLibVlcPlayer.GetVideoTitleCount(): Integer;
+function TPasLibVlcPlayer.GetVideoTitleCount(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_title_count(p_mi);
 end;
 
-function  TPasLibVlcPlayer.GetVideoTitleId():Integer;
+function TPasLibVlcPlayer.GetVideoTitleId(): Integer;
 begin
   Result := -1;
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   Result := libvlc_media_player_get_title(p_mi);
 end;
 
-procedure TPasLibVlcPlayer.SetVideoTitleById(const title_id:Integer);
+procedure TPasLibVlcPlayer.SetVideoTitleById(const title_id: Integer);
 begin
-  if (p_mi = NIL) then exit;
+  if (p_mi = NIL) then
+    exit;
   libvlc_media_player_set_title(p_mi, title_id);
 end;
 
 function TPasLibVlcPlayer.GetVideoTitleNo(): Integer;
 var
-  title_id : Integer;
-  p_track  : libvlc_track_description_t_ptr;
+  title_id: Integer;
+  p_track: libvlc_track_description_t_ptr;
 begin
   Result := 0;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   title_id := libvlc_media_player_get_title(p_mi);
 
@@ -3446,7 +3570,8 @@ begin
 
   while (p_track <> NIL) do
   begin
-    if (p_track^.i_id = title_id) then exit;
+    if (p_track^.i_id = title_id) then
+      exit;
     Inc(Result);
     p_track := p_track^.p_next;
   end;
@@ -3454,12 +3579,14 @@ begin
   Result := -1;
 end;
 
-procedure TPasLibVlcPlayer.SetVideoTitleByNo(title_no : Integer);
+procedure TPasLibVlcPlayer.SetVideoTitleByNo(title_no: Integer);
 var
   p_track: libvlc_track_description_t_ptr;
 begin
-  if (p_mi = NIL) then exit;
-  if (title_no < 0) then exit;
+  if (p_mi = NIL) then
+    exit;
+  if (title_no < 0) then
+    exit;
 
   p_track := libvlc_video_get_title_description(p_mi);
 
@@ -3475,15 +3602,17 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetVideoTitleDescriptionById(const track_id : Integer): WideString;
+function TPasLibVlcPlayer.GetVideoTitleDescriptionById(const track_id: Integer): WideString;
 var
   p_track: libvlc_track_description_t_ptr;
 begin
   Result := '';
 
-  if (track_id < 0) then exit;
-  
-  if not Assigned(p_mi) then exit;
+  if (track_id < 0) then
+    exit;
+
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_video_get_title_description(p_mi);
 
@@ -3501,15 +3630,17 @@ begin
   end;
 end;
 
-function TPasLibVlcPlayer.GetVideoTitleDescriptionByNo(title_no : Integer): WideString;
+function TPasLibVlcPlayer.GetVideoTitleDescriptionByNo(title_no: Integer): WideString;
 var
   p_track: libvlc_track_description_t_ptr;
 begin
   Result := '';
 
-  if (title_no < 0) then exit;
+  if (title_no < 0) then
+    exit;
 
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
 
   p_track := libvlc_video_get_title_description(p_mi);
 
@@ -3533,26 +3664,30 @@ end;
 function TPasLibVlcPlayer.GetAudioChannel(): libvlc_audio_output_channel_t;
 begin
   Result := libvlc_AudioChannel_Error;
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   Result := libvlc_audio_get_channel(p_mi);
 end;
 
 procedure TPasLibVlcPlayer.SetAudioChannel(chanel: libvlc_audio_output_channel_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_audio_set_channel(p_mi, chanel);
 end;
 
-function  TPasLibVlcPlayer.GetAudioDelay(): Int64;
+function TPasLibVlcPlayer.GetAudioDelay(): Int64;
 begin
   Result := 0;
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   Result := libvlc_audio_get_delay(p_mi);
 end;
 
 procedure TPasLibVlcPlayer.SetAudioDelay(delay: Int64);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_audio_set_delay(p_mi, delay);
 end;
 
@@ -3560,33 +3695,41 @@ end;
 
 procedure TPasLibVlcPlayer.SetTeleText(page: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_teletext(p_mi, page);
 end;
 
-function TPasLibVlcPlayer.GetTeleText() : Integer;
+function TPasLibVlcPlayer.GetTeleText(): Integer;
 begin
   Result := -1;
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   Result := libvlc_video_get_teletext(p_mi);
 end;
 
-function TPasLibVlcPlayer.ShowTeleText() : Boolean;
+function TPasLibVlcPlayer.ShowTeleText(): Boolean;
 begin
   Result := FViewTeleText;
-  if FViewTeleText then exit;
-  if not Assigned(p_mi) then exit;
-  if (libvlc_media_player_is_playing(p_mi) = 0) then exit;
+  if FViewTeleText then
+    exit;
+  if not Assigned(p_mi) then
+    exit;
+  if (libvlc_media_player_is_playing(p_mi) = 0) then
+    exit;
   libvlc_toggle_teletext(p_mi);
   Result := FViewTeleText;
 end;
 
-function TPasLibVlcPlayer.HideTeleText() : Boolean;
+function TPasLibVlcPlayer.HideTeleText(): Boolean;
 begin
   Result := FViewTeleText;
-  if not FViewTeleText then exit;
-  if not Assigned(p_mi) then exit;
-  if (libvlc_media_player_is_playing(p_mi) = 0) then exit;
+  if not FViewTeleText then
+    exit;
+  if not Assigned(p_mi) then
+    exit;
+  if (libvlc_media_player_is_playing(p_mi) = 0) then
+    exit;
   libvlc_toggle_teletext(p_mi);
   Result := FViewTeleText;
 end;
@@ -3597,74 +3740,89 @@ end;
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-procedure TPasLibVlcPlayer.LogoSetFile(file_name : WideString);
+procedure TPasLibVlcPlayer.LogoSetFile(file_name: string);
 begin
-  if not Assigned(p_mi) then exit;
-  libvlc_video_set_logo_string(p_mi, libvlc_logo_File, PAnsiChar(UTF8Encode(file_name)));
+  if not Assigned(p_mi) then
+    exit;
+  libvlc_video_set_logo_string(p_mi, libvlc_logo_File, PAnsiChar(AnsiString(file_name)));
 end;
 
-procedure TPasLibVlcPlayer.LogoSetFiles(file_names : array of WideString; delay_ms : Integer = 1000; loop : Boolean = TRUE);
+procedure TPasLibVlcPlayer.LogoSetFiles(file_names: array of WideString; delay_ms: Integer = 1000; loop: Boolean = TRUE);
 var
-  file_name : WideString;
-  file_indx : Integer;
+  file_name: WideString;
+  file_indx: Integer;
 begin
   file_name := '';
   for file_indx := Low(file_names) to High(file_names) do
   begin
-    file_name := file_name + file_names[file_indx] + {$IFDEF MSWINDOWS} ';'; {$ELSE} ':'; {$ENDIF};
+    file_name := file_name + file_names[file_indx] + {$IFDEF MSWINDOWS} ';';                            {$ELSE} ':'; {$ENDIF}
+
+
+
+    ;
   end;
   // remove last PATH_SEPARATOR;
-  if (file_name <> '') then SetLength(file_name, Length(file_name)-1);
+  if (file_name <> '') then
+    SetLength(file_name, Length(file_name) - 1);
   LogoSetFile(file_name);
   LogoSetDelay(delay_ms);
   LogoSetRepeat(loop);
 end;
 
-procedure TPasLibVlcPlayer.LogoSetPosition(position_x, position_y : Integer);
+procedure TPasLibVlcPlayer.LogoSetPosition(position_x, position_y: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_X, position_x);
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Y, position_y);
 end;
 
-procedure TPasLibVlcPlayer.LogoSetPosition(position : libvlc_position_t);
+procedure TPasLibVlcPlayer.LogoSetPosition(position: libvlc_position_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Position, Ord(position));
 end;
 
-procedure TPasLibVlcPlayer.LogoSetOpacity(opacity : libvlc_opacity_t);
+procedure TPasLibVlcPlayer.LogoSetOpacity(opacity: libvlc_opacity_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Opacity, opacity);
 end;
 
-procedure TPasLibVlcPlayer.LogoSetDelay(delay_ms : Integer = 1000); // delay before show next logo file, default 1000
+procedure TPasLibVlcPlayer.LogoSetDelay(delay_ms: Integer = 1000); // delay before show next logo file, default 1000
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Delay, delay_ms);
 end;
 
-procedure TPasLibVlcPlayer.LogoSetRepeat(loop : Boolean = TRUE);
+procedure TPasLibVlcPlayer.LogoSetRepeat(loop: Boolean = TRUE);
 begin
-  if not Assigned(p_mi) then exit;
-  if loop then libvlc_video_set_logo_int(p_mi, libvlc_logo_Repeat, -1) // -1 = loop,
-  else         libvlc_video_set_logo_int(p_mi, libvlc_logo_Repeat, 0); // 0 - disable
+  if not Assigned(p_mi) then
+    exit;
+  if loop then
+    libvlc_video_set_logo_int(p_mi, libvlc_logo_Repeat, -1) // -1 = loop,
+  else
+    libvlc_video_set_logo_int(p_mi, libvlc_logo_Repeat, 0); // 0 - disable
 end;
 
-procedure TPasLibVlcPlayer.LogoSetRepeatCnt(loop : Integer = 0);
+procedure TPasLibVlcPlayer.LogoSetRepeatCnt(loop: Integer = 0);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Repeat, loop); // 0 - disable
 end;
 
-procedure TPasLibVlcPlayer.LogoSetEnable(enable : Integer);
+procedure TPasLibVlcPlayer.LogoSetEnable(enable: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Enable, enable); // not work
 end;
 
-procedure TPasLibVlcPlayer.LogoShowFile(file_name : WideString; position_x, position_y : Integer; opacity: libvlc_opacity_t = libvlc_opacity_full);
+procedure TPasLibVlcPlayer.LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full);
 begin
   LogoSetFile(file_name);
   LogoSetPosition(position_x, position_y);
@@ -3672,7 +3830,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TPasLibVlcPlayer.LogoShowFile(file_name : WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full);
+procedure TPasLibVlcPlayer.LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full);
 begin
   LogoSetFile(file_name);
   LogoSetPosition(position);
@@ -3680,7 +3838,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TPasLibVlcPlayer.LogoShowFiles(file_names : array of WideString; position_x, position_y : Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms : Integer = 1000; loop : Boolean = TRUE);
+procedure TPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
 begin
   LogoSetFiles(file_names);
   LogoSetPosition(position_x, position_y);
@@ -3690,7 +3848,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TPasLibVlcPlayer.LogoShowFiles(file_names : array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms : Integer = 1000; loop : Boolean = TRUE);
+procedure TPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
 begin
   LogoSetFiles(file_names);
   LogoSetPosition(position);
@@ -3702,9 +3860,10 @@ end;
 
 procedure TPasLibVlcPlayer.LogoHide();
 begin
-  if not Assigned(p_mi) then exit;
-  libvlc_video_set_logo_int   (p_mi, libvlc_logo_Enable, 1); // not work
-  libvlc_video_set_logo_string(p_mi, libvlc_logo_File,   NIL); // this work
+  if not Assigned(p_mi) then
+    exit;
+  libvlc_video_set_logo_int(p_mi, libvlc_logo_Enable, 1); // not work
+  libvlc_video_set_logo_string(p_mi, libvlc_logo_File, NIL); // this work
 end;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -3713,63 +3872,74 @@ end;
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-procedure TPasLibVlcPlayer.MarqueeSetText(marquee_text : WideString);
+procedure TPasLibVlcPlayer.MarqueeSetText(marquee_text: WideString);
 begin
-  if not Assigned(p_mi) then exit;
-  if (marquee_text = '') then libvlc_video_set_marquee_string(p_mi, libvlc_marquee_Text, NIL)
-  else libvlc_video_set_marquee_string(p_mi, libvlc_marquee_Text, PAnsiChar(UTF8Encode(marquee_text)));
+  if not Assigned(p_mi) then
+    exit;
+  if (marquee_text = '') then
+    libvlc_video_set_marquee_string(p_mi, libvlc_marquee_Text, NIL)
+  else
+    libvlc_video_set_marquee_string(p_mi, libvlc_marquee_Text, PAnsiChar(UTF8Encode(marquee_text)));
 end;
 
-procedure TPasLibVlcPlayer.MarqueeSetPosition(position_x, position_y : Integer); 
+procedure TPasLibVlcPlayer.MarqueeSetPosition(position_x, position_y: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_X, position_x);
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Y, position_y);
 end;
 
-procedure TPasLibVlcPlayer.MarqueeSetPosition(position : libvlc_position_t);
+procedure TPasLibVlcPlayer.MarqueeSetPosition(position: libvlc_position_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Position, Ord(position));
 end;
 
-procedure TPasLibVlcPlayer.MarqueeSetColor(color : libvlc_video_marquee_color_t);
+procedure TPasLibVlcPlayer.MarqueeSetColor(color: libvlc_video_marquee_color_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Color, color);
 end;
 
 procedure TPasLibVlcPlayer.MarqueeSetFontSize(font_size: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Size, font_size);
 end;
 
 procedure TPasLibVlcPlayer.MarqueeSetOpacity(opacity: libvlc_opacity_t);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Opacity, opacity);
 end;
 
 procedure TPasLibVlcPlayer.MarqueeSetTimeOut(time_out_ms: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Timeout, time_out_ms);
 end;
 
 procedure TPasLibVlcPlayer.MarqueeSetRefresh(refresh_after_ms: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Refresh, refresh_after_ms);
 end;
 
-procedure TPasLibVlcPlayer.MarqueeSetEnable(enable : Integer);
+procedure TPasLibVlcPlayer.MarqueeSetEnable(enable: Integer);
 begin
-  if not Assigned(p_mi) then exit;
+  if not Assigned(p_mi) then
+    exit;
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Enable, enable); // not work
 end;
 
-procedure TPasLibVlcPlayer.MarqueeShowText(marquee_text : WideString; position_x, position_y : Integer; color : libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
+procedure TPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
 begin
   MarqueeSetText(marquee_text);
   MarqueeSetPosition(position_x, position_y);
@@ -3781,12 +3951,15 @@ begin
   MarqueeSetEnable(1);
 
   // handle dynamic strings in form %H:%M:%S
-  if (Pos(WideString('%H'), marquee_text) > 0) then MarqueeSetRefresh(3600 * 1000);
-  if (Pos(WideString('%M'), marquee_text) > 0) then MarqueeSetRefresh(  60 * 1000);
-  if (Pos(WideString('%S'), marquee_text) > 0) then MarqueeSetRefresh(       1000);
+  if (Pos(WideString('%H'), marquee_text) > 0) then
+    MarqueeSetRefresh(3600 * 1000);
+  if (Pos(WideString('%M'), marquee_text) > 0) then
+    MarqueeSetRefresh(60 * 1000);
+  if (Pos(WideString('%S'), marquee_text) > 0) then
+    MarqueeSetRefresh(1000);
 end;
 
-procedure TPasLibVlcPlayer.MarqueeShowText(marquee_text : WideString; position : libvlc_position_t = libvlc_position_bottom; color : libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
+procedure TPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position: libvlc_position_t = libvlc_position_bottom; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
 begin
   MarqueeSetText(marquee_text);
   MarqueeSetPosition(position);
@@ -3798,9 +3971,12 @@ begin
   MarqueeSetEnable(1);
 
   // handle dynamic strings in form %H:%M:%S
-  if (Pos(WideString('%H'), marquee_text) > 0) then MarqueeSetRefresh(3600 * 1000);
-  if (Pos(WideString('%M'), marquee_text) > 0) then MarqueeSetRefresh(  60 * 1000);
-  if (Pos(WideString('%S'), marquee_text) > 0) then MarqueeSetRefresh(       1000);
+  if (Pos(WideString('%H'), marquee_text) > 0) then
+    MarqueeSetRefresh(3600 * 1000);
+  if (Pos(WideString('%M'), marquee_text) > 0) then
+    MarqueeSetRefresh(60 * 1000);
+  if (Pos(WideString('%S'), marquee_text) > 0) then
+    MarqueeSetRefresh(1000);
 end;
 
 procedure TPasLibVlcPlayer.MarqueeHide();
@@ -3824,45 +4000,38 @@ begin
     OnDblClick(SELF);
 end;
 
-procedure TPasLibVlcPlayer.InternalOnMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TPasLibVlcPlayer.InternalOnMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Assigned(OnMouseDown) then
     OnMouseDown(SELF, Button, Shift, X, Y);
 end;
 
-procedure TPasLibVlcPlayer.InternalOnMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
+procedure TPasLibVlcPlayer.InternalOnMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
   if Assigned(OnMouseMove) then
     OnMouseMove(SELF, Shift, X, Y);
 end;
 
-procedure TPasLibVlcPlayer.InternalOnMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TPasLibVlcPlayer.InternalOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Assigned(OnMouseUp) then
     OnMouseUp(SELF, Button, Shift, X, Y);
 end;
 
-procedure TPasLibVlcPlayer.InternalOnMouseWheelDown(Sender: TObject;
-  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+procedure TPasLibVlcPlayer.InternalOnMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
   if Assigned(OnMouseWheelDown) then
     OnMouseWheelDown(SELF, Shift, MousePos, Handled);
 end;
 
-procedure TPasLibVlcPlayer.InternalOnMouseWheelUp(Sender: TObject;
-  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+procedure TPasLibVlcPlayer.InternalOnMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
   if Assigned(OnMouseWheelUp) then
     OnMouseWheelUp(SELF, Shift, MousePos, Handled);
 end;
 
 {$IFDEF DELPHI2005_UP}
-procedure TPasLibVlcPlayer.InternalOnMouseActivate(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer;
-  var MouseActivate: TMouseActivate);
+procedure TPasLibVlcPlayer.InternalOnMouseActivate(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y, HitTest: Integer; var MouseActivate: TMouseActivate);
 begin
   if Assigned(OnMouseActivate) then
     OnMouseActivate(SELF, Button, Shift, X, Y, HitTest, MouseActivate);
@@ -3870,6 +4039,7 @@ end;
 {$ENDIF}
 
 {$IFDEF DELPHI2006_UP}
+
 procedure TPasLibVlcPlayer.InternalOnMouseEnter(Sender: TObject);
 begin
   if Assigned(OnMouseEnter) then
@@ -3887,14 +4057,15 @@ end;
 
 {$WARNINGS OFF}
 {$HINTS OFF}
+
 procedure TPasLibVlcPlayer.WmMediaPlayerMediaChanged(var m: TVlcMessage);
 var
   {$IFNDEF CPUX64}
-  data : Int64;
+  data: Int64;
   {$ENDIF}
-  p_md : libvlc_media_t_ptr;
-  tmp  : PAnsiChar;
-  mrl  : string;
+  p_md: libvlc_media_t_ptr;
+  tmp: PAnsiChar;
+  mrl: string;
 begin
   if Assigned(FOnMediaPlayerMediaChanged) then
   begin
@@ -3904,6 +4075,9 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     p_md := libvlc_media_t_ptr(data);
     {$ENDIF}
+
+
+
     if (p_md <> NIL) then
     begin
       tmp := libvlc_media_get_mrl(p_md);
@@ -3987,7 +4161,7 @@ end;
 {$HINTS OFF}
 procedure TPasLibVlcPlayer.WmMediaPlayerEncounteredError(var m: TVlcMessage);
 var
-  tmp : PAnsiChar;
+  tmp: PAnsiChar;
 begin
   tmp := libvlc_errmsg();
   if (tmp <> NIL) then
@@ -3998,7 +4172,7 @@ begin
   begin
     FError := '';
   end;
-  
+
   if Assigned(FOnMediaPlayerEncounteredError) then
     FOnMediaPlayerEncounteredError(SELF);
   m.Result := 0;
@@ -4017,6 +4191,9 @@ begin
     {$ELSE}
     value := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     {$ENDIF}
+
+
+
     FOnMediaPlayerTimeChanged(SELF, value);
   end;
   m.Result := 0;
@@ -4063,11 +4240,13 @@ end;
 procedure TPasLibVlcPlayer.WmMediaPlayerSnapshotTaken(var m: TVlcMessage);
 var
   {$IFDEF CPUX64}
-  strd : PAnsiChar;
+  strd: PAnsiChar;
   {$ELSE}
   data : Int64;
   strd : PAnsiChar;
   {$ENDIF}
+
+
 begin
   if Assigned(FOnMediaPlayerSnapshotTaken) then
   begin
@@ -4077,6 +4256,9 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     strd := PAnsiChar(data);
     {$ENDIF}
+
+
+
     FOnMediaPlayerSnapshotTaken(SELF, {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(strd));
   end;
   m.Result := 0;
@@ -4086,7 +4268,7 @@ end;
 
 procedure TPasLibVlcPlayer.WmMediaPlayerLengthChanged(var m: TVlcMessage);
 var
-  value : Int64;
+  value: Int64;
 begin
   if Assigned(FOnMediaPlayerLengthChanged) then
   begin
@@ -4095,9 +4277,12 @@ begin
     {$ELSE}
     value := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     {$ENDIF}
+
+
+
     FOnMediaPlayerLengthChanged(SELF, value);
   end;
-  m.Result := 0;    
+  m.Result := 0;
 end;
 
 procedure TPasLibVlcPlayer.WmMediaPlayerVOutChanged(var m: TVlcMessage);
@@ -4195,7 +4380,7 @@ end;
 
 procedure TPasLibVlcPlayer.WMEraseBkgnd(var msg: TWMEraseBkGnd);
 begin
- inherited;
+  inherited;
  {if (msg.DC <> 0) then
   begin
     SetBkMode (msg.DC, TRANSPARENT);
@@ -4210,11 +4395,13 @@ end;
 procedure TPasLibVlcPlayer.WmMediaPlayerAudioDevice(var m: TVlcMessage);
 var
   {$IFDEF CPUX64}
-  strd : PAnsiChar;
+  strd: PAnsiChar;
   {$ELSE}
   data : Int64;
   strd : PAnsiChar;
   {$ENDIF}
+
+
 begin
   if Assigned(FOnMediaPlayerAudioDevice) then
   begin
@@ -4224,6 +4411,9 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     strd := PAnsiChar(data);
     {$ENDIF}
+
+
+
     FOnMediaPlayerAudioDevice(SELF, {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(strd));
   end;
   m.Result := 0;
@@ -4246,9 +4436,9 @@ end;
 procedure TPasLibVlcPlayer.WmRendererDiscoveredItemAdded(var m: TVlcMessage);
 var
   {$IFNDEF CPUX64}
-  data : Int64;
+  data: Int64;
   {$ENDIF}
-  item : libvlc_renderer_item_t_ptr;
+  item: libvlc_renderer_item_t_ptr;
 begin
   if Assigned(FOnRendererDiscoveredItemAdded) then
   begin
@@ -4258,6 +4448,9 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     item := libvlc_renderer_item_t_ptr(data);
     {$ENDIF}
+
+
+
     FOnRendererDiscoveredItemAdded(SELF, item);
   end;
   m.Result := 0;
@@ -4271,9 +4464,9 @@ end;
 procedure TPasLibVlcPlayer.WmRendererDiscoveredItemDeleted(var m: TVlcMessage);
 var
   {$IFNDEF CPUX64}
-  data : Int64;
+  data: Int64;
   {$ENDIF}
-  item : libvlc_renderer_item_t_ptr;
+  item: libvlc_renderer_item_t_ptr;
 begin
   if Assigned(FOnRendererDiscoveredItemDeleted) then
   begin
@@ -4283,6 +4476,9 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     item := libvlc_renderer_item_t_ptr(data);
     {$ENDIF}
+
+
+
     FOnRendererDiscoveredItemDeleted(SELF, item);
   end;
   m.Result := 0;
@@ -4290,17 +4486,17 @@ end;
 
 procedure TPasLibVlcPlayer.WMResize(var Message: TMessage);
 
-function EnumProc(wnd: HWND; Lines: TStrings): BOOL; stdcall;
-var
-  buf, Caption: array[0..255] of char;
-begin
-  Result := True;
+  function EnumProc(wnd: HWND; Lines: TStrings): BOOL; stdcall;
+  var
+    buf, Caption: array[0..255] of char;
+  begin
+    Result := True;
   //GetClassName(wnd, buf, SizeOf(buf) - 1);
-  RedrawWindow(wnd, nil, 0, RDW_INVALIDATE or RDW_UPDATENOW or RDW_ALLCHILDREN);
+    RedrawWindow(wnd, nil, 0, RDW_INVALIDATE or RDW_UPDATENOW or RDW_ALLCHILDREN);
   {SendMessage(wnd, WM_GETTEXT, 256, Integer(@Caption));
   Lines.Add(Format('HWND: %d, ClassName: %s, Caption: %s',
            [wnd, buf, Caption]));}
-end;
+  end;
 
 begin
   inherited;
@@ -4319,11 +4515,13 @@ procedure lib_vlc_player_event_hdlr(p_event: libvlc_event_t_ptr; data: Pointer);
 var
   player: TPasLibVlcPlayer;
 begin
-  if (data = NIL) then exit;
+  if (data = NIL) then
+    exit;
 
   player := TPasLibVlcPlayer(data);
-  
-  if not Assigned(player) then exit;
+
+  if not Assigned(player) then
+    exit;
 
   if Assigned(player.FOnMediaPlayerEvent) then
     player.FOnMediaPlayerEvent(p_event, data);
@@ -4331,194 +4529,159 @@ begin
   with p_event^ do
   begin
     case event_type of
-        
+
       libvlc_MediaPlayerMediaChanged:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_MEDIA_CHANGED,
-          WPARAM(media_player_media_changed.new_media),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_MEDIA_CHANGED, WPARAM(media_player_media_changed.new_media), LPARAM(0));
       {$ELSE}
         PostMessage(player.Handle, WM_MEDIA_PLAYER_MEDIA_CHANGED,
           WPARAM(Int64(media_player_media_changed.new_media) shr 32),
           LPARAM(Int64(media_player_media_changed.new_media)));
       {$ENDIF}
 
+
+
       libvlc_MediaPlayerTimeChanged:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_TIME_CHANGED,
-          WPARAM(media_player_time_changed.new_time),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_TIME_CHANGED, WPARAM(media_player_time_changed.new_time), LPARAM(0));
       {$ELSE}
         PostMessage(player.Handle, WM_MEDIA_PLAYER_TIME_CHANGED,
           WPARAM(media_player_time_changed.new_time shr 32),
           LPARAM(media_player_time_changed.new_time));
       {$ENDIF}
 
+
+
       libvlc_MediaPlayerSnapshotTaken:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_SNAPSHOT_TAKEN,
-          WPARAM(media_player_snapshot_taken.psz_filename),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_SNAPSHOT_TAKEN, WPARAM(media_player_snapshot_taken.psz_filename), LPARAM(0));
       {$ELSE}
         PostMessage(player.Handle, WM_MEDIA_PLAYER_SNAPSHOT_TAKEN,
           WPARAM(Int64(media_player_snapshot_taken.psz_filename) shr 32),
           LPARAM(Int64(media_player_snapshot_taken.psz_filename)));
       {$ENDIF}
 
+
+
       libvlc_MediaPlayerLengthChanged:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_LENGTH_CHANGED,
-          WPARAM(media_player_length_changed.new_length),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_LENGTH_CHANGED, WPARAM(media_player_length_changed.new_length), LPARAM(0));
       {$ELSE}
         PostMessage(player.Handle, WM_MEDIA_PLAYER_LENGTH_CHANGED,
           WPARAM(media_player_length_changed.new_length shr 32),
           LPARAM(media_player_length_changed.new_length));
       {$ENDIF}
 
+
+
       libvlc_MediaPlayerPositionChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_POSITION_CHANGED,
-          WPARAM(Round(1000 * media_player_position_changed.new_position)),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_POSITION_CHANGED, WPARAM(Round(1000 * media_player_position_changed.new_position)), LPARAM(0));
 
       libvlc_MediaPlayerSeekableChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_SEEKABLE_CHANGED,
-          WPARAM(media_player_seekable_changed.new_seekable),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_SEEKABLE_CHANGED, WPARAM(media_player_seekable_changed.new_seekable), LPARAM(0));
 
       libvlc_MediaPlayerPausableChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_PAUSABLE_CHANGED,
-          WPARAM(media_player_pausable_changed.new_pausable),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_PAUSABLE_CHANGED, WPARAM(media_player_pausable_changed.new_pausable), LPARAM(0));
 
       libvlc_MediaPlayerTitleChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_TITLE_CHANGED,
-          WPARAM(media_player_title_changed.new_title),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_TITLE_CHANGED, WPARAM(media_player_title_changed.new_title), LPARAM(0));
 
       libvlc_MediaPlayerNothingSpecial:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_NOTHING_SPECIAL,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_NOTHING_SPECIAL, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerOpening:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_OPENING,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_OPENING, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerBuffering:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_BUFFERING,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_BUFFERING, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerPlaying:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_PLAYING,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_PLAYING, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerPaused:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_PAUSED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_PAUSED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerStopped:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_STOPPED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_STOPPED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerForward:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_FORWARD,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_FORWARD, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerBackward:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_BACKWARD,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_BACKWARD, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerEndReached:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_END_REACHED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_END_REACHED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerEncounteredError:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_ENCOUNTERED_ERROR,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_ENCOUNTERED_ERROR, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerVout:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_VOUT_CHANGED,
-          WPARAM(media_player_vout.new_count),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_VOUT_CHANGED, WPARAM(media_player_vout.new_count), LPARAM(0));
 
       libvlc_MediaPlayerScrambledChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_SCRAMBLED_CHANGED,
-          WPARAM(media_player_scrambled_changed.new_scrambled),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_SCRAMBLED_CHANGED, WPARAM(media_player_scrambled_changed.new_scrambled), LPARAM(0));
 
       libvlc_MediaPlayerCorked:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_CORKED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_CORKED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerUncorked:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_UNCORKED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_UNCORKED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerMuted:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_MUTED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_MUTED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerUnmuted:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_UNMUTED,
-          WPARAM(0), LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_UNMUTED, WPARAM(0), LPARAM(0));
 
       libvlc_MediaPlayerAudioVolume:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_AUDIO_VOLUME,
-          WPARAM(Round(1000 * media_player_audio_volume.volume)),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_AUDIO_VOLUME, WPARAM(Round(1000 * media_player_audio_volume.volume)), LPARAM(0));
 
       libvlc_MediaPlayerESAdded:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_ADDED,
-          WPARAM(media_player_es_changed.i_type),
-          LPARAM(media_player_es_changed.i_id));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_ADDED, WPARAM(media_player_es_changed.i_type), LPARAM(media_player_es_changed.i_id));
 
       libvlc_MediaPlayerESDeleted:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_DELETED,
-          WPARAM(media_player_es_changed.i_type),
-          LPARAM(media_player_es_changed.i_id));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_DELETED, WPARAM(media_player_es_changed.i_type), LPARAM(media_player_es_changed.i_id));
 
       libvlc_MediaPlayerESSelected:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_SELECTED,
-          WPARAM(media_player_es_changed.i_type),
-          LPARAM(media_player_es_changed.i_id));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_ES_SELECTED, WPARAM(media_player_es_changed.i_type), LPARAM(media_player_es_changed.i_id));
 
       libvlc_MediaPlayerAudioDevice:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_AUDIO_DEVICE,
-          WPARAM(media_player_audio_device.device),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_AUDIO_DEVICE, WPARAM(media_player_audio_device.device), LPARAM(0));
       {$ELSE}
           PostMessage(player.Handle, WM_MEDIA_PLAYER_AUDIO_DEVICE,
             WPARAM(Int64(media_player_audio_device.device) shr 32),
             LPARAM(Int64(media_player_audio_device.device)));
       {$ENDIF}
 
+
+
       libvlc_MediaPlayerChapterChanged:
-        PostMessage(player.Handle, WM_MEDIA_PLAYER_CHAPTER_CHANGED,
-          WPARAM(media_player_chapter_changed.new_chapter),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_MEDIA_PLAYER_CHAPTER_CHANGED, WPARAM(media_player_chapter_changed.new_chapter), LPARAM(0));
 
       libvlc_RendererDiscovererItemAdded:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_ADDED,
-          WPARAM(renderer_discoverer_item_added.item),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_ADDED, WPARAM(renderer_discoverer_item_added.item), LPARAM(0));
       {$ELSE}
           PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_ADDED,
             WPARAM(Int64(renderer_discoverer_item_added.item) shr 32),
             LPARAM(Int64(renderer_discoverer_item_added.item)));
       {$ENDIF}
 
+
+
       libvlc_RendererDiscovererItemDeleted:
       {$IFDEF CPUX64}
-        PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_DELETED,
-          WPARAM(renderer_discoverer_item_deleted.item),
-          LPARAM(0));
+        PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_DELETED, WPARAM(renderer_discoverer_item_deleted.item), LPARAM(0));
       {$ELSE}
           PostMessage(player.Handle, WM_RENDERED_DISCOVERED_ITEM_DELETED,
             WPARAM(Int64(renderer_discoverer_item_deleted.item) shr 32),
             LPARAM(Int64(renderer_discoverer_item_deleted.item)));
       {$ENDIF}
+
+
+
     end;
   end;
 end;
@@ -4527,32 +4690,26 @@ procedure lib_vlc_media_list_event_hdlr(p_event: libvlc_event_t_ptr; data: Point
 var
   mediaList: TPasLibVlcMediaList;
 begin
-  if (data = NIL) then exit;
+  if (data = NIL) then
+    exit;
   mediaList := TPasLibVlcMediaList(data);
-  
-  if not Assigned(mediaList) then exit;
+
+  if not Assigned(mediaList) then
+    exit;
 
   case p_event^.event_type of
 
     libvlc_MediaListItemAdded:
-      mediaList.InternalHandleEventItemAdded(
-        p_event^.media_list_item_added.item,
-        p_event^.media_list_item_added.index);
+      mediaList.InternalHandleEventItemAdded(p_event^.media_list_item_added.item, p_event^.media_list_item_added.index);
 
     libvlc_MediaListWillAddItem:
-      mediaList.InternalHandleEventWillAddItem(
-        p_event^.media_list_will_add_item.item,
-        p_event^.media_list_will_add_item.index);
+      mediaList.InternalHandleEventWillAddItem(p_event^.media_list_will_add_item.item, p_event^.media_list_will_add_item.index);
 
     libvlc_MediaListItemDeleted:
-      mediaList.InternalHandleEventItemDeleted(
-        p_event^.media_list_item_deleted.item,
-        p_event^.media_list_item_deleted.index);
+      mediaList.InternalHandleEventItemDeleted(p_event^.media_list_item_deleted.item, p_event^.media_list_item_deleted.index);
 
     libvlc_MediaListWillDeleteItem:
-      mediaList.InternalHandleEventWillDeleteItem(
-        p_event^.media_list_will_delete_item.item,
-        p_event^.media_list_will_delete_item.index);
+      mediaList.InternalHandleEventWillDeleteItem(p_event^.media_list_will_delete_item.item, p_event^.media_list_will_delete_item.index);
   end;
 end;
 
@@ -4560,77 +4717,92 @@ procedure lib_vlc_media_list_player_event_hdlr(p_event: libvlc_event_t_ptr; data
 var
   mediaList: TPasLibVlcMediaList;
 begin
-  if (data = NIL) then exit;
+  if (data = NIL) then
+    exit;
   mediaList := TPasLibVlcMediaList(data);
-  
-  if not Assigned(mediaList) then exit;
+
+  if not Assigned(mediaList) then
+    exit;
 
   case p_event^.event_type of
 
     libvlc_MediaListPlayerPlayed:
-      if Assigned(mediaList.OnPlayed) then mediaList.OnPlayed(mediaList);
+      if Assigned(mediaList.OnPlayed) then
+        mediaList.OnPlayed(mediaList);
 
     libvlc_MediaListPlayerStopped:
-      if Assigned(mediaList.OnStopped) then mediaList.OnStopped(mediaList);
+      if Assigned(mediaList.OnStopped) then
+        mediaList.OnStopped(mediaList);
 
     libvlc_MediaListPlayerNextItemSet:
-      mediaList.InternalHandleEventPlayerNextItemSet(
-        p_event^.media_list_player_next_item_set.item);
+      mediaList.InternalHandleEventPlayerNextItemSet(p_event^.media_list_player_next_item_set.item);
   end;
 end;
 
 procedure libvlc_vlm_event_hdlr(p_event: libvlc_event_t_ptr; data: Pointer); cdecl;
 begin
-  if (data = NIL) then exit;
+  if (data = NIL) then
+    exit;
 
   case p_event^.event_type of
 
-    libvlc_VlmMediaAdded: begin
+    libvlc_VlmMediaAdded:
+      begin
 
       // Utf8Decode(p_event^.vlm_media_event.psz_media_name^);
       // Utf8Decode(p_event^.vlm_media_event.psz_instance_name^);
 
-    end;
+      end;
 
-    libvlc_VlmMediaRemoved: begin
+    libvlc_VlmMediaRemoved:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaChanged: begin
+    libvlc_VlmMediaChanged:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStarted: begin
+    libvlc_VlmMediaInstanceStarted:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStopped: begin
+    libvlc_VlmMediaInstanceStopped:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusInit: begin
+    libvlc_VlmMediaInstanceStatusInit:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusOpening: begin
+    libvlc_VlmMediaInstanceStatusOpening:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusPlaying: begin
+    libvlc_VlmMediaInstanceStatusPlaying:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusPause: begin
+    libvlc_VlmMediaInstanceStatusPause:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusEnd: begin
+    libvlc_VlmMediaInstanceStatusEnd:
+      begin
 
-    end;
+      end;
 
-    libvlc_VlmMediaInstanceStatusError: begin
+    libvlc_VlmMediaInstanceStatusError:
+      begin
 
-    end;
+      end;
   end;
 end;
 {$WARNINGS ON}
@@ -4639,3 +4811,4 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

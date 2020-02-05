@@ -7185,20 +7185,14 @@ type
 
   public
 
-    constructor Create(values : array of WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE);
+    constructor Create(values : array of string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE);
     destructor Destroy; override;
 
     procedure Clear;
-    function AddArg(value : AnsiString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
+    function AddArg(value : string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
+    function AddArg(values : array of string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
+    function AddArg(values : TStringList; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
 
-    // without this D4 not complie
-    // [Error] PasLibVlcUnit.pas(8403): Ambiguous overloaded call to 'AddArg'
-    {$IFDEF DELPHI6_UP}
-    function AddArg(value : WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
-    {$ENDIF}
-    function AddArg(values : array of WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;
-    function AddArg(values : TStringList; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer; overload;    
-    
     property ARGC : LongInt read GetArgc;
     property ARGS : Pointer read GetArgs;
   end;
@@ -11229,7 +11223,7 @@ end;
 
 // =============================================================================
 
-constructor TArgcArgs.Create(values : array of WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE);
+constructor TArgcArgs.Create(values : array of string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE);
 begin
   inherited Create;
   Clear();
@@ -11254,7 +11248,7 @@ begin
   end;
 end;
 
-function TArgcArgs.AddArg(value : AnsiString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer;
+function TArgcArgs.AddArg(value : string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer;
 var
   aIdx : Integer;
 begin
@@ -11280,28 +11274,19 @@ begin
   if (Fargc < ARGC_ARGV_MAX_SIZE) then
   begin
     Fargv[Fargc] := value;
-    Fargs[Fargc] := PAnsiChar(Fargv[argc]);
+    Fargs[Fargc] := PAnsiChar(AnsiString(Fargv[argc]));
     Inc(Fargc);
   end;
   Result := Fargc;
 end;
 
-// without this D4 not complie
-// [Error] PasLibVlcUnit.pas(8403): Ambiguous overloaded call to 'AddArg'
-{$IFDEF DELPHI6_UP}
-function TArgcArgs.AddArg(value : WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer;
-begin
-  Result := AddArg(AnsiString(Utf8Encode(value)), ignoreEmptyStrings, allowDuplicates);
-end;
-{$ENDIF}
-
-function TArgcArgs.AddArg(values : array of WideString; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer;
+function TArgcArgs.AddArg(values : array of string; ignoreEmptyStrings : Boolean = TRUE; allowDuplicates : Boolean = FALSE) : Integer;
 var
   aIdx : Integer;
 begin
   for aIdx := Low(values) to High(values) do
   begin
-    AddArg(AnsiString(Utf8Encode(values[aIdx])), ignoreEmptyStrings, allowDuplicates);
+    AddArg(AnsiString(AnsiString(values[aIdx])), ignoreEmptyStrings, allowDuplicates);
   end;
   Result := Fargc;
 end;
@@ -11312,7 +11297,7 @@ var
 begin
   for aIdx := 0 to values.Count-1 do
   begin
-    AddArg(values.Strings[aIdx], ignoreEmptyStrings, allowDuplicates);
+    AddArg(values[aIdx], ignoreEmptyStrings, allowDuplicates);
   end;
   Result := Fargc;
 end;
