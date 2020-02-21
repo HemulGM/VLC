@@ -38,7 +38,7 @@ unit PasLibVlcClassUnit;
 interface
 
 uses
-  {$IFDEF UNIX}              Unix, {$ENDIF}
+  {$IFDEF UNIX} Unix, {$ENDIF}
   {$IFDEF MSWINDOWS}Windows, {$ENDIF}
   Classes, SysUtils, PasLibVlcUnit;
 
@@ -56,14 +56,12 @@ type
   TVideoOutput = (voDefault
     {$IFDEF DARWIN}, voMacOSX{$ENDIF}
     {$IFDEF UNIX}, voX11, voXVideo, voGlx{$ENDIF}
-    {$IFDEF MSWINDOWS}, voWinGdi, voDirectX, voDirect3d, voOpenGl{$ENDIF}
-      , voDummy);
+    {$IFDEF MSWINDOWS}, voWinGdi, voDirectX, voDirect3d, voOpenGl{$ENDIF}, voDummy);
 
   TAudioOutput = (aoDefault
     {$IFDEF DARWIN}, aoCoreAudio{$ENDIF}
     {$IFDEF UNIX}, aoOpenSystemSound, aoAdvancedLinuxSoundArchitecture, aoEnlightenedSoundDaemon, aoKdeSoundServer{$ENDIF}
-    {$IFDEF MSWINDOWS}, aoDirectX, aoWaveOut{$ENDIF}
-      , aoDummy);
+    {$IFDEF MSWINDOWS}, aoDirectX, aoWaveOut{$ENDIF}, aoDummy);
 
   TVideoCodec = (vcNONE, vcMPGV, vcMP4V, vcH264, vcTHEORA);
 
@@ -78,17 +76,13 @@ const
 
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id330667
   vlcVideoOutputNames: array[TVideoOutput] of string =('default'
-    {$IFDEF DARWIN}, 'macosx' {$ENDIF}
-    {$IFDEF UNIX}, 'x11', 'xvideo', 'glx'{$ENDIF}
-    {$IFDEF MSWINDOWS}, 'wingdi', 'directx', 'direct3d', 'opengl'{$ENDIF}
-      , 'dummy');
-
+    {$IFDEF DARWIN}, 'macosx' {$ENDIF} {$IFDEF UNIX}, 'x11', 'xvideo', 'glx' {$ENDIF}
+    {$IFDEF MSWINDOWS}, 'wingdi', 'directx', 'direct3d', 'opengl' {$ENDIF}, 'dummy');
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id332336
   vlcAudioOutputNames: array[TAudioOutput] of string =('default'
     {$IFDEF DARWIN}, 'coreaudio'{$ENDIF}
     {$IFDEF UNIX}, 'oss', 'alsa', 'esd', 'arts'{$ENDIF}
-    {$IFDEF MSWINDOWS}, 'directx', 'waveout'{$ENDIF}
-      , 'dummy');
+    {$IFDEF MSWINDOWS}, 'directx', 'waveout'{$ENDIF}, 'dummy');
   vlcVideoRatioNames: array[TVideoRatio] of AnsiString = ('', '16:9', '16:10', '185:100', '221:100', '235:100', '239:100', '4:3', '5:4', '5:3', '1:1');
 
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id329971
@@ -288,8 +282,8 @@ end;
 {$HINTS OFF}
 function TPasLibVlc.GetHandle(): libvlc_instance_t_ptr;
 begin
-  Result := NIL;
-  if (FHandle = NIL) then
+  Result := nil;
+  if (FHandle = nil) then
   begin
     if (FPath <> '') then
     begin
@@ -302,13 +296,13 @@ begin
       libvlc_dynamic_dll_init();
     end;
     if (libvlc_dynamic_dll_error <> '') then
-      exit;
+      Exit;
 
     with TArgcArgs.Create([libvlc_dynamic_dll_path, '--ignore-config', '--intf=dummy', '--quiet'
-//'--telnet-host=localhost',
-//'--telnet-port=4212',
-//'--telnet-password=test'
-//'--extraintf=telnet',
+      //'--telnet-host=localhost',
+      //'--telnet-port=4212',
+      //'--telnet-password=test'
+      //'--extraintf=telnet',
       ]) do
     begin
 

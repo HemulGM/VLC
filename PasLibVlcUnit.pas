@@ -11264,7 +11264,7 @@ begin
   begin
     for aIdx := 0 to Fargc - 1 do
     begin
-      if (Fargv[aIdx] = value) then
+      if (Fargv[aIdx] = AnsiString(value)) then
       begin
         Result := Fargc;
         exit;
@@ -11273,8 +11273,8 @@ begin
   end;
   if (Fargc < ARGC_ARGV_MAX_SIZE) then
   begin
-    Fargv[Fargc] := value;
-    Fargs[Fargc] := PAnsiChar(AnsiString(Fargv[argc]));
+    Fargv[Fargc] := AnsiString(value);
+    Fargs[Fargc] := PAnsiChar(Fargv[argc]);
     Inc(Fargc);
   end;
   Result := Fargc;
@@ -11286,7 +11286,7 @@ var
 begin
   for aIdx := Low(values) to High(values) do
   begin
-    AddArg(AnsiString(AnsiString(values[aIdx])), ignoreEmptyStrings, allowDuplicates);
+    AddArg(values[aIdx], ignoreEmptyStrings, allowDuplicates);
   end;
   Result := Fargc;
 end;
