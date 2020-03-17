@@ -2275,6 +2275,7 @@ begin
     libvlc_free(libvlcaspect);
   end;
 end;
+
 function TPasLibVlcPlayer.GetVideoAspectRatioType(): TVideoRatio;
 var
   libvlcaspect: PAnsiChar;
@@ -2649,6 +2650,7 @@ begin
       if (p_list^.psz_name <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2662,6 +2664,7 @@ begin
       if (p_list^.psz_shortname <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2675,6 +2678,7 @@ begin
       if (p_list^.psz_longname <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2688,6 +2692,7 @@ begin
       if (p_list^.psz_help <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2719,6 +2724,7 @@ begin
       if (p_list^.psz_name <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2732,6 +2738,7 @@ begin
       if (p_list^.psz_shortname <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2745,6 +2752,7 @@ begin
       if (p_list^.psz_longname <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2758,6 +2766,7 @@ begin
       if (p_list^.psz_help <> NIL) then
       begin
         Result.AddObject(
+
           {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
@@ -2945,6 +2954,7 @@ begin
     if ((preset <> NIL) and (preset <> '')) then
     begin
       Result.AddObject(
+
         {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(preset), TObject(index));
     end;
     Inc(index);
@@ -3035,7 +3045,9 @@ begin
         if (withDescription) then
         begin
           Result.Add(
+
             {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_name) + separator +
+
             {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description));
         end
         else
@@ -3072,12 +3084,15 @@ begin
         if (withDescription) then
         begin
           Result.Add(
+
             {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device) + separator +
+
             {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_description));
         end
         else
         begin
           Result.Add(
+
             {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(p_list_item^.psz_device));
         end;
       end;
@@ -3116,7 +3131,7 @@ begin
       begin
         if (withDescription) then
         begin
-          Result.Add(UTF8ToWideString(p_list_item^.psz_device) + separator +UTF8ToWideString(p_list_item^.psz_description));
+          Result.Add(UTF8ToWideString(p_list_item^.psz_device) + separator + UTF8ToWideString(p_list_item^.psz_description));
         end
         else
         begin
@@ -3760,7 +3775,8 @@ begin
   file_name := '';
   for file_indx := Low(file_names) to High(file_names) do
   begin
-    file_name := file_name + file_names[file_indx] + {$IFDEF MSWINDOWS} ';';{$ELSE} ':'; {$ENDIF};
+    file_name := file_name + file_names[file_indx] + {$IFDEF MSWINDOWS} ';'; {$ELSE} ':'; {$ENDIF}
+    ;
   end;
   // remove last PATH_SEPARATOR;
   if (file_name <> '') then
@@ -4076,6 +4092,7 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     p_md := libvlc_media_t_ptr(data);
     {$ENDIF}
+
     if (p_md <> NIL) then
     begin
       tmp := libvlc_media_get_mrl(p_md);
@@ -4254,6 +4271,7 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     strd := PAnsiChar(data);
     {$ENDIF}
+
     FOnMediaPlayerSnapshotTaken(SELF, {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(strd));
   end;
   m.Result := 0;
@@ -4272,6 +4290,7 @@ begin
     {$ELSE}
     value := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     {$ENDIF}
+
     FOnMediaPlayerLengthChanged(SELF, value);
   end;
   m.Result := 0;
@@ -4392,6 +4411,7 @@ var
   data : Int64;
   strd : PAnsiChar;
   {$ENDIF}
+
 begin
   if Assigned(FOnMediaPlayerAudioDevice) then
   begin
@@ -4401,6 +4421,7 @@ begin
     data := (Int64(m.WParam) shl 32) or Int64(m.LParam);
     strd := PAnsiChar(data);
     {$ENDIF}
+
     FOnMediaPlayerAudioDevice(SELF, {$IFDEF DELPHI_XE2_UP}UTF8ToWideString{$ELSE}UTF8Decode{$ENDIF}(strd));
   end;
   m.Result := 0;

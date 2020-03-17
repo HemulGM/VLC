@@ -72,7 +72,7 @@ const
   vlcDeinterlaceModeNames: array[TDeinterlaceMode] of string = ('discard', 'blend', 'mean', 'bob', 'linear', 'x', 'yadif', 'yadif2x', 'phosphor', 'ivtc');
 
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id328503
-  vlcMuxNames: array[TMux] of AnsiString = ('ts', 'ps', 'mp4', 'ogg', 'avi');
+  vlcMuxNames: array[TMux] of string = ('ts', 'ps', 'mp4', 'ogg', 'avi');
 
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id330667
   vlcVideoOutputNames: array[TVideoOutput] of string =('default'
@@ -83,11 +83,11 @@ const
     {$IFDEF DARWIN}, 'coreaudio'{$ENDIF}
     {$IFDEF UNIX}, 'oss', 'alsa', 'esd', 'arts'{$ENDIF}
     {$IFDEF MSWINDOWS}, 'directx', 'waveout'{$ENDIF}, 'dummy');
-  vlcVideoRatioNames: array[TVideoRatio] of AnsiString = ('', '16:9', '16:10', '185:100', '221:100', '235:100', '239:100', '4:3', '5:4', '5:3', '1:1');
+  vlcVideoRatioNames: array[TVideoRatio] of string = ('', '16:9', '16:10', '185:100', '221:100', '235:100', '239:100', '4:3', '5:4', '5:3', '1:1');
 
   // http://www.videolan.org/doc/vlc-user-guide/en/ch02.html#id329971
-  vlcVideoCodecNames: array[TVideoCodec] of AnsiString = ('', 'mpgv', 'mp4v', 'mp4v', 'theora');
-  vlcAudioCodecNames: array[TAudioCodec] of AnsiString = ('', 'mpga', 'mp3', 'mp4a', 'vorb', 'flac');
+  vlcVideoCodecNames: array[TVideoCodec] of string = ('', 'mpgv', 'mp4v', 'mp4v', 'theora');
+  vlcAudioCodecNames: array[TAudioCodec] of string = ('', 'mpga', 'mp3', 'mp4a', 'vorb', 'flac');
 
 type
   TPasLibVlc = class
