@@ -2627,13 +2627,13 @@ procedure TPasLibVlcPlayer.SetAudioVolume(volumeLevel: Integer);
 begin
   if (p_mi = NIL) then
     exit;
-  if (volumeLevel < 0) then
-    exit;
-  if (volumeLevel > 200) then
-    exit;
+  volumeLevel := Min(Max(1, volumeLevel), 200);
 //  if (FVLC.VersionBin < $020100) then
   begin
+  try
     libvlc_audio_set_volume(p_mi, volumeLevel);
+  except
+  end;
   end;
 end;
 
