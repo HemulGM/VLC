@@ -34,11 +34,13 @@ requires
   vcl,
   vclactnband,
   vclx,
-  xmlrtl;
+  xmlrtl,
+  fmx;
 
 contains
   PasLibVlcClassUnit in 'PasLibVlcClassUnit.pas',
   PasLibVlcPlayerUnit in 'PasLibVlcPlayerUnit.pas',
-  PasLibVlcUnit in 'PasLibVlcUnit.pas';
+  PasLibVlcUnit in 'PasLibVlcUnit.pas',
+  FmxPasLibVlcPlayerUnit in 'FmxPasLibVlcPlayerUnit.pas';
 
 end.

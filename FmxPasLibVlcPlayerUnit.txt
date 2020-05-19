@@ -1,0 +1,72 @@
+﻿2019.03.24 Modify Stop procedure
+
+           inspired by Rob Renaud <jgrenaud74@gmail.com>
+
+           new procedure:
+            
+                procedure Stop(const stopTimeOut : Cardinal = 1000);
+
+2019.01.08 Add support for events:
+
+      libvlc_MediaPlayerESAdded
+      libvlc_MediaPlayerESDeleted
+      libvlc_MediaPlayerESSelected
+      libvlc_MediaPlayerAudioDevice
+      libvlc_MediaPlayerChapterChanged
+      libvlc_RendererDiscovererItemAdded
+      libvlc_RendererDiscovererItemDeleted
+
+2018.07.01 Add support for media callbacks
+
+           inspired by Mark Adamson <markadamson83@gmail.com>
+
+           new procedure:
+            
+                procedure Play(stm : TStream, ...); overload;
+
+2018.06.29 Remove duplicated code
+
+           affected procedures:
+            
+                procedure Play       (...); overload;
+                procedure PlayNormal (...); overload;
+                procedure PlayYoutube(...); overload;
+
+2018.06.05 Correct PlayYoutube
+
+           reported by Ahmet Yeşilçimen <yesilcimenahmet@gmail.com>
+
+2018.04.26 Correct usage of video callbacks
+
+2018.03.11 Update for better compatibility with libvlc 3.0.0
+
+           New events:
+
+               libvlc_MediaPlayerESAdded,
+               libvlc_MediaPlayerESDeleted,
+               libvlc_MediaPlayerESSelected,
+               libvlc_MediaPlayerAudioDevice,
+               libvlc_MediaPlayerChapterChanged,
+               libvlc_RendererDiscovererItemAdded,
+               libvlc_RendererDiscovererItemDelete
+
+2018.01.02 Extend parameters:
+
+           inspired by "Christian Koch" <ch.koch.ed@online.de>
+           required to add ":cdda-track=1" as option to the media
+            
+           affected procedures:
+            
+                procedure Play       (mrl: WideString; mediaOptions : array of WideString; ...); overload;
+                procedure PlayNormal (mrl: WideString; mediaOptions : array of WideString; ...); overload;
+                procedure PlayYoutube(mrl: WideString; mediaOptions : array of WideString; ...); overload;
+
+2017.12.05 New functions:
+
+           GetVideoSampleAspectRatio
+
+2016.11.28 Update Equalizer function declarations
+
+           reported by "Woldemar Unknown" <djvk@mail.ru>
+
+2016.10.18 Initial release

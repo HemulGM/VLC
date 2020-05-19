@@ -64,7 +64,7 @@ uses
   {$IFDEF LCLQT5}Qt5, QtWidgets,{$ENDIF}
   {$IFDEF UNIX}Dialogs,{$ENDIF}
   {$IFDEF MACOS}FMX.Dialogs,Posix.Unistd,{$ENDIF}
-  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math, Forms;
+  SysUtils, {$IFDEF HAS_SYNCOBJS}SyncObjs,{$ENDIF} Classes, Math;
 
 {$IFDEF HAS_EXCEPTION_MASK}
 const
@@ -7498,9 +7498,10 @@ var
 begin
   Result := '';
   // Search Local path
-  if FileExists(ExtractFilePath(Application.ExeName) + LibVlc) and
-     FileExists(ExtractFilePath(Application.ExeName) + LibVlcCore)
-  then Exit(ExtractFilePath(Application.ExeName));
+
+  if FileExists(ExtractFilePath(ParamStr(0)) + LibVlc) and
+     FileExists(ExtractFilePath(ParamStr(0)) + LibVlcCore)
+  then Exit(ExtractFilePath(ParamStr(0)));
   // Search Inatall VideoLAN path
   FillChar(vBuff, sizeof(vBuff), 0);
   reKey := INVALID_HANDLE_VALUE;

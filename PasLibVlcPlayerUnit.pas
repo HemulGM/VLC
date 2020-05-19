@@ -464,6 +464,7 @@ type
     property LastError: string read FError write FError;
     property LastAudioOutput: WideString read FLastAudioOutput;
     property LastAudioOutputDeviceId: WideString read FLastAudioOutputDeviceId;
+    property HideCursor: Boolean read GetHideCursor write SetHideCursor;
   published
     property Align;
     property AlignWithMargins;
@@ -510,7 +511,6 @@ type
     property OnStartDrag;
     property OnUnDock;
     property TabOrder;
-    property HideCursor: Boolean read GetHideCursor write SetHideCursor;
     property TabStop default True;
     property SpuShow: Boolean read FSpuShow write SetSpuShow default TRUE;
     property OsdShow: Boolean read FOsdShow write SetOsdShow default TRUE;
