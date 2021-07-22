@@ -74,6 +74,9 @@ const
   LibVlc     = 'LibVlc.dll';
   LibVlcCore = 'LibVlcCore.dll';
 
+var
+  VLCLibraryPath : string = '';
+
 
 (**
  * Real path to libvlc.dll
@@ -7499,8 +7502,8 @@ begin
   Result := '';
   // Search Local path
 
-  if FileExists(ExtractFilePath(ParamStr(0)) + LibVlc) and
-     FileExists(ExtractFilePath(ParamStr(0)) + LibVlcCore)
+  if FileExists(VLCLibraryPath + LibVlc) and
+     FileExists(VLCLibraryPath + LibVlcCore)
   then Exit(ExtractFilePath(ParamStr(0)));
   // Search Inatall VideoLAN path
   FillChar(vBuff, sizeof(vBuff), 0);
@@ -11316,6 +11319,7 @@ end;
 
 initialization
 
+  VLCLibraryPath := ExtractFilePath(ParamStr(0));
   libvlc_handle := 0;
   libvlccore_handle := 0;
 

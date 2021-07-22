@@ -232,6 +232,7 @@ type
     procedure InternalHandleEvent_RendererDiscoveredItemAdded(item: libvlc_renderer_item_t_ptr);
     procedure InternalHandleEvent_RendererDiscoveredItemDeleted(item: libvlc_renderer_item_t_ptr);
     procedure SetForceAspectRatio(const Value: Single);
+    function GetIsStopped: Boolean;
   protected
     procedure DestroyPlayer();
     procedure Paint; override;
@@ -251,6 +252,8 @@ type
       WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayNormal(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = '';
       audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure OpenNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
+      audioSetTimeOut: Cardinal = 1000); overload;
     procedure PlayYoutube(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = '';
       audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
     procedure Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut:
@@ -418,6 +421,7 @@ type
     property Volume: Integer read GetAudioVolume write SetAudioVolume;
     property Mute: Boolean read GetAudioMute write SetAudioMute;
     property ForceAspectRatio: Single read FForceAspectRatio write SetForceAspectRatio;
+    property IsStopped: Boolean read GetIsStopped;
   published
     property Align;
     property PopupMenu;
@@ -842,6 +846,11 @@ end;
 function TFmxPasLibVlcPlayer.GetDeinterlaceModeName(): WideString;
 begin
   Result := vlcDeinterlaceModeNames[FDeinterlaceMode];
+end;
+
+function TFmxPasLibVlcPlayer.GetIsStopped: Boolean;
+begin
+  Result := (GetState() = plvPlayer_Stopped);
 end;
 
 procedure TFmxPasLibVlcPlayer.SetDeinterlaceFilter(aValue: TDeinterlaceFilter);
@@ -1728,6 +1737,59 @@ begin
   if (p_mi = NIL) then
     exit;
   libvlc_media_player_next_frame(p_mi);
+end;
+
+procedure TFmxPasLibVlcPlayer.OpenNormal(mrl: WideString;
+  audioOutput,
+  audioOutputDeviceId: WideString; audioSetTimeOut: Cardinal);
+var
+  media: TPasLibVlcMedia;
+begin
+  GetPlayerHandle();
+
+  if (p_mi = NIL) then
+    exit;
+
+  // create media
+  media := TPasLibVlcMedia.Create(VLC, mrl);
+  media.SetDeinterlaceFilter(FDeinterlaceFilter);
+  media.SetDeinterlaceFilterMode(FDeinterlaceMode);
+
+  // assign media to player
+  libvlc_media_player_set_media(p_mi, media.MD);
+
+  // play
+  //libvlc_media_player_play(p_mi);
+
+  // release media
+  media.Free;
+
+  UpdateTitleShow();
+
+  if ((audioOutput <> '') or (audioOutputDeviceId <> '')) then
+  begin
+    while (libvlc_media_player_is_playing(p_mi) = 0) do
+    begin
+      Sleep(10);
+      if (audioSetTimeOut < 10) then
+        break;
+      Dec(audioSetTimeOut, 10);
+    end;
+    SetAudioOutputDevice(audioOutput, audioOutputDeviceId);
+  end
+  else if ((FLastAudioOutput <> '') or (FLastAudioOutputDeviceId <> '')) then
+  begin
+    while (libvlc_media_player_is_playing(p_mi) = 0) do
+    begin
+      Sleep(10);
+      if (audioSetTimeOut < 10) then
+        break;
+      Dec(audioSetTimeOut, 10);
+    end;
+    SetAudioOutputDevice(FLastAudioOutput, FLastAudioOutputDeviceId);
+  end;
+
+  FMute := FALSE;
 end;
 
 function TFmxPasLibVlcPlayer.GetAudioMute(): Boolean;
