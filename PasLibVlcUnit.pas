@@ -7502,9 +7502,9 @@ begin
   Result := '';
   // Search Local path
 
-  if FileExists(VLCLibraryPath + LibVlc) and
-     FileExists(VLCLibraryPath + LibVlcCore)
-  then Exit(ExtractFilePath(ParamStr(0)));
+  if FileExists(VLCLibraryPath + '\' + LibVlc) and
+     FileExists(VLCLibraryPath + '\' + LibVlcCore)
+  then Exit(VLCLibraryPath);
   // Search Inatall VideoLAN path
   FillChar(vBuff, sizeof(vBuff), 0);
   reKey := INVALID_HANDLE_VALUE;

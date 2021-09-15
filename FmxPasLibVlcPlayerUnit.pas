@@ -57,13 +57,13 @@ unit FmxPasLibVlcPlayerUnit;
 interface
 
 uses
-  {$IFDEF UNIX}           Unix, {$ENDIF}
+  {$IFDEF UNIX}               Unix, {$ENDIF}
   {$IFDEF MSWINDOWS}Windows, {$ENDIF}
-  Classes, SysUtils, SyncObjs, FMX.Types, FMX.Objects, FMX.Graphics, System.UITypes, PasLibVlcClassUnit, PasLibVlcUnit;
+  Classes, SysUtils, SyncObjs, FMX.Types, FMX.Objects, FMX.Graphics,
+  System.UITypes, PasLibVlcClassUnit, PasLibVlcUnit;
 
 type
-  TFmxPasLibVlcPlayerState = (plvPlayer_NothingSpecial, plvPlayer_Opening, plvPlayer_Buffering, plvPlayer_Playing,
-    plvPlayer_Paused, plvPlayer_Stopped, plvPlayer_Ended, plvPlayer_Error);
+  TFmxPasLibVlcPlayerState = (plvPlayer_NothingSpecial, plvPlayer_Opening, plvPlayer_Buffering, plvPlayer_Playing, plvPlayer_Paused, plvPlayer_Stopped, plvPlayer_Ended, plvPlayer_Error);
 
 type
   TNotifySeekableChanged = procedure(Sender: TObject; val: Boolean) of object;
@@ -233,37 +233,26 @@ type
     procedure InternalHandleEvent_RendererDiscoveredItemDeleted(item: libvlc_renderer_item_t_ptr);
     procedure SetForceAspectRatio(const Value: Single);
     function GetIsStopped: Boolean;
+    function GetIsEnded: Boolean;
   protected
     procedure DestroyPlayer();
     procedure Paint; override;
-    procedure PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal
-      = 1000); overload;
-    procedure PlayContinue(mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId:
-      WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayContinue(mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function GetPlayerHandle(): libvlc_media_player_t_ptr;
-    procedure Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-      audioSetTimeOut: Cardinal = 1000); overload;
-    procedure Play(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId:
-      WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure Play(stm: TStream; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId:
-      WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayNormal(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = '';
-      audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
-    procedure OpenNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-      audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayYoutube(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = '';
-      audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
-    procedure Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut:
-      Cardinal = 1000); overload;
-    procedure Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut:
-      Cardinal = 1000); overload;
-    procedure PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-      audioSetTimeOut: Cardinal = 1000); overload;
-    procedure PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-      audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
+    procedure Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(stm: TStream; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayNormal(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure OpenNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayYoutube(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
+    procedure Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000); overload;
+    procedure PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000); overload;
     function GetMediaMrl(): string;
     procedure Pause();
     procedure Resume();
@@ -383,14 +372,10 @@ type
     procedure LogoSetDelay(delay_ms: Integer = 1000);  // delay before show next logo file, default 1000
     procedure LogoSetRepeat(loop: boolean = TRUE);
     procedure LogoSetEnable(enable: Integer);
-    procedure LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t =
-      libvlc_opacity_full); overload;
-    procedure LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top; opacity:
-      libvlc_opacity_t = libvlc_opacity_full); overload;
-    procedure LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t
-      = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
-    procedure LogoShowFiles(file_names: array of WideString; position: libvlc_position_t = libvlc_position_top; opacity:
-      libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
+    procedure LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
+    procedure LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full); overload;
+    procedure LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
+    procedure LogoShowFiles(file_names: array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE); overload;
     procedure LogoHide();
 
     // https://wiki.videolan.org/Documentation:Modules/marq/
@@ -403,14 +388,8 @@ type
     procedure MarqueeSetTimeOut(time_out_ms: Integer);
     procedure MarqueeSetRefresh(refresh_after_ms: Integer);
     procedure MarqueeSetEnable(enable: Integer);
-    procedure MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color:
-      libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer =
-      libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
-      overload;
-    procedure MarqueeShowText(marquee_text: WideString; position: libvlc_position_t = libvlc_position_bottom; color:
-      libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer =
-      libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
-      overload;
+    procedure MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
+    procedure MarqueeShowText(marquee_text: WideString; position: libvlc_position_t = libvlc_position_bottom; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0); overload;
     procedure MarqueeHide();
     procedure EventsDisable();
     procedure EventsEnable();
@@ -422,6 +401,7 @@ type
     property Mute: Boolean read GetAudioMute write SetAudioMute;
     property ForceAspectRatio: Single read FForceAspectRatio write SetForceAspectRatio;
     property IsStopped: Boolean read GetIsStopped;
+    property IsEnded: Boolean read GetIsEnded;
   published
     property Align;
     property PopupMenu;
@@ -468,38 +448,27 @@ type
     property OnMediaPlayerEndReached: TNotifyEvent read FOnMediaPlayerEndReached write FOnMediaPlayerEndReached;
     property OnMediaPlayerEncounteredError: TNotifyEvent read FOnMediaPlayerEncounteredError write FOnMediaPlayerEncounteredError;
     property OnMediaPlayerTimeChanged: TNotifyTimeChanged read FOnMediaPlayerTimeChanged write FOnMediaPlayerTimeChanged;
-    property OnMediaPlayerPositionChanged: TNotifyPositionChanged read FOnMediaPlayerPositionChanged write
-      FOnMediaPlayerPositionChanged;
-    property OnMediaPlayerSeekableChanged: TNotifySeekableChanged read FOnMediaPlayerSeekableChanged write
-      FOnMediaPlayerSeekableChanged;
-    property OnMediaPlayerPausableChanged: TNotifyPausableChanged read FOnMediaPlayerPausableChanged write
-      FOnMediaPlayerPausableChanged;
+    property OnMediaPlayerPositionChanged: TNotifyPositionChanged read FOnMediaPlayerPositionChanged write FOnMediaPlayerPositionChanged;
+    property OnMediaPlayerSeekableChanged: TNotifySeekableChanged read FOnMediaPlayerSeekableChanged write FOnMediaPlayerSeekableChanged;
+    property OnMediaPlayerPausableChanged: TNotifyPausableChanged read FOnMediaPlayerPausableChanged write FOnMediaPlayerPausableChanged;
     property OnMediaPlayerTitleChanged: TNotifyTitleChanged read FOnMediaPlayerTitleChanged write FOnMediaPlayerTitleChanged;
     property OnMediaPlayerSnapshotTaken: TNotifySnapshotTaken read FOnMediaPlayerSnapshotTaken write FOnMediaPlayerSnapshotTaken;
     property OnMediaPlayerLengthChanged: TNotifyLengthChanged read FOnMediaPlayerLengthChanged write FOnMediaPlayerLengthChanged;
-    property OnMediaPlayerVideoOutChanged: TNotifyVideoOutChanged read FOnMediaPlayerVideoOutChanged write
-      FOnMediaPlayerVideoOutChanged;
-    property OnMediaPlayerScrambledChanged: TNotifyScrambledChanged read FOnMediaPlayerScrambledChanged write
-      FOnMediaPlayerScrambledChanged;
+    property OnMediaPlayerVideoOutChanged: TNotifyVideoOutChanged read FOnMediaPlayerVideoOutChanged write FOnMediaPlayerVideoOutChanged;
+    property OnMediaPlayerScrambledChanged: TNotifyScrambledChanged read FOnMediaPlayerScrambledChanged write FOnMediaPlayerScrambledChanged;
     property OnMediaPlayerCorked: TNotifyEvent read FOnMediaPlayerCorked write FOnMediaPlayerCorked;
     property OnMediaPlayerUnCorked: TNotifyEvent read FOnMediaPlayerUnCorked write FOnMediaPlayerUnCorked;
     property OnMediaPlayerMuted: TNotifyEvent read FOnMediaPlayerMuted write FOnMediaPlayerMuted;
     property OnMediaPlayerUnMuted: TNotifyEvent read FOnMediaPlayerUnMuted write FOnMediaPlayerUnMuted;
-    property OnMediaPlayerAudioVolumeChanged: TNotifyAudioVolumeChanged read FOnMediaPlayerAudioVolumeChanged write
-      FOnMediaPlayerAudioVolumeChanged;
-    property OnMediaPlayerVideoSizeChanged: TNotifyVideoSizeChanged read FOnMediaPlayerVideoSizeChanged write
-      FOnMediaPlayerVideoSizeChanged;
+    property OnMediaPlayerAudioVolumeChanged: TNotifyAudioVolumeChanged read FOnMediaPlayerAudioVolumeChanged write FOnMediaPlayerAudioVolumeChanged;
+    property OnMediaPlayerVideoSizeChanged: TNotifyVideoSizeChanged read FOnMediaPlayerVideoSizeChanged write FOnMediaPlayerVideoSizeChanged;
     property OnMediaPlayerEsAdded: TNotifyMediaPlayerEsAdded read FOnMediaPlayerEsAdded write FOnMediaPlayerEsAdded;
     property OnMediaPlayerEsDeleted: TNotifyMediaPlayerEsDeleted read FOnMediaPlayerEsDeleted write FOnMediaPlayerEsDeleted;
     property OnMediaPlayerEsSelected: TNotifyMediaPlayerEsSelected read FOnMediaPlayerEsSelected write FOnMediaPlayerEsSelected;
-    property OnMediaPlayerAudioDevice: TNotifyMediaPlayerAudioDevice read FOnMediaPlayerAudioDevice write
-      FOnMediaPlayerAudioDevice;
-    property OnMediaPlayerChapterChanged: TNotifyMediaPlayerChapterChanged read FOnMediaPlayerChapterChanged write
-      FOnMediaPlayerChapterChanged;
-    property OnRendererDiscoveredItemAdded: TNotifyRendererDiscoveredItemAdded read FOnRendererDiscoveredItemAdded write
-      FOnRendererDiscoveredItemAdded;
-    property OnRendererDiscoveredItemDeleted: TNotifyRendererDiscoveredItemDeleted read FOnRendererDiscoveredItemDeleted
-      write FOnRendererDiscoveredItemDeleted;
+    property OnMediaPlayerAudioDevice: TNotifyMediaPlayerAudioDevice read FOnMediaPlayerAudioDevice write FOnMediaPlayerAudioDevice;
+    property OnMediaPlayerChapterChanged: TNotifyMediaPlayerChapterChanged read FOnMediaPlayerChapterChanged write FOnMediaPlayerChapterChanged;
+    property OnRendererDiscoveredItemAdded: TNotifyRendererDiscoveredItemAdded read FOnRendererDiscoveredItemAdded write FOnRendererDiscoveredItemAdded;
+    property OnRendererDiscoveredItemDeleted: TNotifyRendererDiscoveredItemDeleted read FOnRendererDiscoveredItemDeleted write FOnRendererDiscoveredItemDeleted;
     property UseEvents: boolean read FUseEvents write FUseEvents default TRUE;
     property LastAudioOutput: WideString read FLastAudioOutput;
     property LastAudioOutputDeviceId: WideString read FLastAudioOutputDeviceId;
@@ -531,8 +500,7 @@ procedure fmx_libvlc_video_unlock_cb(ptr: Pointer; picture: Pointer; planes: PVC
 
 procedure fmx_libvlc_video_display_cb(ptr: Pointer; picture: Pointer); cdecl; forward;
 
-function fmx_libvlc_video_format_cb(var ptr: Pointer; chroma: PAnsiChar; var width: LongWord; var height: LongWord;
-  pitches: PVCBPitches; lines: PVCBLines): LongWord; cdecl; forward;
+function fmx_libvlc_video_format_cb(var ptr: Pointer; chroma: PAnsiChar; var width: LongWord; var height: LongWord; pitches: PVCBPitches; lines: PVCBLines): LongWord; cdecl; forward;
 
 procedure fmx_libvlc_video_cleanup_cb(ptr: Pointer); cdecl; forward;
 
@@ -848,6 +816,11 @@ begin
   Result := vlcDeinterlaceModeNames[FDeinterlaceMode];
 end;
 
+function TFmxPasLibVlcPlayer.GetIsEnded: Boolean;
+begin
+  Result := (GetState() = plvPlayer_Ended);
+end;
+
 function TFmxPasLibVlcPlayer.GetIsStopped: Boolean;
 begin
   Result := (GetState() = plvPlayer_Stopped);
@@ -942,19 +915,9 @@ begin
 //        libvlc_video_set_mouse_input(p_mi, 1);
 //        libvlc_video_set_key_input(p_mi, 1);
 
-        libvlc_video_set_callbacks(
-          p_mi,
-          fmx_libvlc_video_lock_cb,
-          fmx_libvlc_video_unlock_cb,
-          fmx_libvlc_video_display_cb,
-          Pointer(FVideoCbCtx)
-          );
+        libvlc_video_set_callbacks(p_mi, fmx_libvlc_video_lock_cb, fmx_libvlc_video_unlock_cb, fmx_libvlc_video_display_cb, Pointer(FVideoCbCtx));
 
-        libvlc_video_set_format_callbacks(
-          p_mi,
-          fmx_libvlc_video_format_cb,
-          fmx_libvlc_video_cleanup_cb
-          );
+        libvlc_video_set_format_callbacks(p_mi, fmx_libvlc_video_format_cb, fmx_libvlc_video_cleanup_cb);
       end;
 
 //
@@ -1016,8 +979,7 @@ begin
   end;
 end;
 
-procedure TFmxPasLibVlcPlayer.Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId:
-  WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.Play(var media: TPasLibVlcMedia; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   // assign media to player
   libvlc_media_player_set_media(p_mi, media.MD);
@@ -1065,8 +1027,7 @@ end;
  *              rtp: rstp://host/movie
  *)
 
-procedure TFmxPasLibVlcPlayer.Play(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = '';
-  audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.Play(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
   lcMRL: WideString;
   proto: WideString;
@@ -1090,8 +1051,7 @@ begin
   PlayNormal(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.Play(stm: TStream; mediaOptions: array of WideString; audioOutput: WideString = '';
-  audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.Play(stm: TStream; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
   media: TPasLibVlcMedia;
   mediaOptionIdx: Integer;
@@ -1116,8 +1076,7 @@ begin
   Play(media, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayNormal(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString =
-  ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.PlayNormal(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
   media: TPasLibVlcMedia;
   mediaOptionsIdx: Integer;
@@ -1140,8 +1099,7 @@ begin
   Play(media, audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayYoutube(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString =
-  ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
+procedure TFmxPasLibVlcPlayer.PlayYoutube(mrl: WideString; mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
 begin
   // http://www.youtube.com/watch?feature=player_detailpage&v=ZHHOYmERmDc
   PlayNormal(mrl, mediaOptions, audioOutput, audioOutputDeviceId, audioSetTimeOut);
@@ -1165,8 +1123,7 @@ begin
   end;
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayContinue(mediaOptions: array of WideString; audioOutput: WideString = '';
-  audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.PlayContinue(mediaOptions: array of WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 var
   p_md: libvlc_media_t_ptr;
   p_ml: libvlc_media_list_t_ptr;
@@ -1211,32 +1168,27 @@ end;
  *              rtp: rstp://host/movie
  *)
 
-procedure TFmxPasLibVlcPlayer.Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-  audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.Play(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   Play(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-  audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.Play(stm: TStream; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   Play(stm, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString
-  = ''; audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.PlayNormal(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   PlayNormal(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString
-  = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
+procedure TFmxPasLibVlcPlayer.PlayYoutube(mrl: WideString; audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000; youtubeTimeout: Cardinal = 10000);
 begin
   PlayYoutube(mrl, [], audioOutput, audioOutputDeviceId, audioSetTimeOut, youtubeTimeout);
 end;
 
-procedure TFmxPasLibVlcPlayer.PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = '';
-  audioSetTimeOut: Cardinal = 1000);
+procedure TFmxPasLibVlcPlayer.PlayContinue(audioOutput: WideString = ''; audioOutputDeviceId: WideString = ''; audioSetTimeOut: Cardinal = 1000);
 begin
   PlayContinue([], audioOutput, audioOutputDeviceId, audioSetTimeOut);
 end;
@@ -1292,7 +1244,7 @@ begin
   if (p_mi = NIL) then
     exit;
 
-  if (GetState() = plvPlayer_Paused) then
+  //if (GetState() = plvPlayer_Paused) then
   begin
     libvlc_media_player_play(p_mi);
   end;
@@ -1335,6 +1287,8 @@ begin
   if IsPlay then
     Pause
   else if IsPause then
+    Resume
+  else
     Resume;
   if Assigned(FOnMediaPlayerSwitchPlay) then
     FOnMediaPlayerSwitchPlay(Self);
@@ -1739,9 +1693,7 @@ begin
   libvlc_media_player_next_frame(p_mi);
 end;
 
-procedure TFmxPasLibVlcPlayer.OpenNormal(mrl: WideString;
-  audioOutput,
-  audioOutputDeviceId: WideString; audioSetTimeOut: Cardinal);
+procedure TFmxPasLibVlcPlayer.OpenNormal(mrl: WideString; audioOutput, audioOutputDeviceId: WideString; audioSetTimeOut: Cardinal);
 var
   media: TPasLibVlcMedia;
 begin
@@ -1867,9 +1819,7 @@ begin
     begin
       if (p_list^.psz_name <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_name),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1881,9 +1831,7 @@ begin
     begin
       if (p_list^.psz_shortname <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_shortname),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1895,9 +1843,7 @@ begin
     begin
       if (p_list^.psz_longname <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_longname),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1909,9 +1855,7 @@ begin
     begin
       if (p_list^.psz_help <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_help),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1936,9 +1880,7 @@ begin
     begin
       if (p_list^.psz_name <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_name),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_name), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1950,9 +1892,7 @@ begin
     begin
       if (p_list^.psz_shortname <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_shortname),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_shortname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1964,9 +1904,7 @@ begin
     begin
       if (p_list^.psz_longname <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_longname),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_longname), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -1978,9 +1916,7 @@ begin
     begin
       if (p_list^.psz_help <> NIL) then
       begin
-        Result.AddObject(
-          UTF8ToWideString(p_list^.psz_help),
-          NIL);
+        Result.AddObject(UTF8ToWideString(p_list^.psz_help), NIL);
       end;
       p_list := p_list^.p_next;
     end;
@@ -2005,9 +1941,7 @@ begin
   begin
     if (p_track^.psz_name <> NIL) then
     begin
-      Result.AddObject(
-        UTF8ToWideString(p_track^.psz_name),
-        TObject(p_track^.i_id));
+      Result.AddObject(UTF8ToWideString(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -2164,10 +2098,7 @@ begin
     preset := libvlc_audio_equalizer_get_preset_name(index);
     if ((preset <> NIL) and (preset <> '')) then
     begin
-      Result.AddObject(
-        UTF8ToWideString(preset),
-        TObject(index)
-        );
+      Result.AddObject(UTF8ToWideString(preset), TObject(index));
     end;
     Inc(index);
   end;
@@ -2252,11 +2183,7 @@ begin
       begin
         if (withDescription) then
         begin
-          Result.Add(
-            UTF8ToWideString(p_list_item^.psz_name)
-            + separator +
-            UTF8ToWideString(p_list_item^.psz_description)
-            );
+          Result.Add(UTF8ToWideString(p_list_item^.psz_name) + separator + UTF8ToWideString(p_list_item^.psz_description));
         end
         else
         begin
@@ -2269,8 +2196,7 @@ begin
   end;
 end;
 
-function TFmxPasLibVlcPlayer.GetAudioOutputDeviceList(aOut: WideString; withDescription: Boolean = FALSE; separator:
-  string = '|'): TStringList;
+function TFmxPasLibVlcPlayer.GetAudioOutputDeviceList(aOut: WideString; withDescription: Boolean = FALSE; separator: string = '|'): TStringList;
 var
   p_list_head: libvlc_audio_output_device_t_ptr;
   p_list_item: libvlc_audio_output_device_t_ptr;
@@ -2287,17 +2213,11 @@ begin
       begin
         if (withDescription) then
         begin
-          Result.Add(
-            UTF8ToWideString(p_list_item^.psz_device)
-            + separator +
-            UTF8ToWideString(p_list_item^.psz_description)
-            );
+          Result.Add(UTF8ToWideString(p_list_item^.psz_device) + separator + UTF8ToWideString(p_list_item^.psz_description));
         end
         else
         begin
-          Result.Add(
-            UTF8ToWideString(p_list_item^.psz_device)
-            );
+          Result.Add(UTF8ToWideString(p_list_item^.psz_device));
         end;
       end;
       p_list_item := p_list_item^.p_next;
@@ -2330,17 +2250,11 @@ begin
       begin
         if (withDescription) then
         begin
-          Result.Add(
-            UTF8ToWideString(p_list_item^.psz_device)
-            + separator +
-            UTF8ToWideString(p_list_item^.psz_description)
-            );
+          Result.Add(UTF8ToWideString(p_list_item^.psz_device) + separator + UTF8ToWideString(p_list_item^.psz_description));
         end
         else
         begin
-          Result.Add(
-            UTF8ToWideString(p_list_item^.psz_device)
-            );
+          Result.Add(UTF8ToWideString(p_list_item^.psz_device));
         end;
       end;
       p_list_item := p_list_item^.p_next;
@@ -2583,9 +2497,7 @@ begin
   begin
     if (p_track^.psz_name <> NIL) then
     begin
-      Result.AddObject(
-        UTF8ToWideString(p_track^.psz_name),
-        TObject(p_track^.i_id));
+      Result.AddObject(UTF8ToWideString(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -2742,9 +2654,7 @@ begin
   begin
     if (p_track^.psz_name <> NIL) then
     begin
-      Result.AddObject(
-        UTF8ToWideString(p_track^.psz_name),
-        TObject(p_track^.i_id));
+      Result.AddObject(UTF8ToWideString(p_track^.psz_name), TObject(p_track^.i_id));
     end;
     p_track := p_track^.p_next;
   end;
@@ -2978,7 +2888,7 @@ begin
     file_name := file_name + file_names[file_indx] + ';';
     {$ELSE}
     file_name := file_name + file_names[file_indx] + ':';
-    {$ENDIF}                                                        ;
+    {$ENDIF}                                                                ;
   end;
   // remove last PATH_SEPARATOR;
   if (file_name <> '') then
@@ -3034,8 +2944,7 @@ begin
   libvlc_video_set_logo_int(p_mi, libvlc_logo_Enable, enable); // not work
 end;
 
-procedure TFmxPasLibVlcPlayer.LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity:
-  libvlc_opacity_t = libvlc_opacity_full);
+procedure TFmxPasLibVlcPlayer.LogoShowFile(file_name: WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full);
 begin
   LogoSetFile(file_name);
   LogoSetPosition(position_x, position_y);
@@ -3043,8 +2952,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TFmxPasLibVlcPlayer.LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top;
-  opacity: libvlc_opacity_t = libvlc_opacity_full);
+procedure TFmxPasLibVlcPlayer.LogoShowFile(file_name: WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full);
 begin
   LogoSetFile(file_name);
   LogoSetPosition(position);
@@ -3052,8 +2960,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TFmxPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity:
-  libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
+procedure TFmxPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position_x, position_y: Integer; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
 begin
   LogoSetFiles(file_names);
   LogoSetPosition(position_x, position_y);
@@ -3063,8 +2970,7 @@ begin
   LogoSetEnable(1);
 end;
 
-procedure TFmxPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position: libvlc_position_t =
-  libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
+procedure TFmxPasLibVlcPlayer.LogoShowFiles(file_names: array of WideString; position: libvlc_position_t = libvlc_position_top; opacity: libvlc_opacity_t = libvlc_opacity_full; delay_ms: Integer = 1000; loop: Boolean = TRUE);
 begin
   LogoSetFiles(file_names);
   LogoSetPosition(position);
@@ -3155,9 +3061,7 @@ begin
   libvlc_video_set_marquee_int(p_mi, libvlc_marquee_Enable, enable); // not work
 end;
 
-procedure TFmxPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color:
-  libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer =
-  libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
+procedure TFmxPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position_x, position_y: Integer; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
 begin
   MarqueeSetText(marquee_text);
   MarqueeSetPosition(position_x, position_y);
@@ -3177,9 +3081,7 @@ begin
     MarqueeSetRefresh(1000);
 end;
 
-procedure TFmxPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position: libvlc_position_t =
-  libvlc_position_bottom; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer =
-  libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
+procedure TFmxPasLibVlcPlayer.MarqueeShowText(marquee_text: WideString; position: libvlc_position_t = libvlc_position_bottom; color: libvlc_video_marquee_color_t = libvlc_video_marquee_color_White; font_size: Integer = libvlc_video_marquee_default_font_size; opacity: libvlc_opacity_t = libvlc_opacity_full; time_out_ms: Integer = 0);
 begin
   MarqueeSetText(marquee_text);
   MarqueeSetPosition(position);
@@ -3619,12 +3521,10 @@ begin
   end;
 end;
 
-function fmx_libvlc_video_format_cb(var ptr: Pointer; chroma: PAnsiChar; var width: LongWord; var height: LongWord;
-  pitches: PVCBPitches; lines: PVCBLines): LongWord; cdecl;
+function fmx_libvlc_video_format_cb(var ptr: Pointer; chroma: PAnsiChar; var width: LongWord; var height: LongWord; pitches: PVCBPitches; lines: PVCBLines): LongWord; cdecl;
 const
   // src/misc/fourcc.c: fourcc helpers functions
-  PixelFormatChromas: array[FMX.Types.TPixelFormat] of string[4] =(
-    { None      0}'RV32',
+  PixelFormatChromas: array[FMX.Types.TPixelFormat] of string[4] =(    { None      0}'RV32',
 
     { RGB       4}'RV32',
 
@@ -3668,8 +3568,7 @@ const
 
     { RG32F     8}'RV32',
 
-    { RGBA32F  16}'RV32'
-    );
+    { RGBA32F  16}'RV32');
 type
   PChromaStr = ^TChromaStr;
 
