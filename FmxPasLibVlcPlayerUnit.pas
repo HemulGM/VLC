@@ -234,6 +234,7 @@ type
     procedure SetForceAspectRatio(const Value: Single);
     function GetIsStopped: Boolean;
     function GetIsEnded: Boolean;
+    function GetIsInitialized: Boolean;
   protected
     procedure DestroyPlayer();
     procedure Paint; override;
@@ -402,6 +403,7 @@ type
     property ForceAspectRatio: Single read FForceAspectRatio write SetForceAspectRatio;
     property IsStopped: Boolean read GetIsStopped;
     property IsEnded: Boolean read GetIsEnded;
+    property IsInitialized: Boolean read GetIsInitialized;
   published
     property Align;
     property PopupMenu;
@@ -413,6 +415,8 @@ type
     property OnDragOver;
     property OnEnter;
     property OnExit;
+    property OnKeyUp;
+    property OnKeyDown;
     property OnMouseDown;
     property OnMouseEnter;
     property OnMouseLeave;
@@ -512,6 +516,9 @@ begin
 
   width := 320;
   height := 240;
+  HitTest := True;
+  TabStop := True;
+  CanFocus := True;
   FForceAspectRatio := 16 / 9;
   FAudioOutput := aoDefault;
 
@@ -819,6 +826,11 @@ end;
 function TFmxPasLibVlcPlayer.GetIsEnded: Boolean;
 begin
   Result := (GetState() = plvPlayer_Ended);
+end;
+
+function TFmxPasLibVlcPlayer.GetIsInitialized: Boolean;
+begin
+  Result := p_mi <> nil;
 end;
 
 function TFmxPasLibVlcPlayer.GetIsStopped: Boolean;
