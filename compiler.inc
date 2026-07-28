@@ -211,6 +211,16 @@
   {$UNDEF DELPHI_XX}
 {$ENDIF}
 
+{$IFDEF VER370}
+  {$DEFINE DELPHI27}
+  {$DEFINE DELPHI_10_4}
+  {$DEFINE DELPHI_11}
+  {$DEFINE DELPHI_SYDNEY}
+  {$DEFINE DELPHI_12}
+  {$DEFINE DELPHI_13}
+  {$UNDEF DELPHI_XX}
+{$ENDIF}
+
 {$IFDEF DELPHI_XX}
   ERROR: Unknown compiler please update compiler.inc file
 {$ENDIF}
